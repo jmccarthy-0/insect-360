@@ -1,65 +1,71 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import ImageCanvas from './ImageCanvas/ImageCanvas'
 
-import imgSpriteUrl from './assets/wasp/mobile/webp/wasp_mobile_spritesheet.webp';
+
+
+const loadImg = (imgSrc: string): Promise<HTMLImageElement> => {
+  return new Promise(resolve => {
+    const imgObj = new Image();
+    
+    imgObj.onload = () => {
+      resolve(imgObj);
+    }
+
+    imgObj.src = imgSrc;
+  });
+}
+
+const getBitMaps = async (imgPromises: Promise<HTMLImageElement>[]) => {
+  const imgs = await Promise.all(imgPromises);
+
+  const bitMaps = await Promise.all(
+    imgs.map(img => createImageBitmap(img, 0, 0, 960, 540))
+  );
+
+  return bitMaps;
+};
 
 function App() {
   const [img, setImg] = useState<ImageBitmap[]>([]);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
+  const [imgCount, setImgCount] = useState(360);
 
+  // onMount
   useEffect(() => {
-    const imgObj = new Image();
-
-    type SpriteBitmapArr = Promise<ImageBitmap>[];
-    const spriteBitmaps: SpriteBitmapArr = [];
+    /**
+     * Build array of promises as images are loading
+    */
+    const imgPromises: Promise<HTMLImageElement>[] = [];
     
-    // Promise.all([
-    //   createImageBitmap(imgObj, 0, 0, 960, 540),
-    //   createImageBitmap(imgObj, 960, 0, 1920, 540),
-    //   createImageBitmap(imgObj, 1920, 0, 2880, 540),
-    //   createImageBitmap(imgObj, 2880, 0, 3840, 540),
-    //   createImageBitmap(imgObj, 3840, 0, 4800, 540),
-    //   createImageBitmap(imgObj, 4800, 0, 5760, 540),
-    //   createImageBitmap(imgObj, 5760, 0, 6720, 540),
-    //   createImageBitmap(imgObj, 6720, 0, 7680, 540),
-    //   createImageBitmap(imgObj, 7680, 0, 8640, 540),
-    //   createImageBitmap(imgObj, 8640, 0, 9600, 540),
-    //  ])
-
-    imgObj.onload = () => {
-      
-      for (let i=0; i<10; i++) {
-        const startX = i * 960;
-        const endX = startX + 960;
-        spriteBitmaps[i] = createImageBitmap(imgObj, startX, 0, endX, 540);
-      }
-
-      try {
-        Promise.all(
-          spriteBitmaps
-        ).then((sprites) => {
-          setImg(sprites);
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    for (let i=1; i<=imgCount; i++) {
+      imgPromises.push(loadImg(`/mobile/webp/${i.toString().padStart(4, "0")}.webp`));
     }
 
-    imgObj.src = imgSpriteUrl;
-  }, [])
+    /**
+     * Convert imgPromises -> Image Objects -> Bitmaps
+     * Update image state
+     * */ 
+    (async () => {
+      const sprites = await getBitMaps(imgPromises) 
+      setImg(sprites);
+    })();
+    
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /**
+   * Update image sequence using range slider
+   * @param e 
+   */
+  const handleIndexRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.valueAsNumber);
     setActiveImgIndex(e.target.valueAsNumber)
-  }
+  };
 
   return (
     <>
       <ImageCanvas img={img} activeImgIndex={activeImgIndex} />
-      <input type="range" step={1} min={0} max={9} value={activeImgIndex} onChange={handleChange}/>
+      <input type="range" step={1} min={0} max={imgCount - 1} value={activeImgIndex} onChange={handleIndexRangeChange}/>
     </>
   )
 }
