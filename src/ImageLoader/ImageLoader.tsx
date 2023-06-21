@@ -16,7 +16,7 @@ const getBitMaps = async (imgPromises: Promise<HTMLImageElement>[]) => {
     const imgs = await Promise.all(imgPromises);
   
     const bitMaps = await Promise.all(
-      imgs.map(img => createImageBitmap(img, 0, 0, 960, 540))
+      imgs.map(img => createImageBitmap(img, 0, 0, 900, 900))
     );
   
     return bitMaps;

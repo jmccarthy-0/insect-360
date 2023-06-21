@@ -1,4 +1,12 @@
 #root {
   margin: 0 auto;
-  text-align: center;
+}
+
+.page-grid {
+  display: grid;
+}
+@media (min-width:768px) {
+  .page-grid {
+    grid-template-columns: 500px 500px;
+  }
 }

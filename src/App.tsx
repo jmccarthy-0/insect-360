@@ -4,7 +4,13 @@ import SequenceViewer from './SequenceViewer/SequenceViewer';
 const App = () => {
   return (
     <main>
-      <SequenceViewer imgCount={360} />
+      <div className="page-grid">
+        <div>
+          <h1>Protoxaea gloriosa</h1>
+          <p></p>
+        </div>
+        <SequenceViewer imgCount={360} />
+      </div>
     </main>
   )
 }

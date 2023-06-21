@@ -14,7 +14,8 @@ const ImageCanvas = ({img, activeImgIndex}: ImageCanvasProps) => {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
 
-            canvas.width = img[0].width;
+            // canvas.width = img[0].width;
+            canvas.width= img[0].width;
             canvas.height = img[0].height;
 
 

@@ -1,5 +1,5 @@
 canvas {
-    width: 960px;
-    height:540px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     background-color: lightgray;
 }

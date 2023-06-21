@@ -1,3 +1,4 @@
+import './TimelineScrubber.css';
 
 interface TimelineScrubberProps {
     min: number;
@@ -16,7 +17,7 @@ const TimelineScrubber = ({ min, max, value, setTimelineIndex }: TimelineScrubbe
         setTimelineIndex(e.target.valueAsNumber)
     };
 
-    return <input type="range" step={1} min={min} max={max} value={value} onChange={handleIndexRangeChange}/>
+    return <input className="timeline-scrubber" type="range" step={1} min={min} max={max} value={value} onChange={handleIndexRangeChange}/>
 };
 
 export default TimelineScrubber;
