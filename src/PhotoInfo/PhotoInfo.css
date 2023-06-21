@@ -1,0 +1,5 @@
+.photo-info {
+    width: min(100%, 450px);
+    padding: 1rem;
+    background-color: #fff;
+}
