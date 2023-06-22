@@ -15,7 +15,7 @@ const Modal = ({ children, setOpen }: ModalProps) => {
     return (
         <div className="modal-underlay">
             <div className="modal-body">
-                <button onClick={handleClose}>Close</button>
+                <button className="modal-close" onClick={handleClose}>Close</button>
                 {children}
             </div>
         </div>

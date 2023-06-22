@@ -20,13 +20,14 @@ const ImageCanvas = ({img, activeImgIndex}: ImageCanvasProps) => {
 
 
             window.requestAnimationFrame(() => {
+                ctx?.clearRect(0, 0, canvas.width, canvas.height);
                 ctx?.drawImage(img[activeImgIndex], 0, 0);
             });
         }
     }, [img, activeImgIndex])
 
     return (
-        <canvas ref={canvasRef}></canvas>
+        <canvas className='img-canvas' ref={canvasRef}></canvas>
     );
  }
 
