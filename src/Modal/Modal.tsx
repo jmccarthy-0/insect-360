@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import './Modal.css';
+import CloseBtn from "../Btn/CloseBtn";
 
 interface ModalProps {
     children: ReactNode;
@@ -15,7 +16,7 @@ const Modal = ({ children, setOpen }: ModalProps) => {
     return (
         <div className="modal-underlay">
             <div className="modal-body">
-                <button className="modal-close" onClick={handleClose}>Close</button>
+                <CloseBtn classes="modal-close" handleClick={handleClose} /> 
                 {children}
             </div>
         </div>

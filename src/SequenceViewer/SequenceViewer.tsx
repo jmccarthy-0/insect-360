@@ -7,6 +7,8 @@ import './SequenceViewer.css';
 import Modal from '../Modal/Modal';
 import PhotoInfo from '../PhotoInfo/PhotoInfo';
 import PhotoViewer from '../PhotoViewer/PhotoViewer';
+import InfoBtn from '../Btn/InfoBtn';
+import ExpandBtn from '../Btn/ExpandBtn';
 
 interface SequenceViewerProps {
     imgCount: number;
@@ -28,8 +30,10 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
 
     return (
         <div className='sequence-viewer'>
-            <button onClick={handleInfoClick}>Info</button>
-            <button onClick={handleViewerClick}>Zoom</button>
+            <InfoBtn handleClick={handleInfoClick}/>
+        
+            <ExpandBtn handleClick={handleViewerClick} />
+            
             <ImageLoader imgCount={imgCount} setImg={setImg} />
             <ImageCanvas img={img} activeImgIndex={activeImgIndex} />
             <TimelineScrubber min={0} max={imgCount - 1} value={activeImgIndex} setTimelineIndex={setActiveImgIndex} />
