@@ -1,6 +1,6 @@
 .btn {
-    --width: 2.75rem;
-    --height: 2.75rem;
+    --width: 3rem;
+    --height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,8 @@
     }
 
     > img {
-        width: 90%;
-        height: 90%;
+        --dim: 1rem;
+        width: var(--dim);
+        height: var(--dim);
     }
 }

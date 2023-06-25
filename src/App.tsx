@@ -1,14 +1,12 @@
 import './App.css'
+import PageIntro from './PageIntro/PageIntro';
 import SequenceViewer from './SequenceViewer/SequenceViewer';
 
 const App = () => {
   return (
     <main>
       <div className="page-grid">
-        <div>
-          <h1>Protoxaea gloriosa</h1>
-          <p></p>
-        </div>
+        <PageIntro />
         <SequenceViewer imgCount={360} />
       </div>
     </main>

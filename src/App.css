@@ -1,10 +1,6 @@
-#root {
-  padding: 1rem;
-}
-
 .page-grid {
   display: grid;
-  row-gap: 2rem;
+  row-gap: 3.5rem;
   width: min(100%, 36rem);
   margin-left:auto;
   margin-right:auto;
@@ -13,4 +9,12 @@
     grid-template-columns: 1fr 500px;
     width: min(100%, 52rem);
   }
+}
+.species {
+  font-style: italic;
+}
+
+.binomen {
+  text-align: center;
+  color: var(--txt-muted);
 }
