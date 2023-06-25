@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+import './Btn.css';
+
 interface BtnProps {
     children: ReactNode;
     handleClick: () => void;
@@ -8,7 +10,7 @@ interface BtnProps {
 
 const Btn = ({ children, classes, handleClick }: BtnProps) => {
     return (
-        <button className={`${classes ? classes: ''}`} onClick={ handleClick }>
+        <button className={`btn ${classes ? classes: ''}`} onClick={ handleClick }>
             { children }
         </button>
     )

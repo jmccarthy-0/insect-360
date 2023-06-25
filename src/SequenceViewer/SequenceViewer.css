@@ -5,3 +5,20 @@
     justify-content:center;
     align-items: center;
 }
+
+.sequence-viewer__info-btn,
+.sequence-viewer__expand-btn {
+    background-color: #fff;
+}
+
+.sequence-viewer__info-btn {
+    position: absolute;
+    top: 10px;
+    left:10px;
+}
+
+.sequence-viewer__expand-btn {
+    position: absolute;
+    top: 10px;
+    right:10px;
+}

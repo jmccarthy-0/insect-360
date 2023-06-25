@@ -30,15 +30,15 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
 
     return (
         <div className='sequence-viewer'>
-            <InfoBtn handleClick={handleInfoClick}/>
+            <InfoBtn classes='sequence-viewer__info-btn' handleClick={handleInfoClick}/>
         
-            <ExpandBtn handleClick={handleViewerClick} />
+            <ExpandBtn classes='sequence-viewer__expand-btn' handleClick={handleViewerClick} />
             
             <ImageLoader imgCount={imgCount} setImg={setImg} />
             <ImageCanvas img={img} activeImgIndex={activeImgIndex} />
             <TimelineScrubber min={0} max={imgCount - 1} value={activeImgIndex} setTimelineIndex={setActiveImgIndex} />
 
-            { displayPhotoInfo && <Modal setOpen={setDisplayPhotoInfo}>
+            { displayPhotoInfo && <Modal modalAdjustmentClasses='photo-info-modal' setOpen={setDisplayPhotoInfo}>
                 <PhotoInfo />
             </Modal> }
             { displayPhotoViewer && <Modal setOpen={setDisplayPhotoViewer}>

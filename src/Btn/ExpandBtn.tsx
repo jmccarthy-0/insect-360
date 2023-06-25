@@ -1,15 +1,14 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
-import './ExpandBtn.css';
-
 interface ExpandBtnProps {
     handleClick: () => void;
+    classes?: string;
 }
 
-const ExpandBtn = ({ handleClick }: ExpandBtnProps) => {
+const ExpandBtn = ({ classes, handleClick }: ExpandBtnProps) => {
     return (
-        <Btn classes="expand-btn" handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} btn--round`} handleClick={handleClick}>
             <Icon icon={'expand'} />
         </Btn>
     )

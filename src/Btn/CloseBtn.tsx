@@ -1,8 +1,6 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
-import './CloseBtn.css';
-
 interface CloseBtnProps {
     handleClick: () => void;
     classes?: string;

@@ -1,15 +1,14 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
-import './InfoBtn.css';
-
 interface InfoBtnProps {
     handleClick: () => void;
+    classes?: string;
 }
 
-const InfoBtn = ({ handleClick }: InfoBtnProps) => {
+const InfoBtn = ({ classes, handleClick }: InfoBtnProps) => {
     return (
-        <Btn classes={'info-btn'} handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} btn--round`} handleClick={handleClick}>
             <Icon icon={'info'} />
         </Btn>
     )
