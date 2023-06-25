@@ -1,12 +1,16 @@
 #root {
-  margin: 0 auto;
+  padding: 1rem;
 }
 
 .page-grid {
   display: grid;
-}
-@media (min-width:768px) {
-  .page-grid {
-    grid-template-columns: 500px 500px;
+  row-gap: 2rem;
+  width: min(100%, 36rem);
+  margin-left:auto;
+  margin-right:auto;
+  
+  @media (min-width:992px) { 
+    grid-template-columns: 1fr 500px;
+    width: min(100%, 52rem);
   }
 }

@@ -1,38 +1,39 @@
-.modal-underlay {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content: center;
-    align-items:center;
-    background-color: rgba(0,0,0,0.35);
-    z-index: 1;
-}
+.modal {
+    &-underlay {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        background-color: rgba(0,0,0,0.35);
+        z-index: 1;
+    }
+    
+    &-body {
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        position: relative;
+    }
+    
+    &-close {
+        position: absolute;
+        top: 10px;
+        right:10px;
+        z-index: 2;
+        background-color: #fff;
+        transition: background-color 80ms ease;
 
-
-.modal-body {
-    display:flex;
-    justify-content: center;
-    align-items:center;
-    position: relative;
-}
-
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right:10px;
-    z-index: 2;
-    background-color: #fff;
-    transition: background-color 80ms ease;
-}
-
-.modal-close:hover {
-    background-color: hsla(0, 0%, 98%, .8);
-}
-
-.modal-close > img {
-    width: 90%;
-    height:90%;
+        &:hover {
+            background-color: hsla(0, 0%, 98%, .8);
+        }
+        
+        > img {
+            width: 90%;
+            height:90%;
+        }
+    }    
 }
