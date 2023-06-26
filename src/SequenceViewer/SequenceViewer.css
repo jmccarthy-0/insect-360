@@ -9,14 +9,15 @@
     &__expand-btn {
         position: absolute;
         top: 10px;
-        background-color: #fff;
+        background-color: transparent;
+        border: 1px solid #fff !important;
     }
 
     &__info-btn {
-        left:10px;
+        left: var(--page-padding);
     }
 
     &__expand-btn {
-        right:10px;
-    }
+        right: var(--page-padding);
+    } 
 }

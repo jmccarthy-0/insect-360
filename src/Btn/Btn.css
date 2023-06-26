@@ -6,15 +6,16 @@
     align-items: center;
     width: var(--width);
     height: var(--height);
-    border-width:0;
+    border: 1px solid var(--txt-clr);
     cursor: pointer;
 
     &--round {
         border-radius: 50%;
     }
 
-    > img {
-        --dim: 1rem;
+    > img,
+    > svg {
+        --dim: 60%;
         width: var(--dim);
         height: var(--dim);
     }
