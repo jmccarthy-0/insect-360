@@ -30,16 +30,10 @@
         width: 1.5rem;   
         background-color: hsl(0, 0%, 0%);
         border: 3px solid var(--accent-clr);
-        transform: scale(1);
-        transition: transform 80ms ease background-color 120ms ease;
-    }
-    
-    &::-webkit-slider-thumb,
-    &:hover::-moz-range-thumb {
-       transform: scale(1.25);
+        transition: background-color 120ms ease;
     }
 
-    &::-webkit-slider-thumb,
+    &:active::-webkit-slider-thumb,
     &:active::-moz-range-thumb {
         background-color: var(--accent-clr);
     }
