@@ -1,6 +1,6 @@
 .page-intro {
-    padding-left: var(--page-padding);
-    padding-right: var(--page-padding);
+    padding-left: var(--page-padding-x);
+    padding-right: var(--page-padding-x);
 
     &__title-wrapper {
         text-align: center;

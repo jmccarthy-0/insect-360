@@ -21,8 +21,8 @@
     
     &-close {
         position: absolute;
-        top:  var(--page-padding);
-        right: var(--page-padding);
+        top:  var(--page-padding-y);
+        right: var(--page-padding-x);
         z-index: 2;
         background-color: #fff;
         transition: background-color 80ms ease;

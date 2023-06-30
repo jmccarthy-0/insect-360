@@ -3,9 +3,9 @@
     appearance: none;
     position: absolute;
     bottom: 2rem;
-    left: var(--page-padding);
-    right: var(--page-padding);
-    width: calc(100% - var(--page-padding) * 2);
+    left: var(--page-padding-x);
+    right: var(--page-padding-x);
+    width: calc(100% - var(--page-padding-x) * 2);
     margin: 1rem 0 0;
     background-color: transparent;
     cursor: pointer;

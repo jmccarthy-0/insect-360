@@ -14,10 +14,10 @@
     }
 
     &__info-btn {
-        left: var(--page-padding);
+        left: var(--page-padding-x);
     }
 
     &__expand-btn {
-        right: var(--page-padding);
+        right: var(--page-padding-x);
     } 
 }
