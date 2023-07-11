@@ -8,20 +8,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
- 
-  --bg-clr: hsl(0, 0%, 100%);
+
+  --primary-light: hsl(0, 0%, 10%);
+  --primary-dark: hsl(0, 0%, 100%);
   --accent-clr: hsl(41, 100%, 49%);
-  --txt-clr: hsl(0, 0%, 10%);
+ 
+  --bg-clr: var(--primary-dark);
+  --txt-clr: var(--primary-light);
   --txt-muted: hsl(0, 0%, 46%);
 
   --page-padding-x: 1rem;
   --page-padding-y: 3rem;
 
   @media (prefers-color-scheme: dark) {
-    --bg-clr: hsl(0, 0%, 5%);
-    --txt-clr: hsl(0, 0%, 100%);
+    --bg-clr: var(--primary-light);
+    --txt-clr: var(--primary-dark);
   }
   
+}
+
+html, body {
+  overscroll-behavior-x: none;
 }
 
 

@@ -1,6 +1,8 @@
 .btn {
     --width: 3rem;
     --height: 3rem;
+    --transition-duration: 320ms;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,14 +11,20 @@
     border: 1px solid var(--txt-clr);
     cursor: pointer;
 
+    transition: background-color var(--transition-duration) ease;
+
     &--round {
         border-radius: 50%;
     }
 
     > img,
     > svg {
-        --dim: 60%;
+        --dim: 1.75rem;
         width: var(--dim);
         height: var(--dim);
+    }
+
+    svg, g, path {
+        transition: stroke var(--transition-duration) ease, fill var(--transition-duration) ease;
     }
 }

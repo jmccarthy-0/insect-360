@@ -1,6 +1,6 @@
-import closeIcon from '../assets/icons/close_FILL0_wght400_GRAD0_opsz48.svg';
-import expandIcon from '../assets/icons/expand_content_FILL0_wght400_GRAD0_opsz48.svg';
-import infoIcon from '../assets/icons/info_modified.svg';
+import {ReactComponent as CloseIcon} from '../assets/icons/close_FILL0_wght400_GRAD0_opsz48.svg';
+import {ReactComponent as ExpandIcon} from '../assets/icons/expand_content_FILL0_wght400_GRAD0_opsz48.svg';
+import {ReactComponent as InfoIcon} from '../assets/icons/info_modified.svg';
 
 
 type iconType = 'close' | 'expand' | 'info';
@@ -12,20 +12,22 @@ interface IconProps {
 const getIconUrl = (iconKey: iconType) => {
     switch (iconKey) {
         case 'close': 
-            return closeIcon;
+            return <CloseIcon />;
         case 'expand':
-            return expandIcon;
+            return <ExpandIcon />;
         case 'info': 
-            return infoIcon;
+            return <InfoIcon />;
     }    
 }
 
 const Icon = ({ icon }: IconProps) => {
 
-    const iconUrl = getIconUrl(icon);
+    const iconComponent = getIconUrl(icon);
 
     return (
-        <img src={iconUrl}/>
+        <>   
+            {iconComponent}
+        </>
     )
 }
 
