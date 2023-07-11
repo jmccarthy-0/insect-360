@@ -10,7 +10,16 @@
         position: absolute;
         top: 10px;
         background-color: transparent;
-        border: 1px solid #fff !important;
+        border: 1px solid var(--primary-dark) !important;
+
+
+        &:hover {
+            background-color: var(--primary-dark);
+    
+            path {
+                fill: var(--primary-light);
+            }
+        }
     }
 
     &__info-btn {

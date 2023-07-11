@@ -1,40 +1,78 @@
 .timeline-scrubber {
-    -webkit-appearance: none;
-    appearance: none;
+    --track-w: 100%;
+    --track-h: 0px;
+    --track-bg: transparent;
+    --track-border: 1px solid hsl(0,0%,100%);
+
+    --thumb-dim: 2rem;
+    --thumb-border: 3px solid var( --accent-clr);
+    --thumb-radius: 50%;
+    --thumb-bg: hsl(0,0%,0%);
+
+    @media (min-width:992px) {
+        --thumb-dim: 1.5rem;
+    }
+
+    /* Reset */
     position: absolute;
-    bottom: 2rem;
     left: var(--page-padding-x);
     right: var(--page-padding-x);
-    width: calc(100% - var(--page-padding-x) * 2);
-    margin: 1rem 0 0;
-    background-color: transparent;
-    cursor: pointer;
+    bottom: 2rem;
+    width: calc(100% - calc(var(--page-padding-x) * 2));
+    background: transparent; 
+    -webkit-appearance: none;
+
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+
+    &:active {
+        --thumb-bg: var(--accent-clr);
+    }
 
     /* Track */
-    &::-webkit-slider-runnable-track,
-    &::-moz-range-track {
-        background: hsl(0, 0%, 100%);
-        height: 1px;
-    }
-    
-    /* Controller */
-    &::-webkit-slider-thumb,
-    &::-moz-range-thumb {
-        -webkit-appearance: none; /* Override default look */
-        border: none; /*Removes extra border that FF applies*/
-        border-radius: 50%; /*Removes default border-radius that FF applies*/
-    
-        appearance: none;
-        margin-top: -12px; /* Centers thumb on the track */
-        height: 1.5rem;
-        width: 1.5rem;   
-        background-color: hsl(0, 0%, 0%);
-        border: 3px solid var(--accent-clr);
-        transition: background-color 120ms ease;
+    &::-webkit-slider-runnable-track {
+        width: var(--track-w);
+        height: var(--track-h);
+        background-color: var(--track-bg);
+        border-top: var(--track-border);
+        cursor: pointer;
     }
 
-    &:active::-webkit-slider-thumb,
-    &:active::-moz-range-thumb {
-        background-color: var(--accent-clr);
+    &:focus::-webkit-slider-runnable-track {
+        background: var(--track-bg);
+    }
+
+    &::-moz-range-track {
+        width: var(--track-w);
+        height: var(--track-h);
+        border-top:  var(--track-border);
+        cursor: pointer;
+    }
+         
+    
+    /* Thumb */
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: var(--thumb-border);
+        height: var(--thumb-dim);
+        width: var(--thumb-dim);
+        border-radius: var(--thumb-radius);
+        background-color: var(--thumb-bg);
+        cursor: pointer;
+        margin-top: calc(var(--thumb-dim) / -2);
+        transition: background-color 100ms ease
+    }
+
+    &::-moz-range-thumb {
+        border: var(--thumb-border);
+        height: var(--thumb-dim);
+        width: var(--thumb-dim);
+        border-radius: var(--thumb-radius);
+        background-color: var(--thumb-bg);
+        cursor: pointer;
+        transition: background-color 100ms ease
     }
 }
