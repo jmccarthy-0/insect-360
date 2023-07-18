@@ -1,4 +1,4 @@
-:root {
+html {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;  
@@ -15,17 +15,19 @@
  
   --bg-clr: var(--primary-dark);
   --txt-clr: var(--primary-light);
+  --border-clr: var(--primary-light);
   --txt-muted: hsl(0, 0%, 46%);
 
   --page-padding-x: 1rem;
   --page-padding-y: 3rem;
 
-  @media (prefers-color-scheme: dark) {
+  &[data-theme="dark"] {
     --bg-clr: var(--primary-light);
+    --border-clr: var(--primary-dark);
     --txt-clr: var(--primary-dark);
   }
-  
 }
+
 
 html, body {
   overscroll-behavior-x: none;
