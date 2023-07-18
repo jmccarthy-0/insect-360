@@ -1,0 +1,43 @@
+[
+    {
+      "rank": "kingdom",
+      "name": "Animalia",
+      "children": [
+        {
+          "rank": "phylum",
+          "name": "Arthropoda",
+          "children": [
+            {
+              "rank": "class",
+              "name": "Insecta",
+              "children": [
+                {
+                  "rank": "order",
+                  "name": "Hymenoptera",
+                  "children": [
+                    {
+                      "rank": "family",
+                      "name": "Andrenidae",
+                      "children": [
+                        {
+                          "rank": "genus",
+                          "name": "Protoxaea",
+                          "children": [
+                            {
+                              "rank": "species",
+                              "name": "gloriosa"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+]
+
