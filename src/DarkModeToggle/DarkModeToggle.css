@@ -14,6 +14,8 @@
         height: var(--toggle-height);
         border-radius: calc(var(--toggle-height) / 2);
         border: var(--border-width) solid var(--border-clr);
+        cursor: pointer;
+
         &--dark {
             --translate: 100%;
         }
