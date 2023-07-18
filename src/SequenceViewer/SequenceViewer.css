@@ -4,6 +4,9 @@
     flex-direction: column;
     justify-content:center;
     align-items: center;
+    width: min(100%, 36rem);
+    margin-left: auto;
+    margin-right: auto;
 
     &__info-btn,
     &__expand-btn {

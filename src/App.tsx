@@ -8,8 +8,10 @@ const App = () => {
     <main>
       <div className="page-grid">
         <Header />
-        <PageIntro />
-        <SequenceViewer imgCount={360} />
+        <div>
+          <PageIntro />
+          <SequenceViewer imgCount={360} />
+        </div>
       </div>
     </main>
   )
