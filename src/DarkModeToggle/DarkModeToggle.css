@@ -1,0 +1,79 @@
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+
+    &__input {
+        --translate: 0;
+        --toggle-width: 5rem;
+        --toggle-height: calc(var(--toggle-width) / 2);
+        --border-width: 2px;
+    
+        position:relative;
+        width: var(--toggle-width);
+        height: var(--toggle-height);
+        border-radius: calc(var(--toggle-height) / 2);
+        border: var(--border-width) solid var(--border-clr);
+        &--dark {
+            --translate: 100%;
+        }
+
+
+        &::after {
+            content: '';
+            position:absolute;
+            top: calc(var(--border-width) * -1);
+            left: calc(var(--border-width) * -1);
+            width: var(--toggle-height);
+            height: var(--toggle-height);
+            border-radius:50%;
+            background-color:var(--primary-dark);
+            border: var(--border-width) solid var(--border-clr);
+            transform: translateX(var(--translate));
+            transition: transform 120ms ease;
+        }
+    }
+}
+
+/*
+	Improved screen reader only CSS class
+	@author Gaël Poupard
+		@note Based on Yahoo!'s technique
+		@author Thierry Koblentz
+		@see https://www.cssmojo.com/hide-content-from-sighted-users/
+	* 1.
+		@note `clip` is deprecated but works everywhere
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip
+	* 2.
+		@note `clip-path` is the future-proof version, but not very well supported yet
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+		@see http://caniuse.com/#search=clip-path
+		@author Yvain Liechti
+		@see https://twitter.com/ryuran78/status/778943389819604992
+	* 3.
+		@note preventing text to be condensed
+		author J. Renée Beach
+		@see https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+		@note Drupal 8 goes with word-wrap: normal instead
+		@see https://www.drupal.org/node/2045151
+		@see http://cgit.drupalcode.org/drupal/commit/?id=5b847ea
+	* 4.
+		@note !important is important
+		@note Obviously you wanna hide something
+		@author Harry Roberts
+		@see https://csswizardry.com/2016/05/the-importance-of-important/
+*/
+
+.sr-only {
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+	-webkit-clip-path: inset(50%) !important;
+		clip-path: inset(50%) !important;  /* 2 */
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important;            /* 3 */
+}
