@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { resizeCanvas, refreshCanvas } from '../utils/canvas-utils';
-import './PhotoViewer.css';
+import classes from './PhotoViewer.module.css';
+import Btn from '../Btn/Btn';
 
 interface PhotoViewerProps {
     imgFileIndex: number;
@@ -62,8 +63,8 @@ const PhotoViewer = ({ imgFileIndex }: PhotoViewerProps) => {
         };
     }, []);
 
-    return (
-        <canvas className='photo-viewer' ref={canvasRef}></canvas>
+    return (   
+        <canvas className={classes.photoViewer} ref={canvasRef}></canvas>
     )
 }
 

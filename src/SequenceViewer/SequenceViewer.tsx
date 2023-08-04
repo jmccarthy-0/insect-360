@@ -7,9 +7,11 @@ import './SequenceViewer.css';
 import Modal from '../Modal/Modal';
 import PhotoInfo from '../PhotoInfo/PhotoInfo';
 import PhotoViewer from '../PhotoViewer/PhotoViewer';
+import Btn from '../Btn/Btn';
 import InfoBtn from '../Btn/InfoBtn';
 import ExpandBtn from '../Btn/ExpandBtn';
 import Loader from '../Loader/Loader';
+import ZoomBtns from '../ZoomBtns/ZoomBtns';
 
 interface SequenceViewerProps {
     imgCount: number;
@@ -21,6 +23,8 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
+
+    const [zoomLevel, setZoomLevel] = useState(0);
 
     const handleInfoClick = () => {
         setDisplayPhotoInfo(true);
@@ -49,10 +53,14 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
             <ImageCanvas img={img} activeImgIndex={activeImgIndex} />
             <TimelineScrubber min={0} max={imgCount - 1} value={activeImgIndex} setTimelineIndex={setActiveImgIndex} />
 
+            {/* Modal details about a given photo */}
             { displayPhotoInfo && <Modal modalAdjustmentClasses='photo-info-modal' setOpen={setDisplayPhotoInfo}>
                 <PhotoInfo />
             </Modal> }
+
+             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
             { displayPhotoViewer && <Modal setOpen={setDisplayPhotoViewer}>
+                <ZoomBtns setZoomLevel={setZoomLevel}  zoomLevel={zoomLevel}/>
                 <PhotoViewer imgFileIndex={activeImgIndex + 1} />
             </Modal> }
         </div>
