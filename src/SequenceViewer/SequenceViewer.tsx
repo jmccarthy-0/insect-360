@@ -12,6 +12,7 @@ import InfoBtn from '../Btn/InfoBtn';
 import ExpandBtn from '../Btn/ExpandBtn';
 import Loader from '../Loader/Loader';
 import ZoomBtns from '../ZoomBtns/ZoomBtns';
+import PhotoViewerModal from '../PhotoViewer/PhotoViewerModal';
 
 interface SequenceViewerProps {
     imgCount: number;
@@ -23,8 +24,6 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
-
-    const [zoomLevel, setZoomLevel] = useState(0);
 
     const handleInfoClick = () => {
         setDisplayPhotoInfo(true);
@@ -58,11 +57,10 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
                 <PhotoInfo />
             </Modal> }
 
-             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
-            { displayPhotoViewer && <Modal setOpen={setDisplayPhotoViewer}>
-                <ZoomBtns setZoomLevel={setZoomLevel}  zoomLevel={zoomLevel}/>
-                <PhotoViewer imgFileIndex={activeImgIndex + 1} />
-            </Modal> }
+            {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
+            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} imgFileIndex={activeImgIndex + 1} /> }
+
+            
         </div>
     )
 }
