@@ -5,23 +5,21 @@ export const resizeCanvas = (canvas: HTMLCanvasElement, w: number, h: number) =>
     canvas.height= h * device;
 }
 
-export const getImgScale = (canvas: HTMLCanvasElement, img: HTMLImageElement, crop: 'cover' | 'contain') => {
+export const getDefaultImgScale = (canvas: HTMLCanvasElement, img: HTMLImageElement) => {
     const scaleX = canvas.width / img.width;
     const scaleY = canvas.height / img.height;
 
-    // Cover
-    if (crop === 'cover') {
-        return Math.max(scaleX, scaleY);
-    }
-
     // Contain
+    console.log('scale: ', Math.min(scaleX, scaleY));
+
+
     return Math.min(scaleX, scaleY);
 }
 
-export const getImgCenterOffset = (canvas: HTMLCanvasElement, img: HTMLImageElement, scale: number) => {
+export const getImgCenterOffset = (canvas: HTMLCanvasElement, w: number, h: number, scale: number) => {
      // Get centered position
-    const offsetX = (canvas.width - img.width * scale) / 2;
-    const offsetY = (canvas.height - img.height * scale) / 2;
+    const offsetX = (canvas.width - w * scale) / 2;
+    const offsetY = (canvas.height - h * scale) / 2;
 
     return [offsetX, offsetY];
 }
@@ -32,13 +30,16 @@ export const getImgCenterOffset = (canvas: HTMLCanvasElement, img: HTMLImageElem
  * @param canvas 
  * @param img 
  */
-export const refreshCanvas = (ctx: CanvasRenderingContext2D , canvas: HTMLCanvasElement, img: HTMLImageElement) => {
+export const refreshCanvas = (ctx: CanvasRenderingContext2D , canvas: HTMLCanvasElement, img: HTMLImageElement, crop: 'cover' | 'contain') => {
     // Get Scale Factor
-    const scale = getImgScale(canvas, img, 'contain');
+    const scale = getImgScale(canvas, img, crop);
 
     // Get centered position
     const [offsetX, offsetY] = getImgCenterOffset(canvas, img, scale)
 
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+    // drawImage(image, dx, dy, dWidth, dHeight)
     ctx?.drawImage(img, offsetX, offsetY, img.width * scale, img.height * scale);
 }

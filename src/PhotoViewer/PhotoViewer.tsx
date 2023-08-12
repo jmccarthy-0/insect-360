@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { useSingleImageLoader } from '../hooks/singleImageLoader';
+
+
 import { resizeCanvas, refreshCanvas } from '../utils/canvas-utils';
 import classes from './PhotoViewer.module.css';
-import Btn from '../Btn/Btn';
+import ImageCanvas from './PhotoCanvas';
 
 interface PhotoViewerProps {
-    imgFileIndex: number;
+    zoomLevel: number;
 }
 
 /**
@@ -18,21 +21,25 @@ const resizePhotoViewerCanvas = (canvas: HTMLCanvasElement) => {
 };
 
 
-const PhotoViewer = ({ imgFileIndex }: PhotoViewerProps) => {
+const PhotoViewer = ({ zoomLevel }: PhotoViewerProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const img = useSingleImageLoader('/hi-res/29540763125_daca6ae7f7_o.jpg');
+
+    console.log({img})
+
 
     useEffect(() => {
         let handleResize: (event: Event) => void;
 
         if (canvasRef.current) {
             const canvas = canvasRef.current;
-            const img = new Image();
             const ctx = canvas.getContext('2d');
 
             if (ctx) {
                 const updatePhotoViewerCanvas = () => {
                     resizePhotoViewerCanvas(canvas);
-                    refreshCanvas(ctx, canvas, img);
+                    //refreshCanvas(ctx, canvas, img, zoomLevel === 1 ? 'cover' : 'contain');
                 }
 
                 /**
@@ -44,16 +51,7 @@ const PhotoViewer = ({ imgFileIndex }: PhotoViewerProps) => {
                 window.addEventListener('resize', handleResize);
                 
 
-                /**
-                 *   Update canvas dimensions and trigger redraw on image load 
-                 *  */ 
-                img.onload = () => {                    
-                    updatePhotoViewerCanvas();
-                }
-                
-                // imgFileIndex eventually used to load actual image based on active 360 viewer image. 
-                console.log({ imgFileIndex }); 
-                img.src = '/hi-res/29540763125_daca6ae7f7_o.jpg' // placeholder file
+            
             }
         }
 
@@ -64,7 +62,7 @@ const PhotoViewer = ({ imgFileIndex }: PhotoViewerProps) => {
     }, []);
 
     return (   
-        <canvas className={classes.photoViewer} ref={canvasRef}></canvas>
+        <ImageCanvas img={img} zoomLevel={zoomLevel} />
     )
 }
 
