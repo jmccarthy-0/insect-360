@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, MouseEvent} from 'react';
+import {useState, useRef, useEffect, MouseEvent, TouchEvent, SyntheticEvent} from 'react';
 import classes from './PhotoViewer.module.css';
 
 import {resizeCanvas, getImgCenterOffset, getDefaultImgScale} from '../utils/canvas-utils';
@@ -68,22 +68,26 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     }, [dx, dy]);
 
     // Event Handlers
-    const handleMouseDown = (e: MouseEvent) => {
-        if (zoomLevel > 0) {
+    const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+        // if (zoomLevel > 0) {
+            const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
+
             setisDragging(true);
 
             setPrevDragPos({
-                x: e.clientX,
-                y: e.clientY
+                x: event.clientX,
+                y: event.clientY
             }); 
-        }
+        //}
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: MouseEvent | TouchEvent) => {
+        const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
+
         if (isDragging) {
             // Difference between current mouse coordinates and previous mouse coordinates 
-            const updateDx = dx + (e.clientX - prevDragPos.x);
-            const updateDY = dy + (e.clientY - prevDragPos.y);
+            const updateDx = dx + (event.clientX - prevDragPos.x);
+            const updateDY = dy + (event.clientY - prevDragPos.y);
 
             // Update image position
             setDx(updateDx);
@@ -91,20 +95,25 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
 
             //Reset Prev Mouse coordinates
             setPrevDragPos({
-                x: e.clientX,
-                y: e.clientY
+                x: event.clientX,
+                y: event.clientY
             });
         }
     }
 
-    const handleMouseUp = () => {
+    const handlePointerUp = () => {
         setisDragging(false);
     }
 
     return <canvas className={classes.photoViewer} ref={canvasRef} 
-                onMouseDown={panningEnabled ? handleMouseDown : undefined} 
-                onMouseMove={panningEnabled ? handleMouseMove : undefined} 
-                onMouseUp={panningEnabled ? handleMouseUp : undefined}></canvas>;
+                onMouseDown={panningEnabled ? handlePointerDown : undefined} 
+                onMouseMove={panningEnabled ? handlePointerMove : undefined} 
+                onMouseUp={panningEnabled ? handlePointerUp : undefined}
+                onTouchStart={panningEnabled ? handlePointerDown : undefined}
+                onTouchMove={panningEnabled ? handlePointerMove : undefined}
+                onTouchEnd={panningEnabled ? handlePointerUp : undefined}
+                
+                ></canvas>;
 }
 
 export default ImageCanvas;
