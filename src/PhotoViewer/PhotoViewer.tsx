@@ -62,7 +62,7 @@ const PhotoViewer = ({ zoomLevel }: PhotoViewerProps) => {
     }, []);
 
     return (   
-        <ImageCanvas img={img} zoomLevel={zoomLevel} />
+        <ImageCanvas img={img} zoomLevel={zoomLevel} panningEnabled={true} />
     )
 }
 
