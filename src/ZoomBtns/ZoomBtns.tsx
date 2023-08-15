@@ -7,15 +7,15 @@ interface ZoomBtnsInterface {
 }
 
 const ZoomBtns = ({zoomLevel, setZoomLevel}: ZoomBtnsInterface) => {
-    const increment = (val: number) => val + 1;
-    const decrement = (val: number) => val - 1;
+    const increment = (val: number) => val + 0.5;
+    const decrement = (val: number) => val - 0.5;
     const handleZoomClick = (isPositive: boolean) => {
         setZoomLevel(prevZoom => isPositive ? increment(prevZoom) : decrement(prevZoom));
     }
 
     return (
         <div className={classes.zoomBtns}>
-            <Btn classes={'btn--round'} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel > 0}>+</Btn>
+            <Btn classes={'btn--round'} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel >= 1}>+</Btn>
             <Btn classes={'btn--round'} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0}>-</Btn>
         </div>
     );

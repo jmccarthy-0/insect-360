@@ -23,23 +23,3 @@ export const getImgCenterOffset = (canvas: HTMLCanvasElement, w: number, h: numb
 
     return [offsetX, offsetY];
 }
-
-/**
- *  Draw image to canvas 
- * @param ctx 
- * @param canvas 
- * @param img 
- */
-export const refreshCanvas = (ctx: CanvasRenderingContext2D , canvas: HTMLCanvasElement, img: HTMLImageElement, crop: 'cover' | 'contain') => {
-    // Get Scale Factor
-    const scale = getImgScale(canvas, img, crop);
-
-    // Get centered position
-    const [offsetX, offsetY] = getImgCenterOffset(canvas, img, scale)
-
-    ctx?.clearRect(0, 0, canvas.width, canvas.height);
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-    // drawImage(image, dx, dy, dWidth, dHeight)
-    ctx?.drawImage(img, offsetX, offsetY, img.width * scale, img.height * scale);
-}

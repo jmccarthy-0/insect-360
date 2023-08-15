@@ -14,36 +14,34 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     const [isDragging, setisDragging] = useState(false);
     const [prevDragPos, setPrevDragPos] = useState({ x:0 , y:0});
 
+    const [scale, setScale] = useState(1);
     const [dx, setDx] = useState(0); // Image offset x within the canvas
     const [dy, setDy] = useState(0); // Image offset y within the canvas
     const [dw, setDw] = useState(0); // Image width within the canvas
     const [dh, setDh] = useState(0); // Image height within the canvas
     
-    // Set Image Width/Height relative to canvas
+
+    //Calculation cascade: scale -> dw/dh -> dx/dy -> draw image
+
+    // Set Image Scale
     useEffect(() => {    
         if (img && canvasRef.current) {
             const canvas = canvasRef.current;
 
-            let handleWindowResize: (event: Event) => void;
-            handleWindowResize = (_) => {
-            
-            }
-
             resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
+            setScale(getDefaultImgScale(canvas, img) + zoomLevel);
+        }
+    }, [img, zoomLevel]);
 
-            const scale = getDefaultImgScale(canvas, img) + zoomLevel;
+    // Set Image Width/Height relative to canvas
+    useEffect(() => {
+        if (img) {
+
             setDw(Math.min(img.width, img.width * scale));
             setDh(Math.min(img.height, img.height * scale));
 
-            window.addEventListener('resize', handleWindowResize);
-            
-
-            return () => {
-                // Kill canvas resize event listener
-                window.removeEventListener('resize', handleWindowResize)
-            };
         }
-    }, [img, zoomLevel]);
+    }, [scale]);
 
     // Center Image
     useEffect(() => {
@@ -69,7 +67,7 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
 
     // Event Handlers
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
-        // if (zoomLevel > 0) {
+        if (zoomLevel > 0) {
             const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
 
             setisDragging(true);
@@ -78,7 +76,7 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
                 x: event.clientX,
                 y: event.clientY
             }); 
-        //}
+        }
     }
 
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
@@ -86,8 +84,8 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
 
         if (isDragging) {
             // Difference between current mouse coordinates and previous mouse coordinates 
-            const updateDx = dx + (event.clientX - prevDragPos.x);
-            const updateDY = dy + (event.clientY - prevDragPos.y);
+            const updateDx = dx + ((event.clientX - prevDragPos.x) * Math.min(window.devicePixelRatio, 2));
+            const updateDY = dy + ((event.clientY - prevDragPos.y) * Math.min(window.devicePixelRatio, 2));
 
             // Update image position
             setDx(updateDx);
@@ -112,7 +110,6 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
                 onTouchStart={panningEnabled ? handlePointerDown : undefined}
                 onTouchMove={panningEnabled ? handlePointerMove : undefined}
                 onTouchEnd={panningEnabled ? handlePointerUp : undefined}
-                
                 ></canvas>;
 }
 
