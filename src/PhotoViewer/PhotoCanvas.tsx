@@ -1,10 +1,10 @@
-import {useState, useRef, useEffect, MouseEvent, TouchEvent, SyntheticEvent} from 'react';
+import {useState, useRef, useEffect, MouseEvent, TouchEvent} from 'react';
 import classes from './PhotoViewer.module.css';
 
-import {resizeCanvas, getImgCenterOffset, getDefaultImgScale} from '../utils/canvas-utils';
+import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../utils/canvas-utils';
 
 interface PhotoCanvasProps {
-    img: HTMLImageElement | null;
+    img: HTMLImageElement | ImageBitmap | null;
     zoomLevel: number;
     panningEnabled: boolean;
 }
@@ -14,14 +14,11 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     const [isDragging, setisDragging] = useState(false);
     const [prevDragPos, setPrevDragPos] = useState({ x:0 , y:0});
 
-    const [scale, setScale] = useState(1);
     const [dx, setDx] = useState(0); // Image offset x within the canvas
     const [dy, setDy] = useState(0); // Image offset y within the canvas
     const [dw, setDw] = useState(0); // Image width within the canvas
     const [dh, setDh] = useState(0); // Image height within the canvas
     
-
-    //Calculation cascade: scale -> dw/dh -> dx/dy -> draw image
 
     // Set Image Scale
     useEffect(() => {    
@@ -29,39 +26,23 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
             const canvas = canvasRef.current;
 
             resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
-            setScale(getDefaultImgScale(canvas, img) + zoomLevel);
+            const scale = getDefaultImgScale(canvas, img) + zoomLevel;
+
+            const initialDw = Math.min(img.width, img.width * scale);
+            const initialDh = Math.min(img.height, img.height * scale);
+            const [initialDx, initialDy] = getImgCenterOffset(canvas, initialDw, initialDh, 1);
+
+            setDw(initialDw);
+            setDh(initialDh);
+            setDx(initialDx);
+            setDy(initialDy);
         }
     }, [img, zoomLevel]);
 
-    // Set Image Width/Height relative to canvas
-    useEffect(() => {
-        if (img) {
-
-            setDw(Math.min(img.width, img.width * scale));
-            setDh(Math.min(img.height, img.height * scale));
-
-        }
-    }, [scale]);
-
-    // Center Image
+    // Redraw canvas when dx/dy coordinates change
     useEffect(() => {
         if (img && canvasRef.current) {
-            const canvas = canvasRef.current;
-            const [updateDx, updateDy] = getImgCenterOffset(canvas, dw, dh, 1);
-
-            setDx(updateDx);
-            setDy(updateDy);
-        }
-    }, [dw, dh]);
-
-    // Draw Image
-    useEffect(() => {
-        if (img && canvasRef.current) {
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
-
-            ctx?.clearRect(0, 0, canvas.width, canvas.height);
-            ctx?.drawImage(img, dx, dy, dw, dh);
+            refreshCanvas(canvasRef.current, img, dx, dy, dw, dh);
         }
     }, [dx, dy]);
 

@@ -58,7 +58,7 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
             </Modal> }
 
             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
-            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} imgFileIndex={activeImgIndex + 1} /> }
+            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} /> }
 
             
         </div>

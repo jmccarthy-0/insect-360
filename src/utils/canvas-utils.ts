@@ -5,7 +5,16 @@ export const resizeCanvas = (canvas: HTMLCanvasElement, w: number, h: number) =>
     canvas.height= h * device;
 }
 
-export const getDefaultImgScale = (canvas: HTMLCanvasElement, img: HTMLImageElement) => {
+export const refreshCanvas = (canvas: HTMLCanvasElement, img: HTMLImageElement | ImageBitmap, dx:number, dy:number, dw:number, dh:number, ) => {
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, dx, dy, dw, dh);
+    }
+}
+
+export const getDefaultImgScale = (canvas: HTMLCanvasElement, img: HTMLImageElement | ImageBitmap) => {
     const scaleX = canvas.width / img.width;
     const scaleY = canvas.height / img.height;
 
