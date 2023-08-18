@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSingleImageLoader } from '../hooks/singleImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas';
+import Loader from '../Loader/Loader';
 import ZoomBtns from "../ZoomBtns/ZoomBtns";
 
 import classes from './PhotoViewer.module.css';
-import Loader from '../Loader/Loader';
-
-
-
 
 const PhotoViewer = () => {
     const img = useSingleImageLoader('/hi-res/29540763125_daca6ae7f7_o.jpg');

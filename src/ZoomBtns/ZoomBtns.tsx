@@ -1,4 +1,5 @@
 import Btn from "../Btn/Btn";
+
 import classes from './ZoomBtns.module.css';
 
 interface ZoomBtnsInterface {
@@ -14,7 +15,7 @@ const ZoomBtns = ({zoomLevel, setZoomLevel}: ZoomBtnsInterface) => {
     }
 
     return (
-        <div className={classes.zoomBtns}>
+        <div className={classes['zoom-btns']}>
             <Btn classes={'btn--round'} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel >= 1}>+</Btn>
             <Btn classes={'btn--round'} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0}>-</Btn>
         </div>
