@@ -1,0 +1,13 @@
+.sequence-viewer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    width: min(100%, 56rem);
+    aspect-ratio: 4/3;
+
+    margin-top:3rem;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useSingleImageLoader } from '../hooks/singleImageLoader';
 
-import ImageCanvas from './PhotoCanvas';
+import ImageCanvas from '../ImageCanvas/ImageCanvas';
 import ZoomBtns from "../ZoomBtns/ZoomBtns";
+
+import classes from './PhotoViewer.module.css';
 
 
 
@@ -14,7 +16,9 @@ const PhotoViewer = () => {
     return (   
         <>
             <ZoomBtns setZoomLevel={setZoomLevel}  zoomLevel={zoomLevel}/>
-            <ImageCanvas img={img} zoomLevel={zoomLevel} panningEnabled={true} />
+            <div className={classes['photo-viewer']}>
+                <ImageCanvas img={img} zoomLevel={zoomLevel} panningEnabled={true} />
+            </div>
         </>
     )
 }

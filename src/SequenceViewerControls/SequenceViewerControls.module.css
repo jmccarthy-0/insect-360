@@ -1,0 +1,24 @@
+.info-btn,
+.expand-btn {
+    position: absolute;
+    top: 10px;
+    background-color: transparent;
+    border: 1px solid var(--primary-dark) !important;
+
+
+    &:hover {
+        background-color: var(--primary-dark);
+
+        path {
+            fill: var(--primary-light);
+        }
+    }
+}
+
+.info-btn {
+    left: var(--page-padding-x);
+}
+
+.expand-btn {
+    right: var(--page-padding-x);
+} 

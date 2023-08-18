@@ -18,10 +18,6 @@ export const getDefaultImgScale = (canvas: HTMLCanvasElement, img: HTMLImageElem
     const scaleX = canvas.width / img.width;
     const scaleY = canvas.height / img.height;
 
-    // Contain
-    console.log('scale: ', Math.min(scaleX, scaleY));
-
-
     return Math.min(scaleX, scaleY);
 }
 
