@@ -4,8 +4,7 @@ import useMultiImageLoader from '../hooks/multiImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas'
 import Loader from '../Loader/Loader';
-import Modal from '../Modal/Modal';
-import PhotoInfo from '../PhotoInfo/PhotoInfo';
+import PhotoInfoModal from '../PhotoInfo/PhotoInfoModal';
 import PhotoViewerModal from '../PhotoViewer/PhotoViewerModal';
 import SequenceViewerControls from '../SequenceViewerControls/SequenceViewerControls';
 
@@ -43,9 +42,8 @@ const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
             
 
             {/* Modal details about a given photo */}
-            { displayPhotoInfo && <Modal modalAdjustmentClasses='photo-info-modal' setOpen={setDisplayPhotoInfo}>
-                <PhotoInfo />
-            </Modal> }
+            { displayPhotoInfo && <PhotoInfoModal setOpen={setDisplayPhotoInfo}/>
+            }
 
             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
             { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} /> }

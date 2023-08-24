@@ -4,5 +4,6 @@
 
 .photo-info {
     padding: 4rem var(--page-padding-x) 1rem;
-    background-color: #fff;
+    background-color: var(--bg-clr);
+    color: var(--txt-clr);
 }

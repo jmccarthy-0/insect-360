@@ -60,7 +60,7 @@ ol, ul {
 }
 
 p {
-  line-height: 1.5;
+  line-height: 2;
 
   &:has(+ p) {
     margin-bottom: 1rem;

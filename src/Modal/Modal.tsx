@@ -8,9 +8,10 @@ interface ModalProps {
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
     modalAdjustmentClasses?: string;
     animationDirection?: 'none' | 'left' | 'right' | 'fade';
+    size?: 'small' | 'default'
 }
 
-const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none' }: ModalProps) => {
+const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none', size='default' }: ModalProps) => {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
@@ -34,7 +35,11 @@ const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='
     }
 
     return (
-        <div className={`${classes['modal']} ${isActive ? classes['modal--active'] : ''}`}>
+        <div className={
+                            `${classes['modal']} 
+                            ${isActive ? classes['modal--active'] : ''}
+                            ${size !=='default' ? classes['modal--small']: ''}`
+                        }>
             <div className={
                                 `${ classes['modal-body'] /* Main modal classes*/}
                                 ${ isActive ? classes['modal-body--active'] : '' /* Added on mount to trigger animation */ } 

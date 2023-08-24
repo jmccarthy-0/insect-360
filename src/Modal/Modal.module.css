@@ -1,5 +1,7 @@
 .modal {
     --transition-duration: 240ms;
+    --close-btn-offset-x:  var(--page-padding-x);
+    --close-btn-offset-y: var(--page-padding-y);
 
     @media (prefers-reduced-motion) {
         --transition-duration: 0ms;
@@ -16,6 +18,11 @@
     background-color: rgba(0,0,0,0);
     z-index: 1;
     transition: background-color var(--transition-duration) linear;
+
+    &--small {
+        --close-btn-offset-x: 10px;
+        --close-btn-offset-y: 10px;
+    }
 
     &--active {
         background-color: rgba(0,0,0,0.35);
@@ -56,11 +63,16 @@
     
     &-close {
         position: absolute;
-        top:  var(--page-padding-y);
-        right: var(--page-padding-x);
+        top:  var(--close-btn-offset-y);
+        right: var(--close-btn-offset-x);
         z-index: 2;
         background-color: #fff;
         transition: background-color 80ms ease;
+
+        &--outside {
+            top: 10px;
+            right: 10px;
+        }
 
         &:hover {
             background-color: hsla(0, 0%, 98%, .8);
