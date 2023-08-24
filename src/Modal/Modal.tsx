@@ -1,23 +1,47 @@
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
-import './Modal.css';
+import classes from './Modal.module.css';
 import CloseBtn from "../Btn/CloseBtn";
 
 interface ModalProps {
     children: ReactNode;
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-    modalAdjustmentClasses?: string
+    modalAdjustmentClasses?: string;
+    animationDirection?: 'none' | 'left' | 'right' | 'fade';
 }
 
-const Modal = ({ children, setOpen, modalAdjustmentClasses }: ModalProps) => {
+const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none' }: ModalProps) => {
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+        const duration = animationDirection === 'none' ? 0 : 10;
+
+        const animationTimeout = setTimeout(() => {
+            setIsActive(true);
+        }, duration);
+
+        return () => clearTimeout(animationTimeout);
+    }, []);
+
     const handleClose = () => {
-        setOpen(false);
+        const duration = animationDirection === 'none' ? 0 : 240; // Must match value in Modal.module.css
+
+        setIsActive(false);
+
+        setTimeout(() => {
+            setOpen(false);
+        }, duration);
     }
 
     return (
-        <div className="modal-underlay">
-            <div className={`modal-body ${modalAdjustmentClasses ? modalAdjustmentClasses : ''}`}>
-                <CloseBtn classes="modal-close btn--round" handleClick={handleClose} /> 
+        <div className={`${classes['modal']} ${isActive ? classes['modal--active'] : ''}`}>
+            <div className={
+                                `${ classes['modal-body'] /* Main modal classes*/}
+                                ${ isActive ? classes['modal-body--active'] : '' /* Added on mount to trigger animation */ } 
+                                ${ classes[`modal-body--animate-${animationDirection}`] /* Allows customization of effect (direction, fade-in, etc.) */ }  
+                                ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
+                            }>
+                <CloseBtn classes={`${classes['modal-close']} btn--round`} handleClick={handleClose} /> 
                 {children}
             </div>
         </div>

@@ -7,7 +7,7 @@ interface PhotoViewerModalProps {
 
 const PhotoViewerModal = ({ setOpen }: PhotoViewerModalProps) => {
     return (
-        <Modal setOpen={setOpen}>
+        <Modal setOpen={setOpen} animationDirection="right">
             <PhotoViewer />
         </Modal>
     );
