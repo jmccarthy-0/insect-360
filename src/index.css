@@ -25,6 +25,7 @@ html {
     --bg-clr: var(--primary-light);
     --border-clr: var(--primary-dark);
     --txt-clr: var(--primary-dark);
+    --txt-muted: hsl(0, 0%, 51%);
   }
 }
 

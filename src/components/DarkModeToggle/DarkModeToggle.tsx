@@ -6,7 +6,7 @@ import DarkModeToggleUI from "./DarkModeToggle_UI";
 
 
 const DarkModeToggle = () => {
-    const [darkMode, setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const [darkMode, setDarkMode] = useState(true);
 
     useEffect(() => {
         document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';

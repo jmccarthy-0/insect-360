@@ -17,6 +17,19 @@
         border-radius: 50%;
     }
 
+    &--dark {
+        background-color: transparent;
+        border: 1px solid var(--primary-dark) !important;
+
+        &:hover {
+            background-color: var(--primary-dark);
+    
+            path {
+                fill: var(--primary-light);
+            }
+        }
+    }
+
     > img,
     > svg {
         --dim: 1.75rem;

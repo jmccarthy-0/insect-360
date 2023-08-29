@@ -1,7 +1,8 @@
 import { ReactNode, useState, useEffect } from "react";
-
-import classes from './Modal.module.css';
 import CloseBtn from "../Btn/CloseBtn";
+
+import btnClasses from '../Btn/Btn.module.css';
+import classes from './Modal.module.css';
 
 interface ModalProps {
     children: ReactNode;
@@ -46,7 +47,7 @@ const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='
                                 ${ classes[`modal-body--animate-${animationDirection}`] /* Allows customization of effect (direction, fade-in, etc.) */ }  
                                 ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
                             }>
-                <CloseBtn classes={`${classes['modal-close']} btn--round`} handleClick={handleClose} /> 
+                <CloseBtn classes={`${classes['modal-close']} ${btnClasses['btn--dark']}`} handleClick={handleClose} /> 
                 {children}
             </div>
         </div>
