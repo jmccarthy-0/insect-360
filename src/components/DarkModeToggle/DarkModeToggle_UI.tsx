@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import Icon from "../../Icon/Icon";
 
 interface DarkModeToggleProps {
     darkMode: boolean;
@@ -13,9 +14,9 @@ const DarkModeToggleUI = ({darkMode, setDarkMode}: DarkModeToggleProps) => {
 
     return (
         <div className="dark-mode-toggle">
-            <span>Light</span>
+            <Icon icon="light" />
             <div className={`dark-mode-toggle__input ${darkMode ? 'dark-mode-toggle__input--dark' : ''}`} onClick={toggleDarkMode} aria-hidden="true"></div>
-            <span>Dark</span>
+            <Icon icon="dark" />
         </div>
     );
 

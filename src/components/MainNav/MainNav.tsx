@@ -7,9 +7,6 @@ const MainNav = () => {
                 <li>
                     <button>Species</button>
                 </li>
-                <li>
-                    <button>Search</button>
-                </li>
             </ul>
         </nav>
     );

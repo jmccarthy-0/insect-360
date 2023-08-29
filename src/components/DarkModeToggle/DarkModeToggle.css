@@ -39,6 +39,10 @@
             transition: transform var(--duration) ease, background-color var(--duration) ease;
         }
     }
+
+	path {
+		fill: var(--txt-clr);
+	}
 }
 
 /*
