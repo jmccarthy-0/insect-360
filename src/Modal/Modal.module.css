@@ -66,16 +66,10 @@
         top:  var(--close-btn-offset-y);
         right: var(--close-btn-offset-x);
         z-index: 2;
-        background-color: #fff;
-        transition: background-color 80ms ease;
 
         &--outside {
             top: 10px;
             right: 10px;
-        }
-
-        &:hover {
-            background-color: hsla(0, 0%, 98%, .8);
         }
         
         > img {

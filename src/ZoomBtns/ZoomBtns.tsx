@@ -1,6 +1,7 @@
 import Btn from "../Btn/Btn";
 
 import btnClasses from '../Btn/Btn.module.css';
+import Icon from "../Icon/Icon";
 import classes from './ZoomBtns.module.css';
 
 interface ZoomBtnsInterface {
@@ -17,8 +18,12 @@ const ZoomBtns = ({zoomLevel, setZoomLevel}: ZoomBtnsInterface) => {
 
     return (
         <div className={classes['zoom-btns']}>
-            <Btn classes={ `${btnClasses['btn--dark']}`} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel >= 1}>+</Btn>
-            <Btn classes={ `${btnClasses['btn--dark']}`} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0}>-</Btn>
+            <Btn classes={ `${btnClasses['btn--dark']}`} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel >= 1}>
+                <Icon icon={'zoom in'} />
+            </Btn>
+            <Btn classes={ `${btnClasses['btn--dark']}`} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0}>
+                <Icon icon={'zoom out'} />
+            </Btn>
         </div>
     );
 };

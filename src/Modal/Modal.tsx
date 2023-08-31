@@ -9,10 +9,11 @@ interface ModalProps {
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
     modalAdjustmentClasses?: string;
     animationDirection?: 'none' | 'left' | 'right' | 'fade';
-    size?: 'small' | 'default'
+    size?: 'small' | 'default';
+    theme?: 'default' | 'light' | 'dark';
 }
 
-const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none', size='default' }: ModalProps) => {
+const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none', size='default', theme='default' }: ModalProps) => {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='
                                 ${ classes[`modal-body--animate-${animationDirection}`] /* Allows customization of effect (direction, fade-in, etc.) */ }  
                                 ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
                             }>
-                <CloseBtn classes={`${classes['modal-close']} ${btnClasses['btn--dark']}`} handleClick={handleClose} /> 
+                <CloseBtn classes={`${classes['modal-close']} ${theme !== 'default' ? btnClasses[`btn--${theme}`] : ''}`} handleClick={handleClose} /> 
                 {children}
             </div>
         </div>
