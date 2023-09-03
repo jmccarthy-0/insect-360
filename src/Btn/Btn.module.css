@@ -22,6 +22,13 @@
         --bg-color: var(--bg-color-invert);
     }
 
+    &--link {
+        border-width: 0;
+        width: auto;
+        height: auto;
+        color: var(--accent-clr);
+    }
+
 
     &--round {
         border-radius: 50%;
