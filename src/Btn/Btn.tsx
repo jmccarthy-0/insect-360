@@ -1,16 +1,17 @@
 import { ReactNode } from "react";
 
-import './Btn.css';
+import btnClasses from './Btn.module.css';
 
 interface BtnProps {
     children: ReactNode;
     handleClick: () => void;
     classes?: string;
+    disabled?: boolean
 }
 
-const Btn = ({ children, classes, handleClick }: BtnProps) => {
+const Btn = ({ children, classes, handleClick, disabled }: BtnProps) => {
     return (
-        <button className={`btn ${classes ? classes: ''}`} onClick={ handleClick }>
+        <button className={`${btnClasses['btn']} ${classes ? classes: ''}`} onClick={ handleClick } disabled={disabled || false}>
             { children }
         </button>
     )

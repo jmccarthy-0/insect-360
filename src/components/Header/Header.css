@@ -1,0 +1,8 @@
+.header {
+    position: relative;
+    column-gap: 1rem;
+    /* background-color: hsl(170, 24%, 31%); */
+    border-bottom: 1px solid var(--txt-muted);
+    color: var(--txt-color);
+    display: flex;
+}

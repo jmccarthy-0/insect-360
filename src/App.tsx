@@ -1,5 +1,5 @@
 import './App.css'
-import Header from './Header/Header';
+import Header from './components/Header/Header';
 import PageIntro from './PageIntro/PageIntro';
 import SequenceViewer from './SequenceViewer/SequenceViewer';
 

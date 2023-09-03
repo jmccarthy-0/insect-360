@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const loadImg = (imgSrc: string): Promise<HTMLImageElement> => {
     return new Promise(resolve => {
@@ -22,14 +22,9 @@ const getBitMaps = async (imgPromises: Promise<HTMLImageElement>[]) => {
     return bitMaps;
 };
 
+const useMultiImageLoader = (imgCount: number) => {
+    const [renderImgs, setRenderImgs] = useState<ImageBitmap[]>([]);
 
-interface ImageLoaderProps {
-    imgCount: number;
-    setImg:  (value: ImageBitmap[] | ((prevVar: ImageBitmap[]) => ImageBitmap[])) => void;
-}
-
-const ImageLoader = ({imgCount, setImg}: ImageLoaderProps) => {
-    // onMount
     useEffect(() => {
         /**
          * Build array of promises as images are loading
@@ -39,18 +34,18 @@ const ImageLoader = ({imgCount, setImg}: ImageLoaderProps) => {
         for (let i=1; i<=imgCount; i++) {
             imgPromises.push(loadImg(`/mobile/webp/${i.toString().padStart(4, "0")}.webp`));
         }
-
+ 
         /**
-         * Convert imgPromises -> Image Objects -> Bitmaps
-         * Update image state
-         * */ 
+        * Convert imgPromises -> Image Objects -> Bitmaps
+        * Update image state
+        * */ 
         (async () => {
             const sprites = await getBitMaps(imgPromises) 
-            setImg(sprites);
+            setRenderImgs(sprites);
         })();
     }, []);
 
-    return null;
-}
+    return renderImgs;
+};
 
-export default ImageLoader;
+export default useMultiImageLoader

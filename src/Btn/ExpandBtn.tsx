@@ -1,6 +1,8 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
+import btnClasses from './Btn.module.css';
+
 interface ExpandBtnProps {
     handleClick: () => void;
     classes?: string;
@@ -8,7 +10,7 @@ interface ExpandBtnProps {
 
 const ExpandBtn = ({ classes, handleClick }: ExpandBtnProps) => {
     return (
-        <Btn classes={`${classes ? classes : ''} btn--round`} handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']}`} handleClick={handleClick}>
             <Icon icon={'expand'} />
         </Btn>
     )

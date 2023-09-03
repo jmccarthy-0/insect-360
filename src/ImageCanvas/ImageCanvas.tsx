@@ -1,34 +1,99 @@
-import { useEffect, useRef } from 'react';
-import './ImageCanvas.css';
+import {useState, useRef, useEffect, MouseEvent, TouchEvent} from 'react';
+import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../utils/canvas-utils';
+import classes from './ImageCanvas.module.css';
 
-interface ImageCanvasProps {
-    img: ImageBitmap[];
-    activeImgIndex: number;
+interface PhotoCanvasProps {
+    img: HTMLImageElement | ImageBitmap | null;
+    zoomLevel?: number;
+    panningEnabled?: boolean;
 }
 
-const ImageCanvas = ({img, activeImgIndex}: ImageCanvasProps) => {
+const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isDragging, setisDragging] = useState(false);
+    const [prevDragPos, setPrevDragPos] = useState({ x:0 , y:0});
+
+    const [dx, setDx] = useState(0); // Image offset x within the canvas
+    const [dy, setDy] = useState(0); // Image offset y within the canvas
+    const [dw, setDw] = useState(0); // Image width within the canvas
+    const [dh, setDh] = useState(0); // Image height within the canvas
     
-    useEffect(() => {
-        if (canvasRef.current && img[0]) {
+
+    // Set Image Scale
+    useEffect(() => {    
+        console.log({img});
+        if (img && canvasRef.current) {
             const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
 
-            // canvas.width = img[0].width;
-            canvas.width= img[0].width;
-            canvas.height = img[0].height;
+            resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
+            
+            const scale = getDefaultImgScale(canvas, img) + zoomLevel;
+            const initialDw = Math.min(img.width, img.width * scale);
+            const initialDh = Math.min(img.height, img.height * scale);
+            const [initialDx, initialDy] = getImgCenterOffset(canvas, initialDw, initialDh, 1);
 
+            setDw(initialDw);
+            setDh(initialDh);
+            setDx(initialDx);
+            setDy(initialDy);
 
-            window.requestAnimationFrame(() => {
-                ctx?.clearRect(0, 0, canvas.width, canvas.height);
-                ctx?.drawImage(img[activeImgIndex], 0, 0);
+            refreshCanvas(canvasRef.current, img, initialDx, initialDy, initialDw, initialDh);
+        }
+    }, [img, zoomLevel]);
+
+    // Redraw canvas when dx/dy coordinates change
+    useEffect(() => {
+        if (img && canvasRef.current) {
+            refreshCanvas(canvasRef.current, img, dx, dy, dw, dh);
+        }
+    }, [dx, dy]);
+
+    // Event Handlers
+    const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+        if (zoomLevel > 0) {
+            const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
+
+            setisDragging(true);
+
+            setPrevDragPos({
+                x: event.clientX,
+                y: event.clientY
+            }); 
+        }
+    }
+
+    const handlePointerMove = (e: MouseEvent | TouchEvent) => {
+        const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
+
+        if (isDragging) {
+            // Difference between current mouse coordinates and previous mouse coordinates 
+            const updateDx = dx + ((event.clientX - prevDragPos.x) * Math.min(window.devicePixelRatio, 2));
+            const updateDY = dy + ((event.clientY - prevDragPos.y) * Math.min(window.devicePixelRatio, 2));
+
+            // Update image position
+            setDx(updateDx);
+            setDy(updateDY);
+
+            //Reset Prev Mouse coordinates
+            setPrevDragPos({
+                x: event.clientX,
+                y: event.clientY
             });
         }
-    }, [img, activeImgIndex])
+    }
 
-    return (
-        <canvas className='img-canvas' ref={canvasRef}></canvas>
-    );
- }
+    const handlePointerUp = () => {
+        setisDragging(false);
+    }
 
- export default ImageCanvas;
+    return <canvas className={classes['img-canvas']} ref={canvasRef} 
+                onMouseDown={panningEnabled ? handlePointerDown : undefined} 
+                onMouseMove={panningEnabled ? handlePointerMove : undefined} 
+                onMouseUp={panningEnabled ? handlePointerUp : undefined}
+                onTouchStart={panningEnabled ? handlePointerDown : undefined}
+                onTouchMove={panningEnabled ? handlePointerMove : undefined}
+                onTouchEnd={panningEnabled ? handlePointerUp : undefined}
+                ></canvas>;
+}
+
+export default ImageCanvas;

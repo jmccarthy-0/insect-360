@@ -15,16 +15,25 @@ html {
  
   --bg-clr: var(--primary-dark);
   --txt-clr: var(--primary-light);
-  --border-clr: var(--primary-light);
+  --border-color: var(--primary-light);
   --txt-muted: hsl(0, 0%, 46%);
+
+  --bg-color-invert: var(--primary-light);
+  --txt-color-invert: var(--primary-dark);
+  --border-color-invert: var(--primary-dark);
 
   --page-padding-x: 1rem;
   --page-padding-y: 3rem;
 
   &[data-theme="dark"] {
     --bg-clr: var(--primary-light);
-    --border-clr: var(--primary-dark);
+    --border-color: var(--primary-dark);
     --txt-clr: var(--primary-dark);
+    --txt-muted: hsl(0, 0%, 51%);
+
+    --bg-color-invert: var(--primary-dark);
+    --txt-color-invert: var(--primary-light);
+    --border-color-invert: var(--primary-light);
   }
 }
 
@@ -60,7 +69,7 @@ ol, ul {
 }
 
 p {
-  line-height: 1.5;
+  line-height: 2;
 
   &:has(+ p) {
     margin-bottom: 1rem;
