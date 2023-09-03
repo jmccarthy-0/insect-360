@@ -9,12 +9,15 @@ interface MainContentProps {
 }
 
 const MainContent = ({displaySpeciesMenu}: MainContentProps) => {
+    if (displaySpeciesMenu) {
+        return <SpeciesMenu />;
+    }
+
     return (
-        <main className={styles.mainContent}>
-          {displaySpeciesMenu && <SpeciesMenu />}
+        <>
           <PageIntro />
           <SequenceViewer imgCount={360} />
-        </main>
+        </>
     );
 }
 

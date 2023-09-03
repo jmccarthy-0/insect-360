@@ -1,17 +1,17 @@
-import './App.css'
+import { useState } from 'react';
 import Header from './components/Header/Header';
-import PageIntro from './PageIntro/PageIntro';
-import SequenceViewer from './SequenceViewer/SequenceViewer';
+import MainContent from './MainContent/MainContent';
+
+import './App.css'
 
 const App = () => {
+  const [displaySpeciesMenu, setDisplaySpeciesMenu] = useState(true);
+
   return (
     <main>
       <div className="page-grid">
         <Header />
-        <div>
-          <PageIntro />
-          <SequenceViewer imgCount={360} />
-        </div>
+        <MainContent displaySpeciesMenu={displaySpeciesMenu} />
       </div>
     </main>
   )

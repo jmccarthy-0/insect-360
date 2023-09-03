@@ -1,5 +1,6 @@
 .page-grid {
   display: grid;
+  grid-template-rows: max-content 1fr;
   row-gap: 3.5rem;
   width: 95%;
   min-height: 100vh;
