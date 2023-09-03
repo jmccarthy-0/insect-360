@@ -13,19 +13,20 @@
               "children": [
                 {
                   "rank": "order",
-                  "name": "Hymenoptera",
+                  "name": "Hemiptera",
                   "children": [
                     {
                       "rank": "family",
-                      "name": "Andrenidae",
+                      "name": "Fulgoridae",
                       "children": [
                         {
                           "rank": "genus",
-                          "name": "Protoxaea",
+                          "name": "Lycorma",
                           "children": [
                             {
                               "rank": "species",
-                              "name": "gloriosa"
+                              "name": "delicatula",
+                              "sid": "lycorma-delicatula"
                             }
                           ]
                         }
