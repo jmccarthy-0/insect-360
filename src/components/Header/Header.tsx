@@ -3,10 +3,14 @@ import MainNav from "../MainNav/MainNav";
 
 import './Header.css';
 
-const Header = () => {
+interface HeaderProps {
+    setDisplaySpeciesMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+}
+
+const Header = ({ setDisplaySpeciesMenu }: HeaderProps) => {
     return (
         <header className="header">
-            <MainNav />
+            <MainNav setDisplaySpeciesMenu={setDisplaySpeciesMenu} />
             <DarkModeToggle />
         </header>
     );
