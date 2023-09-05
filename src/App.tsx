@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import MainContent from './MainContent/MainContent';
 import SpeciesMenu from './SpeciesMenu/SpeciesMenu';
@@ -8,6 +8,10 @@ import './App.css'
 const App = () => {
   const [displaySpeciesMenu, setDisplaySpeciesMenu] = useState(true);
   const [activeSpecies, setActiveSpecies] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log({activeSpecies});
+  }, [activeSpecies]);
 
   return (
     <main>

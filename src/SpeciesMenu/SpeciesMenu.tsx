@@ -33,11 +33,16 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                         if (taxon.rank !== 'species' && (!taxon.children || !taxon.children.length)) {
                             return null;
                         }
+
+                        const handleClick = () => {
+                            setActiveSpecies(taxon.id);
+                            setDisplayMenu(false);
+                        }
                         
                         return (
                             <li key={index} className={taxon.rank}>
                                 { 
-                                    taxon.rank == 'species' && taxon ? <Btn handleClick={() => setActiveSpecies(taxon.id)} classes={`${btnClasses['btn--link']}`}>{taxon.name}</Btn> : taxon.name
+                                    taxon.rank == 'species' && taxon ? <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{taxon.name}</Btn> : taxon.name
                                 }
     
                                 {
