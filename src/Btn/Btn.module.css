@@ -1,5 +1,5 @@
 .btn {
-    --width: 3rem;
+    --width: 15rem;
     --height: 3rem;
     --transition-duration: 320ms;
     
@@ -9,8 +9,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: var(--width);
+    width: min(var(--width), 100%);
     height: var(--height);
+    padding: 0 2rem;
     color: var(--txt-clr);
     background-color: var(--bg-color);
     border: 1px solid var(--border-color);
@@ -22,13 +23,19 @@
         --bg-color: var(--bg-color-invert);
     }
 
+    &--square {
+        --width: var(--height);
+        padding: 0;
+    }
+
     &--link {
         --transform: 0;
+        --width: auto;
+        --height:  auto;
 
         position:relative;
+        padding: 0;
         border-width: 0;
-        width: auto;
-        height: auto;
         color: var(--accent-clr);
         
         &:hover {

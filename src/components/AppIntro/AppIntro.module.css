@@ -1,0 +1,15 @@
+.app-intro {
+    text-align: center;
+    display: grid;
+    place-content: center;
+    row-gap: 2rem;
+}
+
+.page-title {
+    font-size: 6rem;
+}
+
+.btn-wrapper {
+    display: flex; 
+    justify-content: center;
+}

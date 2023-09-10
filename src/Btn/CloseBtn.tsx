@@ -1,6 +1,8 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
+import btnClasses from './Btn.module.css';
+
 interface CloseBtnProps {
     handleClick: () => void;
     classes?: string;
@@ -8,7 +10,7 @@ interface CloseBtnProps {
 
 const CloseBtn = ({ classes, handleClick }: CloseBtnProps) => {
     return (
-        <Btn classes={`close-btn ${classes ? classes : ''}`} handleClick={handleClick}>
+        <Btn classes={`close-btn ${classes ? classes : ''}  ${btnClasses['btn--square']}`} handleClick={handleClick}>
             <Icon icon={'close'} />
         </Btn>
     )

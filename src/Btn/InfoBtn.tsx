@@ -10,7 +10,7 @@ interface InfoBtnProps {
 
 const InfoBtn = ({ classes, handleClick }: InfoBtnProps) => {
     return (
-        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']}`} handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={handleClick}>
             <Icon icon={'info'} />
         </Btn>
     )
