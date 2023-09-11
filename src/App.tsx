@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import AppIntro from './components/AppIntro/AppIntro';
 import Header from './components/Header/Header';
 import MainContent from './MainContent/MainContent';
@@ -10,7 +10,7 @@ const App = () => {
   const [displaySpeciesMenu, setDisplaySpeciesMenu] = useState(false);
   const [activeSpecies, setActiveSpecies] = useState<string | null>(null);
 
-  let content = activeSpecies ? <MainContent /> : <AppIntro setDisplaySpeciesMenu={setDisplaySpeciesMenu} />;
+  let content = activeSpecies ? <MainContent activeSpeciesId={activeSpecies} /> : <AppIntro setDisplaySpeciesMenu={setDisplaySpeciesMenu} />;
 
   return (
     <main>

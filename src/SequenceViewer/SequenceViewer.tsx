@@ -12,10 +12,11 @@ import classes from './SequenceViewer.module.css';
 
 interface SequenceViewerProps {
     imgCount: number;
+    imgPath: string;
 }
 
-const SequenceViewer = ({ imgCount }: SequenceViewerProps) => {
-    const imgs = useMultiImageLoader(imgCount);
+const SequenceViewer = ({ imgCount, imgPath }: SequenceViewerProps) => {
+    const imgs = useMultiImageLoader(imgCount, imgPath);
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);

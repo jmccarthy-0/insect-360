@@ -22,7 +22,14 @@ const getBitMaps = async (imgPromises: Promise<HTMLImageElement>[]) => {
     return bitMaps;
 };
 
-const useMultiImageLoader = (imgCount: number) => {
+/**
+ * 
+ * @param imgCount Number of frames available for this image set
+ * @param path URL to images up until (but not including the file number)
+ * @param format Filetype
+ * @param padding Number of placeholders in the file number
+ */
+const useMultiImageLoader = (imgCount: number, path: string, format='webp', padding=2) => {
     const [renderImgs, setRenderImgs] = useState<ImageBitmap[]>([]);
 
     useEffect(() => {
@@ -32,7 +39,7 @@ const useMultiImageLoader = (imgCount: number) => {
         const imgPromises: Promise<HTMLImageElement>[] = [];
         
         for (let i=1; i<=imgCount; i++) {
-            imgPromises.push(loadImg(`/mobile/webp/${i.toString().padStart(4, "0")}.webp`));
+            imgPromises.push(loadImg(`${path}${i.toString().padStart(padding, "0")}.${format}`));
         }
  
         /**
