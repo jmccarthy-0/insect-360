@@ -1,0 +1,12 @@
+{
+    "sid": "lycorma-delicatula",
+    "images": {
+        "sequenceFramecount": 19,
+        "paths": {
+            "sequence": {
+                "path": "/species_assets/lycorma-delicatula/sequence/lycorma-delicatula_viewer_frame-",
+                "filetype": "webp"
+            }
+        }
+    }
+}
