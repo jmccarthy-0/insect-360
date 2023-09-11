@@ -21,7 +21,6 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
 
     // Set Image Scale
     useEffect(() => {    
-        console.log({img});
         if (img && canvasRef.current) {
             const canvas = canvasRef.current;
 

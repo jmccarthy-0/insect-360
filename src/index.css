@@ -12,6 +12,7 @@ html {
   --primary-light: hsl(0, 0%, 10%);
   --primary-dark: hsl(0, 0%, 100%);
   --accent-clr: hsl(41, 100%, 49%);
+  --true-black: #000;
  
   --bg-clr: var(--primary-dark);
   --txt-clr: var(--primary-light);

@@ -13,7 +13,6 @@ const TimelineScrubber = ({ min, max, value, setTimelineIndex }: TimelineScrubbe
      * @param e 
      */
     const handleIndexRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.valueAsNumber);
         setTimelineIndex(e.target.valueAsNumber)
     };
 
