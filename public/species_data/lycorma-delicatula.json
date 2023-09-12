@@ -1,5 +1,8 @@
 {
     "sid": "lycorma-delicatula",
+    "meta": {
+        "photoInfo": "<dl><dd>Camera:</dd><dt>Olympus OM-D EM1 Mark III</dt><dd>Lens:</dd><dt>M. Zuiko 60mm Macro</dt></dl>"
+    },
     "details": {
         "binomialName": "Lycorma delicatula",
         "commonName": "Spotted Lanternfly",

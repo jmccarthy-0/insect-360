@@ -6,4 +6,5 @@
     padding: 4rem var(--page-padding-x) 1rem;
     background-color: var(--bg-clr);
     color: var(--txt-clr);
+    width:100%;
 }

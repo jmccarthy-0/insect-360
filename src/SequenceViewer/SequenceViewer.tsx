@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Taxon } from '../utils/ts/types';
 
 import useMultiImageLoader from '../hooks/multiImageLoader';
 
@@ -11,19 +12,18 @@ import SequenceViewerControls from '../SequenceViewerControls/SequenceViewerCont
 import classes from './SequenceViewer.module.css';
 
 interface SequenceViewerProps {
-    imgCount: number;
-    imgPath: string;
+    species: Taxon;
 }
 
-const SequenceViewer = ({ imgCount, imgPath }: SequenceViewerProps) => {
-    const imgs = useMultiImageLoader(imgCount, imgPath);
+const SequenceViewer = ({ species: {details, images, meta}}: SequenceViewerProps) => {
+    const imgs = useMultiImageLoader(images.sequenceFramecount, images.sequence.path);
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
 
     useEffect(() => {
-        if (imgs.length === imgCount) {
+        if (imgs.length === images.sequenceFramecount) {
             setDisplayLoader(false);
         }
     }, [imgs]);
@@ -37,13 +37,13 @@ const SequenceViewer = ({ imgCount, imgPath }: SequenceViewerProps) => {
                 setDisplayPhotoViewer={setDisplayPhotoViewer}
                 activeImgIndex={activeImgIndex}
                 setActiveImgIndex={setActiveImgIndex}
-                imgCount={imgCount}
+                imgCount={images.sequenceFramecount}
             />
             <ImageCanvas img={imgs[activeImgIndex]} />
             
 
             {/* Modal details about a given photo */}
-            { displayPhotoInfo && <PhotoInfoModal setOpen={setDisplayPhotoInfo}/>
+            { displayPhotoInfo && <PhotoInfoModal setOpen={setDisplayPhotoInfo} content={meta.photoInfo}/>
             }
 
             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}

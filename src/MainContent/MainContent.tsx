@@ -34,7 +34,7 @@ const MainContent = ({activeSpeciesId}:MainContentProps) => {
       <main className={classes['main-content']}>
         <Suspense fallback={<Loader />}>
           {species && <PageIntro content={species.details} />}
-          {species && <SequenceViewer imgCount={species.images.sequenceFramecount} imgPath={species.images.sequence.path} />}
+          {species && <SequenceViewer species={species} />}
         </Suspense>
       </main>
   );

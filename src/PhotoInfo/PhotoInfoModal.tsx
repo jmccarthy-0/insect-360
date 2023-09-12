@@ -5,15 +5,16 @@ import classes from './PhotoInfo.module.css';
 
 interface PhotoInfoModalProps {
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+    content: string;
 }
 
-const PhotoInfoModal = ({setOpen}: PhotoInfoModalProps) => {
+const PhotoInfoModal = ({setOpen, content}: PhotoInfoModalProps) => {
     return (
         <Modal  modalAdjustmentClasses={classes['photo-info-modal']} 
                 setOpen={setOpen} 
                 animationDirection="fade"
                 size="small">
-            <PhotoInfo />
+            <PhotoInfo content={content}/>
         </Modal>
     );
 }
