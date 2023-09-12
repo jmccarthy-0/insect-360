@@ -1,3 +1,5 @@
-.mainContent {
-    position: relative;
+.main-content {
+    display: grid;
+    row-gap: 3rem;
+    grid-template-rows: max-content 1fr;
 }

@@ -1,14 +1,15 @@
 {
     "sid": "lycorma-delicatula",
-    "scientificName": "Lycorma delicatula",
-    "commonName": "Spotted Lanternfly",
+    "details": {
+        "binomialName": "Lycorma delicatula",
+        "commonName": "Spotted Lanternfly",
+        "classifiedBy": "White, 1845"
+    },
     "images": {
         "sequenceFramecount": 19,
-        "paths": {
-            "sequence": {
-                "path": "/species_assets/lycorma-delicatula/sequence/lycorma-delicatula_viewer_frame-",
-                "filetype": "webp"
-            }
+        "sequence": {
+            "path": "/species_assets/lycorma-delicatula/sequence/lycorma-delicatula_viewer_frame-",
+            "filetype": "webp"
         }
     }
 }

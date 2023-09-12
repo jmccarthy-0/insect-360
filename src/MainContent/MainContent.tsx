@@ -2,11 +2,13 @@ import { useState, useEffect, Suspense, lazy } from 'react';
 import { Taxon } from '../utils/ts/types';
 
 import Loader from '../Loader/Loader';
-import PageIntro from '../PageIntro/PageIntro';
-
+const PageIntro = lazy(() => import('../PageIntro/PageIntro'));
 const SequenceViewer = lazy(() => import('../SequenceViewer/SequenceViewer'));
 
 import { fetchData } from '../utils/ts/fetch-utils';
+
+import classes from './MainContent.module.css';
+
 
 
 interface MainContentProps {
@@ -29,12 +31,12 @@ const MainContent = ({activeSpeciesId}:MainContentProps) => {
 
 
   return (
-      <>
-        <PageIntro />
+      <main className={classes['main-content']}>
         <Suspense fallback={<Loader />}>
-          {species && <SequenceViewer imgCount={species.images.sequenceFramecount} imgPath={species.images.paths.sequence.path} />}
+          {species && <PageIntro content={species.details} />}
+          {species && <SequenceViewer imgCount={species.images.sequenceFramecount} imgPath={species.images.sequence.path} />}
         </Suspense>
-      </>
+      </main>
   );
 }
 

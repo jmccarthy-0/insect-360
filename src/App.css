@@ -11,8 +11,3 @@
 .species {
   font-style: italic;
 }
-
-.binomen {
-  text-align: center;
-  color: var(--txt-muted);
-}

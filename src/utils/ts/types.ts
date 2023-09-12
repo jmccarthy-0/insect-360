@@ -1,14 +1,17 @@
+export type TaxonDetails = {
+    "binomialName": string,
+    "commonName": string | null
+    "classifiedBy": string | null;
+}
+
 export interface Taxon {
     "sid": string,
-    "scientificName": string,
-    "commonName": string,
+    "details": TaxonDetails
     "images": {
-      "sequenceFramecount": number,
-      "paths": {
-          "sequence": {
-              "path": string,
-              "filetype": string
-          }
-      }
+        "sequenceFramecount": number,
+        "sequence": {
+            "path": string,
+            "filetype": string
+        }
     }
 }

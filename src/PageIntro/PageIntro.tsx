@@ -1,13 +1,18 @@
-import  './PageIntro.css';
+import { TaxonDetails } from '../utils/ts/types';
 
-const PageIntro = () => {
+import classes from './PageIntro.module.css';
+
+interface PageIntroProps {
+  content: TaxonDetails
+}
+
+const PageIntro = ({content: {binomialName, commonName, classifiedBy}}: PageIntroProps) => {
     return (
-        <div className='page-intro'>
-          <div className='page-intro__title-wrapper'>
-            <h1 className='page-intro__heading species'>Protoxaea gloriosa</h1>
-            <p className='page-intro__descr'>(Fox, 1893)</p>
+        <div className={classes['page-intro']}>
+          <div className={classes['title-wrapper']}>
+            <h1 className={`${classes['heading']}`}><span className={'species'}>{binomialName}</span> {commonName && `- ${commonName}`}</h1>
+            {classifiedBy && <p className='page-intro__descr'>({classifiedBy})</p>}
           </div>
-          <p className='binomen'><span className='species'>Megacilissa gloriosa</span> Fox, 1893; <span className='species'>Oxaea tristis</span> Gribodo, 1894; <span className='species'>Protoxaea gloriosa pallida</span> Cockerell, 1934</p>
         </div>
     );
 }
