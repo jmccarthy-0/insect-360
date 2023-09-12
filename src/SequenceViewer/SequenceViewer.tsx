@@ -21,6 +21,7 @@ const SequenceViewer = ({ species: {details, images, meta}}: SequenceViewerProps
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
+    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
 
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
@@ -47,7 +48,7 @@ const SequenceViewer = ({ species: {details, images, meta}}: SequenceViewerProps
             }
 
             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
-            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} /> }
+            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} imgPath={activeHiResImgUrl} /> }
         </div>
     )
 }

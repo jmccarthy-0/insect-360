@@ -7,8 +7,12 @@ import ZoomBtns from "../ZoomBtns/ZoomBtns";
 
 import classes from './PhotoViewer.module.css';
 
-const PhotoViewer = () => {
-    const img = useSingleImageLoader('/hi-res/29540763125_daca6ae7f7_o.jpg');
+interface PhotoViewerProps {
+    imgPath: string;
+}
+
+const PhotoViewer = ({imgPath}: PhotoViewerProps) => {
+    const img = useSingleImageLoader(imgPath);
     const [zoomLevel, setZoomLevel] = useState(0);
     const [displayLoader, setDisplayLoader] = useState(true);
 

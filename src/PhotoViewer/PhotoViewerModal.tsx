@@ -3,12 +3,13 @@ import PhotoViewer from "./PhotoViewer";
 
 interface PhotoViewerModalProps {
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+    imgPath: string;
 }
 
-const PhotoViewerModal = ({ setOpen }: PhotoViewerModalProps) => {
+const PhotoViewerModal = ({ setOpen, imgPath }: PhotoViewerModalProps) => {
     return (
         <Modal setOpen={setOpen} animationDirection="right" theme="dark">
-            <PhotoViewer />
+            <PhotoViewer imgPath={imgPath} />
         </Modal>
     );
 };

@@ -17,6 +17,10 @@ export interface Taxon {
         "sequence": {
             "path": string,
             "filetype": string
+        },
+        "sequenceHiRes": {
+            "path": string,
+            "filetype": string
         }
     }
 }
