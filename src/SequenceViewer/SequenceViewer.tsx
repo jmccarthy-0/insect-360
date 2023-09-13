@@ -15,19 +15,23 @@ interface SequenceViewerProps {
     species: Taxon;
 }
 
-const SequenceViewer = ({ species: {details, images, meta}}: SequenceViewerProps) => {
+const SequenceViewer = ({ species: { images, meta }}: SequenceViewerProps) => {
     const imgs = useMultiImageLoader(images.sequenceFramecount, images.sequence.path);
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
-    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
+    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`); // Convert to reusable function
 
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
             setDisplayLoader(false);
         }
     }, [imgs]);
+
+    useEffect(() => {
+        setActiveHighResImgUrl(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
+    }, [ images, activeImgIndex]);
 
     return (
         <div className={classes['sequence-viewer']}>
