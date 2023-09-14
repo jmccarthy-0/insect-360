@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactElement } from 'react';
+import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
 
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
@@ -18,7 +18,7 @@ interface Taxon {
 interface SpeciesMenuProps {
     displayMenu: boolean;
     setDisplayMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-    setActiveSpecies: (value: string | ((prevVar: string) => string)) => void;
+    setActiveSpecies: Dispatch<SetStateAction<string | null>>;
 }
 
 
