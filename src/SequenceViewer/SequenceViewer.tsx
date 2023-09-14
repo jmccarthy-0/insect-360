@@ -21,7 +21,7 @@ const SequenceViewer = ({ species: { images, meta }}: SequenceViewerProps) => {
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
-    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`); // Convert to reusable function
+    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${import.meta.env.BASE_URL}${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`); // Convert to reusable function
 
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
@@ -30,7 +30,7 @@ const SequenceViewer = ({ species: { images, meta }}: SequenceViewerProps) => {
     }, [imgs]);
 
     useEffect(() => {
-        setActiveHighResImgUrl(`${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
+        setActiveHighResImgUrl(`${import.meta.env.BASE_URL}${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
     }, [ images, activeImgIndex]);
 
     return (

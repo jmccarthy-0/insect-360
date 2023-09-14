@@ -4,6 +4,7 @@ import autoprefixer from 'autoprefixer';
 import postCSSNested from 'postcss-nested';
 import svgr from "vite-plugin-svgr";
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/insect-360/',

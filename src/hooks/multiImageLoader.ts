@@ -39,7 +39,7 @@ const useMultiImageLoader = (imgCount: number, path: string, format='webp', padd
         const imgPromises: Promise<HTMLImageElement>[] = [];
         
         for (let i=1; i<=imgCount; i++) {
-            imgPromises.push(loadImg(`${path}${i.toString().padStart(padding, "0")}.${format}`));
+            imgPromises.push(loadImg(`${import.meta.env.BASE_URL}${path}${i.toString().padStart(padding, "0")}.${format}`));
         }
  
         /**

@@ -11,11 +11,11 @@
     "images": {
         "sequenceFramecount": 19,
         "sequence": {
-            "path": "/species_assets/lycorma-delicatula/sequence/lycorma-delicatula_viewer_frame-",
+            "path": "species_assets/lycorma-delicatula/sequence/lycorma-delicatula_viewer_frame-",
             "filetype": "webp"
         },
         "sequenceHiRes": {
-            "path": "/species_assets/lycorma-delicatula/sequence_hi-res/lycorma-delicatula_hi-res_frame-",
+            "path": "species_assets/lycorma-delicatula/sequence_hi-res/lycorma-delicatula_hi-res_frame-",
             "filetype": "webp"
         }
     }
