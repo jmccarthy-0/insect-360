@@ -3,7 +3,7 @@ import { useCallback, ChangeEvent } from "react";
 interface DarkModeToggleProps {
     darkMode: boolean;
     setDarkMode: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-};
+}
 
 const DarkModeToggleSR = ({darkMode, setDarkMode}: DarkModeToggleProps) => {
 

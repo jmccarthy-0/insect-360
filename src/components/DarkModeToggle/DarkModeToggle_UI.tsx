@@ -4,7 +4,7 @@ import Icon from "../../Icon/Icon";
 interface DarkModeToggleProps {
     darkMode: boolean;
     setDarkMode: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-};
+}
 
 const DarkModeToggleUI = ({darkMode, setDarkMode}: DarkModeToggleProps) => {
 
