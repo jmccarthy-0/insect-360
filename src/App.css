@@ -5,6 +5,11 @@ body {
   }
 }
 
+.app {
+  max-width: 2400px;
+  margin: auto;
+}
+
 .page-grid {
   display: grid;
   grid-template-rows: max-content 1fr;

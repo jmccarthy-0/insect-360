@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { useSingleImageLoader } from '../hooks/singleImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas';

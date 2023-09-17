@@ -13,13 +13,13 @@ const App = () => {
   const content = activeSpecies ? <MainContent activeSpeciesId={activeSpecies} /> : <AppIntro setDisplaySpeciesMenu={setDisplaySpeciesMenu} />;
 
   return (
-    <main>
+    <div className={'app'}>
       <div className="page-grid">
         <Header setDisplaySpeciesMenu={setDisplaySpeciesMenu} /> {/*  Remove excessive prop drilling here*/} 
         <SpeciesMenu displayMenu={displaySpeciesMenu} setDisplayMenu={setDisplaySpeciesMenu} setActiveSpecies={setActiveSpecies} />
         { content } 
       </div>
-    </main>
+    </div>
   )
 }
 
