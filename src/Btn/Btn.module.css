@@ -26,6 +26,7 @@
     &--square {
         --width: var(--height);
         padding: 0;
+        flex: 0 0 auto;
     }
 
     &--link {

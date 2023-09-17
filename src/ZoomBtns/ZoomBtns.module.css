@@ -2,6 +2,8 @@
     position: absolute;
     bottom: 2dvh;
     right: var(--close-btn-offset-x);
-    display:flex;
+    display: inline-flex;
+    justify-content: flex-end;
     gap: 1rem;
+    min-width: 10rem;
 }
