@@ -15,7 +15,7 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
 
     return (
         <div className={classes['app-intro']}>
-            <h1 className={classes['page-title']}>Insect360: A Digital Field Guide</h1>
+            <h1 className={classes['page-title']}>BioSphere: A Digital Field Guide</h1>
             <p>Choose a species from the menu to get started.</p>
             <div className={classes['btn-wrapper']}>
                 <Btn handleClick={handleClick}>

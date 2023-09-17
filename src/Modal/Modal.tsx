@@ -23,7 +23,12 @@ const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='
             setIsActive(true);
         }, duration);
 
-        return () => clearTimeout(animationTimeout);
+        document.body.classList.add('modal-open');
+
+        return () => {
+            document.body.classList.remove('modal-open');
+            clearTimeout(animationTimeout);
+        };
     }, []);
 
     const handleClose = () => {

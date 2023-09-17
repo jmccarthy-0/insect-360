@@ -1,8 +1,7 @@
 .zoom-btns {
     position: absolute;
-    bottom:2rem;
-    right: 2rem;
+    bottom: 2dvh;
+    right: var(--close-btn-offset-x);
     display:flex;
-    flex-direction: column;
-    row-gap: 1rem;
+    gap: 1rem;
 }
