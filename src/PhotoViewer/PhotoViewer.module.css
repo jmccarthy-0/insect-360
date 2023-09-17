@@ -6,4 +6,8 @@
     background-color: #000;
     overscroll-behavior: none;
     cursor: var(--cursor);
+
+    &--is-grabbing {
+        --cursor: grabbing;
+    }
 }

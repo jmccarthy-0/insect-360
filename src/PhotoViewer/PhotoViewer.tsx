@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import { useSingleImageLoader } from '../hooks/singleImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas';
@@ -15,13 +15,21 @@ const PhotoViewer = ({imgPath}: PhotoViewerProps) => {
     const img = useSingleImageLoader(imgPath);
     const [zoomLevel, setZoomLevel] = useState(0);
     const [displayLoader, setDisplayLoader] = useState(true);
+    const [isGrabbing, setIsGrabbing] = useState(false);
 
     useEffect(() => {
         img && img.complete && setDisplayLoader(false);
     }, [img]);
 
+    const handleMouseDown = () => {
+        setIsGrabbing(true);
+    }
+    const handleMouseUp = () => {
+        setIsGrabbing(false);
+    }
+
     return (   
-        <div className={classes['photo-viewer']}>
+        <div className={`${classes['photo-viewer']} ${isGrabbing ? classes['photo-viewer--is-grabbing'] : ''}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
             {displayLoader && <Loader />}
             <ZoomBtns setZoomLevel={setZoomLevel}  zoomLevel={zoomLevel}/>
             <ImageCanvas img={img} zoomLevel={zoomLevel} panningEnabled={true} />
