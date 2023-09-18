@@ -10,8 +10,11 @@ const PageIntro = ({content: {binomialName, commonName, classifiedBy}}: PageIntr
     return (
         <div className={classes['page-intro']}>
           <div className={classes['title-wrapper']}>
-            <h1 className={`${classes['heading']}`}><span className={'species'}>{binomialName}</span> {commonName && `- ${commonName}`}</h1>
-            {classifiedBy && <p className='page-intro__descr'>({classifiedBy})</p>}
+            <h1 className={`${classes['heading']}`}>
+              <span className={`${classes['scientific-name']}`}>{binomialName}</span>
+              {commonName && <span className={`${classes['common-name']}`}>{commonName}</span>}
+            </h1>
+            {classifiedBy && <p>({classifiedBy})</p>}
           </div>
         </div>
     );
