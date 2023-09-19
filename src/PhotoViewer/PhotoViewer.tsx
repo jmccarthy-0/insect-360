@@ -27,11 +27,14 @@ const PhotoViewer = ({imgPath}: PhotoViewerProps) => {
     const handleMouseUp = () => {
         setIsGrabbing(false);
     }
+    const handleMouseLeave = () => {
+        setIsGrabbing(false);
+    }
 
     return (   
-        <div className={`${classes['photo-viewer']} ${isGrabbing ? classes['photo-viewer--is-grabbing'] : ''}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+        <div className={`${classes['photo-viewer']} ${isGrabbing ? classes['photo-viewer--is-grabbing'] : ''}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave}>
             {displayLoader && <Loader />}
-            <ZoomBtns setZoomLevel={setZoomLevel}  zoomLevel={zoomLevel}/>
+            <ZoomBtns setZoomLevel={setZoomLevel} zoomLevel={zoomLevel}/>
             <ImageCanvas img={img} zoomLevel={zoomLevel} panningEnabled={true} />
         </div>
     )

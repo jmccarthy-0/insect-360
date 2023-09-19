@@ -64,14 +64,16 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
         const event = 'touches' in e ? e.touches[0] : e as MouseEvent;
 
-        if (isDragging) {
+        if (isDragging && canvasRef.current) {
+            const canvas = canvasRef.current;
+            
             // Difference between current mouse coordinates and previous mouse coordinates 
             const updateDx = dx + ((event.clientX - prevDragPos.x) * Math.min(window.devicePixelRatio, 2));
-            const updateDY = dy + ((event.clientY - prevDragPos.y) * Math.min(window.devicePixelRatio, 2));
+            const updateDy = dy + ((event.clientY - prevDragPos.y) * Math.min(window.devicePixelRatio, 2));
 
-            // Update image position
-            setDx(updateDx);
-            setDy(updateDY);
+            // Update image position (constrain to edges of image)
+            updateDx <= 0 && updateDx >= (canvas.offsetWidth - dw) && setDx(updateDx);
+            updateDy <= 0 && updateDy >= (canvas.offsetHeight - dh) && setDy(updateDy); 
 
             //Reset Prev Mouse coordinates
             setPrevDragPos({
@@ -85,6 +87,10 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
         setisDragging(false);
     }
 
+    const handlePointerLeave = () => {
+        setisDragging(false);
+    }
+
     return <canvas className={classes['img-canvas']} ref={canvasRef} 
                 onMouseDown={panningEnabled ? handlePointerDown : undefined} 
                 onMouseMove={panningEnabled ? handlePointerMove : undefined} 
@@ -92,6 +98,7 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
                 onTouchStart={panningEnabled ? handlePointerDown : undefined}
                 onTouchMove={panningEnabled ? handlePointerMove : undefined}
                 onTouchEnd={panningEnabled ? handlePointerUp : undefined}
+                onPointerLeave={panningEnabled ? handlePointerLeave : undefined}
                 ></canvas>;
 }
 
