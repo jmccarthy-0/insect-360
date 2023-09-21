@@ -45,7 +45,7 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
         }
     }
 
-    // Set Image Scale
+    // Set Image Render Values
     useEffect(() => {    
         initCanvas();
 
