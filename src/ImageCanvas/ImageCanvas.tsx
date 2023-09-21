@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, MouseEvent, TouchEvent} from 'react';
+import {useState, useRef, useEffect, useCallback, MouseEvent, TouchEvent} from 'react';
 import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../utils/canvas-utils';
 import classes from './ImageCanvas.module.css';
 
@@ -12,31 +12,47 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isDragging, setisDragging] = useState(false);
     const [prevDragPos, setPrevDragPos] = useState({ x:0 , y:0});
+    const [prevZoom, setPrevZoom] = useState(zoomLevel);
 
     const [dx, setDx] = useState(0); // Image offset x within the canvas
     const [dy, setDy] = useState(0); // Image offset y within the canvas
     const [dw, setDw] = useState(0); // Image width within the canvas
     const [dh, setDh] = useState(0); // Image height within the canvas
+    const [canvasWidth, setCanvasWidth] = useState<number | null>(null);
+    const [canvasHeight, setCanvasHeight] = useState<number | null>(null);
+
+    const initCanvas = () => {
+        if (img && canvasRef.current) {
+            const canvas = canvasRef.current;
+            const currentCanvasWidth = canvas.clientWidth;
+            const currentCanvasHeight = canvas.clientHeight;
+            if (zoomLevel !== prevZoom || currentCanvasWidth !== canvasWidth || currentCanvasHeight !== canvasHeight) {
+                resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
+                    
+                const scale = getDefaultImgScale(canvas, img) + zoomLevel;
+                const updateDw = Math.min(img.width, img.width * scale);
+                const updateDh = Math.min(img.height, img.height * scale);
+                const [updateDx, updateDy] = getImgCenterOffset(canvas, updateDw, updateDh, 1);
     
+                setDw(updateDw);
+                setDh(updateDh);
+                setDx(updateDx);
+                setDy(updateDy);
+                setCanvasWidth(currentCanvasWidth);
+                setCanvasHeight(currentCanvasHeight);
+                setPrevZoom(zoomLevel);
+            }
+        }
+    }
 
     // Set Image Scale
     useEffect(() => {    
-        if (img && canvasRef.current) {
-            const canvas = canvasRef.current;
+        initCanvas();
 
-            resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
-            
-            const scale = getDefaultImgScale(canvas, img) + zoomLevel;
-            const initialDw = Math.min(img.width, img.width * scale);
-            const initialDh = Math.min(img.height, img.height * scale);
-            const [initialDx, initialDy] = getImgCenterOffset(canvas, initialDw, initialDh, 1);
+        window.addEventListener('resize', initCanvas);
 
-            setDw(initialDw);
-            setDh(initialDh);
-            setDx(initialDx);
-            setDy(initialDy);
-
-            refreshCanvas(canvasRef.current, img, initialDx, initialDy, initialDw, initialDh);
+        return () => {
+            window.removeEventListener('resize', initCanvas);
         }
     }, [img, zoomLevel]);
 
@@ -45,7 +61,7 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
         if (img && canvasRef.current) {
             refreshCanvas(canvasRef.current, img, dx, dy, dw, dh);
         }
-    }, [dx, dy]);
+    }, [img, dx, dy, dw, dh]);
 
     // Event Handlers
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
