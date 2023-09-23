@@ -9,7 +9,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary-light: hsl(0, 0%, 10%);
+  --primary-light: hsl(0, 0%, 5%);
   --primary-dark: hsl(0, 0%, 100%);
   --accent-clr: hsl(41, 100%, 49%);
   --true-black: #000;
