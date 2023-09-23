@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Taxon } from '../utils/ts/types';
 
 import useMultiImageLoader from '../hooks/multiImageLoader';
+import { getSpeciesHiResImgSequenceUrl } from '../utils/ts/img-utils';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas'
 import Loader from '../Loader/Loader';
@@ -15,13 +16,13 @@ interface SequenceViewerProps {
     species: Taxon;
 }
 
-const SequenceViewer = ({ species: { images, meta }}: SequenceViewerProps) => {
-    const imgs = useMultiImageLoader(images.sequenceFramecount, images.sequence.path);
+const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) => {
+    const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
-    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(`${import.meta.env.BASE_URL}${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`); // Convert to reusable function
+    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(getSpeciesHiResImgSequenceUrl(sid, activeImgIndex)); // Convert to reusable function
 
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
@@ -30,7 +31,7 @@ const SequenceViewer = ({ species: { images, meta }}: SequenceViewerProps) => {
     }, [imgs]);
 
     useEffect(() => {
-        setActiveHighResImgUrl(`${import.meta.env.BASE_URL}${images.sequenceHiRes.path}${(activeImgIndex + 1).toString().padStart(2, '0')}.${images.sequenceHiRes.filetype}`);
+        setActiveHighResImgUrl(getSpeciesHiResImgSequenceUrl(sid, activeImgIndex));
     }, [ images, activeImgIndex]);
 
     return (

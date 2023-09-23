@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getSpeciesImgSequenceUrl } from '../utils/ts/img-utils';
 
 const loadImg = (imgSrc: string): Promise<HTMLImageElement> => {
     return new Promise(resolve => {
@@ -29,7 +30,7 @@ const getBitMaps = async (imgPromises: Promise<HTMLImageElement>[]) => {
  * @param format Filetype
  * @param padding Number of placeholders in the file number
  */
-const useMultiImageLoader = (imgCount: number, path: string, format='webp', padding=2) => {
+const useMultiImageLoader = (imgCount: number, sid: string) => {
     const [renderImgs, setRenderImgs] = useState<ImageBitmap[]>([]);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const useMultiImageLoader = (imgCount: number, path: string, format='webp', padd
         const imgPromises: Promise<HTMLImageElement>[] = [];
         
         for (let i=1; i<=imgCount; i++) {
-            imgPromises.push(loadImg(`${import.meta.env.BASE_URL}${path}${i.toString().padStart(padding, "0")}.${format}`));
+            imgPromises.push(loadImg(`${getSpeciesImgSequenceUrl(sid, i)}`));
         }
  
         /**
