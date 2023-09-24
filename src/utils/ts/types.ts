@@ -14,13 +14,5 @@ export interface Taxon {
     "details": TaxonDetails
     "images": {
         "sequenceFramecount": number,
-        "sequence": {
-            "path": string,
-            "filetype": string
-        },
-        "sequenceHiRes": {
-            "path": string,
-            "filetype": string
-        }
     }
 }

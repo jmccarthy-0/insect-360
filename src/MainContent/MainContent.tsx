@@ -21,7 +21,7 @@ const MainContent = ({activeSpeciesId}:MainContentProps) => {
   // Fetch species data from json endpoint
   useEffect(() => {
     const fetchSpeciesData= async (sid: string) => {
-      const data: Taxon | null = await fetchData(`${import.meta.env.BASE_URL}species_data/${sid}.json`);
+      const data: Taxon | null = await fetchData(`http://127.0.0.1:8000/species/${sid}`);
       setSpecies(data);
     }
 
