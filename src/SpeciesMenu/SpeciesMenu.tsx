@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
+import { fetchData } from '../utils/ts/fetch-utils';
 
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
@@ -8,11 +9,9 @@ import species from '../assets/species-tree.json';
 import classes from './SpeciesMenu.module.css';
 import btnClasses from '../Btn/Btn.module.css';
 
-interface Taxon {
-    rank: string;
-    name: string;
-    children?: Taxon[];
-    id: string;
+type SpeciesItem = {
+    sid: string,
+    binomialName: string
 }
 
 interface SpeciesMenuProps {
@@ -25,28 +24,22 @@ interface SpeciesMenuProps {
 const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesMenuProps) => {
     const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
 
-    const buildTree = (data: Taxon[]) => {
-        return (
-            <ul className={`${data[0].rank}-list ${classes['taxon-list']}`} >
-                {
-                    data.map((taxon: Taxon, index: number) => {
-                        if (taxon.rank !== 'species' && (!taxon.children || !taxon.children.length)) {
-                            return null;
-                        }
+    const buildTree = async () => {
+        const data = await fetchData(`http://127.0.0.1:8000/species-list`);
 
+        return (
+            <ul className={`${classes['taxon-list']}`} >
+                {
+                    data.map(({sid, binomialName}: SpeciesItem, index: number) => {
                         const handleClick = () => {
-                            setActiveSpecies(taxon.id);
+                            setActiveSpecies(sid);
                             setDisplayMenu(false);
                         }
                         
                         return (
-                            <li key={index} className={taxon.rank}>
+                            <li key={index}>
                                 { 
-                                    taxon.rank == 'species' && taxon ? <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{taxon.name}</Btn> : taxon.name
-                                }
-    
-                                {
-                                    taxon.children && taxon.children.length > 0 && buildTree(taxon.children)
+                                    <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{binomialName}</Btn>
                                 }
                             </li>
                         );
@@ -57,11 +50,15 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
     }
 
     useEffect(() => {
-        if (!speciesTree && displayMenu) {
-            const tree = buildTree(species);
-            
-            setSpeciesTree(tree);
+        const buildList = async () => {
+            if (!speciesTree && displayMenu) {
+                const tree = await buildTree();
+                
+                setSpeciesTree(tree);
+            }
         }
+
+        buildList();
     }, [ displayMenu ]);
 
     if (displayMenu && speciesTree) {
