@@ -5,7 +5,7 @@
     --track-border: 1px solid hsl(0,0%,100%);
 
     --thumb-dim: 2rem;
-    --thumb-border: 3px solid var( --accent-clr);
+    --thumb-border: 3px solid var(--secondary-light);
     --thumb-radius: 50%;
     --thumb-bg: hsl(0,0%,0%);
 
@@ -29,7 +29,7 @@
 
 
     &:active {
-        --thumb-bg: var(--accent-clr);
+        --thumb-bg: var(--secondary-light);
     }
 
     /* Track */
