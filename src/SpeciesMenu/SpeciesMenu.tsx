@@ -11,7 +11,8 @@ import btnClasses from '../Btn/Btn.module.css';
 
 type SpeciesItem = {
     sid: string,
-    binomialName: string
+    genus: string,
+    species: string,
 }
 
 interface SpeciesMenuProps {
@@ -25,12 +26,12 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
     const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
 
     const buildTree = async () => {
-        const data = await fetchData(`http://127.0.0.1:8000/species-list`);
+        const data = await fetchData(`http://127.0.0.1:8000/species/`);
 
         return (
             <ul className={`${classes['taxon-list']}`} >
                 {
-                    data.map(({sid, binomialName}: SpeciesItem, index: number) => {
+                    data.map(({sid, genus, species}: SpeciesItem, index: number) => {
                         const handleClick = () => {
                             setActiveSpecies(sid);
                             setDisplayMenu(false);
@@ -39,7 +40,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                         return (
                             <li key={index}>
                                 { 
-                                    <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{binomialName}</Btn>
+                                    <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{genus} {species}</Btn>
                                 }
                             </li>
                         );
