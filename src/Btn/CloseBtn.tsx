@@ -10,7 +10,7 @@ interface CloseBtnProps {
 
 const CloseBtn = ({ classes, handleClick }: CloseBtnProps) => {
     return (
-        <Btn classes={`close-btn ${classes ? classes : ''}  ${btnClasses['btn--square']}`} handleClick={handleClick}>
+        <Btn classes={`close-btn ${classes ? classes : ''}  ${btnClasses['btn--square']}`} handleClick={handleClick} ariaLabel="Close Modal">
             <Icon icon={'close'} />
         </Btn>
     )
