@@ -66,7 +66,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
 
     if (displayMenu && speciesTree) {
         return (
-            <Modal setOpen={setDisplayMenu} animationDirection='fade'> 
+            <Modal id="speciesMenuModal" setOpen={setDisplayMenu} animationDirection='fade'> 
                 <div className={classes['species-menu']}>
                     { speciesTree }
                 </div>

@@ -6,6 +6,7 @@ import classes from './Modal.module.css';
 
 interface ModalProps {
     children: ReactNode;
+    id: string;
     setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
     modalAdjustmentClasses?: string;
     animationDirection?: 'none' | 'left' | 'right' | 'fade';
@@ -13,7 +14,7 @@ interface ModalProps {
     theme?: 'default' | 'light' | 'dark';
 }
 
-const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='none', size='default', theme='default' }: ModalProps) => {
+const Modal = ({ children, id, setOpen, modalAdjustmentClasses, animationDirection='none', size='default', theme='default' }: ModalProps) => {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
@@ -42,17 +43,20 @@ const Modal = ({ children, setOpen, modalAdjustmentClasses, animationDirection='
     }
 
     return (
-        <div className={
-                            `${classes['modal']} 
-                            ${isActive ? classes['modal--active'] : ''}
-                            ${size !=='default' ? classes['modal--small']: ''}`
-                        }>
+        <div id={id}
+            className={
+                `${classes['modal']} 
+                ${isActive ? classes['modal--active'] : ''}
+                ${size !=='default' ? classes['modal--small']: ''}`
+            }
+        >
             <div className={
-                                `${ classes['modal-body'] /* Main modal classes*/}
-                                ${ isActive ? classes['modal-body--active'] : '' /* Added on mount to trigger animation */ } 
-                                ${ classes[`modal-body--animate-${animationDirection}`] /* Allows customization of effect (direction, fade-in, etc.) */ }  
-                                ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
-                            }>
+                    `${ classes['modal-body'] /* Main modal classes*/}
+                    ${ isActive ? classes['modal-body--active'] : '' /* Added on mount to trigger animation */ } 
+                    ${ classes[`modal-body--animate-${animationDirection}`] /* Allows customization of effect (direction, fade-in, etc.) */ }  
+                    ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
+                }
+            >
                 <CloseBtn classes={`${classes['modal-close']} ${theme !== 'default' ? btnClasses[`btn--${theme}`] : ''}`} handleClick={handleClose} /> 
                 {children}
             </div>

@@ -10,7 +10,8 @@ interface PhotoInfoModalProps {
 
 const PhotoInfoModal = ({setOpen, content}: PhotoInfoModalProps) => {
     return (
-        <Modal  modalAdjustmentClasses={classes['photo-info-modal']} 
+        <Modal  id="photoInfoModal"
+                modalAdjustmentClasses={classes['photo-info-modal']} 
                 setOpen={setOpen} 
                 animationDirection="fade"
                 size="small">

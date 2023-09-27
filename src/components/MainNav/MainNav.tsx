@@ -14,7 +14,7 @@ const MainNav = ({ setDisplaySpeciesMenu }: MainNavProps) => {
         <nav>
             <ul className={classes['nav-list']}>
                 <li>
-                    <Btn handleClick={handleClick} classes={btnStyles['btn--link']}>Species</Btn>
+                    <Btn handleClick={handleClick} classes={btnStyles['btn--link']} ariaControls="speciesMenuModal">Species</Btn>
                 </li>
             </ul>
         </nav>
