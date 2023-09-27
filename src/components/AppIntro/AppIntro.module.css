@@ -12,7 +12,7 @@
 
     @media (min-width: 980px) {
         padding: var(--padding-y) calc(var(--padding-x) + var(--border-width)) 0 var(--padding-x);
-        border-left: var(--border-width) solid var(--border-color);
+        border-left: var(--border-width) solid var(--txt-muted);
     }
 
     @media (min-width: 1800px) {
