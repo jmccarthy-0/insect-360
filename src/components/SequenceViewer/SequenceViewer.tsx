@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Taxon } from '../utils/ts/types';
+import { Taxon } from '../../utils/ts/types';
 
-import useMultiImageLoader from '../hooks/multiImageLoader';
+import useMultiImageLoader from '../../hooks/multiImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas'
 import Loader from '../Loader/Loader';

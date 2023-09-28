@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AppIntro from './components/AppIntro/AppIntro';
 import Header from './components/Header/Header';
-import MainContent from './MainContent/MainContent';
-import SpeciesMenu from './SpeciesMenu/SpeciesMenu';
+import MainContent from './components/MainContent/MainContent';
+import SpeciesMenu from './components/SpeciesMenu/SpeciesMenu';
 
 import './App.css'
 

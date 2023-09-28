@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSingleImageLoader } from '../hooks/singleImageLoader';
+import { useSingleImageLoader } from '../../hooks/singleImageLoader';
 
 import ImageCanvas from '../ImageCanvas/ImageCanvas';
 import Loader from '../Loader/Loader';

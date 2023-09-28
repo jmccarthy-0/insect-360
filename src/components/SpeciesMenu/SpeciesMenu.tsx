@@ -3,7 +3,7 @@ import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'rea
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
 
-import species from '../assets/species-tree.json';
+import species from '../../assets/species-tree.json';
 
 import classes from './SpeciesMenu.module.css';
 import btnClasses from '../Btn/Btn.module.css';
