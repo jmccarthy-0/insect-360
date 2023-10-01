@@ -9,9 +9,7 @@ export const setQueryParam = (query: string, value: string) => {
     setBrowserUrl(query, value);
 }
 
-const getUrlNoSearchParams = () => {
-    return window.location.origin + window.location.pathname;
-}
+const getUrlNoSearchParams = () => window.location.origin + window.location.pathname;
 
 const setBrowserUrl = (query: string, value: string) => {
     const url = getUrlNoSearchParams();
