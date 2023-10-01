@@ -3,6 +3,8 @@ import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'rea
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
 
+import { setQueryParam } from '../../utils/ts/query-utils';
+
 import species from '../../assets/species-tree.json';
 
 import classes from './SpeciesMenu.module.css';
@@ -37,6 +39,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                         const handleClick = () => {
                             setActiveSpecies(taxon.id);
                             setDisplayMenu(false);
+                            setQueryParam('sid', taxon.id);
                         }
                         
                         return (
