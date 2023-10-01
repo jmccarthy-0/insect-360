@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import Icon from "../../Icon/Icon";
+import Icon from "../Icon/Icon";
 
 interface DarkModeToggleProps {
     darkMode: boolean;

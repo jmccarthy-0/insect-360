@@ -10,7 +10,7 @@ interface ExpandBtnProps {
 
 const ExpandBtn = ({ classes, handleClick }: ExpandBtnProps) => {
     return (
-        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']}  ${btnClasses['btn--square']}`} handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']}  ${btnClasses['btn--square']}`} handleClick={handleClick} ariaLabel="Expand Image" ariaControls="photoViewerModal">
             <Icon icon={'expand'} />
         </Btn>
     )

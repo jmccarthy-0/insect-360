@@ -1,11 +1,11 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { Taxon } from '../utils/ts/types';
+import { Taxon } from '../../utils/ts/types';
 
 import Loader from '../Loader/Loader';
 const PageIntro = lazy(() => import('../PageIntro/PageIntro'));
 const SequenceViewer = lazy(() => import('../SequenceViewer/SequenceViewer'));
 
-import { fetchData } from '../utils/ts/fetch-utils';
+import { fetchData } from '../../utils/ts/fetch-utils';
 
 import classes from './MainContent.module.css';
 

@@ -15,7 +15,7 @@
         height: var(--toggle-height);
         background-color: var(--txt-muted);
         border-radius: calc(var(--toggle-height) / 2);
-        border: var(--border-width) solid var(--primary-dark);
+        border: var(--border-width) solid var(--bg-clr);
         cursor: pointer;
 
         &--dark {
@@ -34,7 +34,7 @@
             height: var(--toggle-height);
             border-radius:50%;
             background-color:var(--after-fill);
-            border: 2px solid var(--primary-dark);
+            border: 1px solid var(--bg-color-invert);
             transform: translateX(var(--translate));
             transition: transform var(--duration) ease, background-color var(--duration) ease;
         }

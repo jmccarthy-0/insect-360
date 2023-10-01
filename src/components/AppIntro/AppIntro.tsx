@@ -1,4 +1,4 @@
-import Btn from "../../Btn/Btn";
+import Btn from "../Btn/Btn";
 
 import classes from './AppIntro.module.css';
 
@@ -15,12 +15,14 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
 
     return (
         <div className={classes['app-intro']}>
-            <h1 className={classes['page-title']}>BioSphere: A Digital Field Guide</h1>
-            <p>Choose a species from the menu to get started.</p>
-            <div className={classes['btn-wrapper']}>
-                <Btn handleClick={handleClick}>
-                    Species
-                </Btn>
+            <div className={classes['page-header']}>
+                <h1 className={classes['page-title']}><span className={classes['app-name']}>BioSphere:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
+                
+                <div className={classes['btn-wrapper']}>
+                    <Btn handleClick={handleClick}>
+                        Species
+                    </Btn>
+                </div>
             </div>
         </div>
     );

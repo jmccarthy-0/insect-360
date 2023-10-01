@@ -10,7 +10,7 @@ interface InfoBtnProps {
 
 const InfoBtn = ({ classes, handleClick }: InfoBtnProps) => {
     return (
-        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={handleClick}>
+        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={handleClick} ariaLabel="Photo Info" ariaControls="photoInfoModal">
             <Icon icon={'info'} />
         </Btn>
     )

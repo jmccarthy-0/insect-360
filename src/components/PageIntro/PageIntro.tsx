@@ -1,4 +1,4 @@
-import { TaxonDetails } from '../utils/ts/types';
+import { TaxonDetails } from '../../utils/ts/types';
 
 import classes from './PageIntro.module.css';
 

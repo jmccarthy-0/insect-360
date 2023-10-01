@@ -16,7 +16,7 @@ const TimelineScrubber = ({ min, max, value, setTimelineIndex }: TimelineScrubbe
         setTimelineIndex(e.target.valueAsNumber)
     };
 
-    return <input className="timeline-scrubber" type="range" step={1} min={min} max={max} value={value} onChange={handleIndexRangeChange}/>
+    return <input className="timeline-scrubber" type="range" step={1} min={min} max={max} value={value} onChange={handleIndexRangeChange} aria-label='Set current image index'/>
 };
 
 export default TimelineScrubber;
