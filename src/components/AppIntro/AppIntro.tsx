@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Btn from "../Btn/Btn";
 
 import classes from './AppIntro.module.css';
@@ -7,6 +9,14 @@ interface AppIntroProps {
 }
 
 const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
+    const [borderHeight, setBorderHeight] = useState('0');
+    
+    useEffect(() => {
+        setTimeout(() => {
+            setBorderHeight('1');
+        } , 800);
+    }, []);
+
     // Reuseable functionality: 
     // Custom hook candidate?
     const handleClick = () => {
@@ -15,7 +25,7 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
 
     return (
         <div className={classes['app-intro']}>
-            <div className={classes['page-header']}>
+            <div className={classes['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
                 <h1 className={classes['page-title']}><span className={classes['app-name']}>BioSphere:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
                 
                 <div className={classes['btn-wrapper']}>
