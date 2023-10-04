@@ -1,5 +1,5 @@
 import {useState, useRef, useEffect, MouseEvent, TouchEvent} from 'react';
-import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../../utils/canvas-utils';
+import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../../utils/ts/canvas-utils';
 import classes from './ImageCanvas.module.css';
 
 interface PhotoCanvasProps {

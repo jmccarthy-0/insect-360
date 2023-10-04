@@ -4,11 +4,13 @@ import Header from './components/Header/Header';
 import MainContent from './components/MainContent/MainContent';
 import SpeciesMenu from './components/SpeciesMenu/SpeciesMenu';
 
+import { getQueryParam } from './utils/ts/query-utils';
+
 import './App.css'
 
 const App = () => {
   const [displaySpeciesMenu, setDisplaySpeciesMenu] = useState(false);
-  const [activeSpecies, setActiveSpecies] = useState<string | null>(null);
+  const [activeSpecies, setActiveSpecies] = useState<string | null>(getQueryParam('sid'));
 
   const content = activeSpecies ? <MainContent activeSpeciesId={activeSpecies} /> : <AppIntro setDisplaySpeciesMenu={setDisplaySpeciesMenu} />;
 

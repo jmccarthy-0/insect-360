@@ -9,10 +9,26 @@
     --border-width: 1px;
     --padding-x: 2rem;
     --padding-y: 1rem;
+    --border-height: 0;
+    position: relative;
 
     @media (min-width: 980px) {
         padding: var(--padding-y) calc(var(--padding-x) + var(--border-width)) 0 var(--padding-x);
-        border-left: var(--border-width) solid var(--txt-muted);
+    }
+
+    &::after {
+        height:100%;
+        position: absolute;
+        top:0;
+        left:1px;
+        border-left: 1px solid var(--txt-muted);
+        transform: scaleY(var(--border-height));
+        transform-origin: top;
+        transition: transform 240ms ease;
+
+        @media (min-width: 980px) {
+            content:'';
+        }
     }
 
     @media (min-width: 1800px) {
