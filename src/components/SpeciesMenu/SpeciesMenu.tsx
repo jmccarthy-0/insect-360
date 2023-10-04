@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
-import { fetchData } from '../utils/ts/fetch-utils';
+import { fetchData } from '../../utils/ts/fetch-utils';
 
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
@@ -37,7 +37,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                         const handleClick = () => {
                             setActiveSpecies(sid);
                             setDisplayMenu(false);
-                            setQueryParam('sid', taxon.id);
+                            setQueryParam('sid', sid);
                         }
                         
                         return (
