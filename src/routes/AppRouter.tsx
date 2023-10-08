@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Layout from './Layout';
-import Index from './Index';
+import Index from './pages/Index';
+import SpeciesDetails from './pages/SpeciesDetails';
 
 import '../App.css';
 
@@ -14,7 +15,10 @@ const AppRouter = () => {
         <Router>
             <Layout displaySpeciesMenu={displaySpeciesMenu} setDisplaySpeciesMenu={setDisplaySpeciesMenu}>
                 <Routes>
-                    <Route index path="/insect-360" element={<Index setDisplaySpeciesMenu={setDisplaySpeciesMenu}  />} /> {/* Replace insect-360 pathing for index once we're off githubpage config*/}
+                    <Route path="insect-360"> {/* Replace insect-360 pathing for index once we're off githubpage config*/}
+                        <Route index={true} element={<Index setDisplaySpeciesMenu={setDisplaySpeciesMenu} />} />
+                        <Route path=":slug" element={ <SpeciesDetails /> } />
+                    </Route>
                 </Routes>
             </Layout>
         </Router>

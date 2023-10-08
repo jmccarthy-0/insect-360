@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 
 import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
@@ -20,11 +21,10 @@ interface Taxon {
 interface SpeciesMenuProps {
     displayMenu: boolean;
     setDisplayMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-    setActiveSpecies: Dispatch<SetStateAction<string | null>>;
 }
 
 
-const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesMenuProps) => {
+const SpeciesMenu = ({ displayMenu, setDisplayMenu }: SpeciesMenuProps) => {
     const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
 
     const buildTree = (data: Taxon[]) => {
@@ -37,15 +37,13 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                         }
 
                         const handleClick = () => {
-                            setActiveSpecies(taxon.id);
                             setDisplayMenu(false);
-                            setQueryParam('sid', taxon.id);
                         }
                         
                         return (
                             <li key={index} className={taxon.rank}>
                                 { 
-                                    taxon.rank == 'species' && taxon ? <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{taxon.name}</Btn> : taxon.name
+                                    taxon.rank == 'species' && taxon ? <Link to={`insect-360/${taxon.id}`} className={`${btnClasses['btn--link']}`} onClick={handleClick}>{taxon.name}</Link> : taxon.name
                                 }
     
                                 {
