@@ -1,11 +1,12 @@
 import { useState } from "react";
 import AppIntro from "../components/AppIntro/AppIntro";
 
-const Index = () => {
-    // const [placeHolder, setPlaceholder] = useState(false);
+interface IndexProps {
+    setDisplaySpeciesMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+}
 
-    // return <AppIntro setDisplaySpeciesMenu={setPlaceholder}/>
-    return <div>Test</div>
+const Index = ({setDisplaySpeciesMenu}: IndexProps) => {
+    return <AppIntro setDisplaySpeciesMenu={setDisplaySpeciesMenu}/>
 }
 
 export default Index;
