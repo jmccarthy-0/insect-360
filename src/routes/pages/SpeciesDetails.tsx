@@ -11,7 +11,7 @@ const SpeciesDetails = () => {
     }, [slug]);
 
     if (!slug) {
-        return 'cum'
+        return 'Did not find page'
     }
 
     return <MainContent activeSpeciesId={slug}/>

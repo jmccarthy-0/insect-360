@@ -43,7 +43,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu }: SpeciesMenuProps) => {
                         return (
                             <li key={index} className={taxon.rank}>
                                 { 
-                                    taxon.rank == 'species' && taxon ? <Link to={`insect-360/${taxon.id}`} className={`${btnClasses['btn--link']}`} onClick={handleClick}>{taxon.name}</Link> : taxon.name
+                                    taxon.rank == 'species' && taxon ? <Link to={`${taxon.id}/`} className={`${btnClasses['btn--link']}`} onClick={handleClick}>{taxon.name}</Link> : taxon.name
                                 }
     
                                 {

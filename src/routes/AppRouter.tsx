@@ -13,14 +13,12 @@ const AppRouter = () => {
     
     return (
         <Router>
-            <Layout displaySpeciesMenu={displaySpeciesMenu} setDisplaySpeciesMenu={setDisplaySpeciesMenu}>
-                <Routes>
-                    <Route path="insect-360"> {/* Replace insect-360 pathing for index once we're off githubpage config*/}
-                        <Route index={true} element={<Index setDisplaySpeciesMenu={setDisplaySpeciesMenu} />} />
-                        <Route path=":slug" element={ <SpeciesDetails /> } />
-                    </Route>
-                </Routes>
-            </Layout>
+            <Routes>
+                <Route path={import.meta.env.BASE_URL} element={<Layout displaySpeciesMenu={displaySpeciesMenu} setDisplaySpeciesMenu={setDisplaySpeciesMenu} />}> {/* Replace insect-360 pathing for index once we're off githubpage config*/}
+                    <Route index={true} element={<Index setDisplaySpeciesMenu={setDisplaySpeciesMenu} />} />
+                    <Route path=":slug" element={ <SpeciesDetails /> } />
+                </Route>
+            </Routes>
         </Router>
     )
 }
