@@ -59,6 +59,11 @@ html {
 
 body {
   background-color: var(--bg-clr);
+
+  &.modal-open {
+    height: 100vh;
+    overflow: hidden;
+  }
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul, dl, dd, dt, button {

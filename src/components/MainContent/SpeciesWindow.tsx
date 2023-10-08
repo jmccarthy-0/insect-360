@@ -7,7 +7,7 @@ const SequenceViewer = lazy(() => import('../SequenceViewer/SequenceViewer'));
 
 import { fetchData } from '../../utils/ts/fetch-utils';
 
-import classes from './MainContent.module.css';
+import classes from './SpeciesWindow.module.css';
 
 
 
@@ -15,7 +15,7 @@ interface MainContentProps {
   activeSpeciesId: string
 }
 
-const MainContent = ({activeSpeciesId}:MainContentProps) => {
+const SpeciesWindow = ({activeSpeciesId}:MainContentProps) => {
   const [species, setSpecies] = useState<Taxon | null>(null);
 
   // Fetch species data from json endpoint
@@ -31,7 +31,7 @@ const MainContent = ({activeSpeciesId}:MainContentProps) => {
 
 
   return (
-      <main className={classes['main-content']}>
+      <main className={classes['species-window']}>
         <Suspense fallback={<Loader />}>
           {species && <PageIntro content={species.details} />}
           {species && <SequenceViewer species={species} />}
@@ -40,4 +40,4 @@ const MainContent = ({activeSpeciesId}:MainContentProps) => {
   );
 }
 
-export default MainContent;
+export default SpeciesWindow;
