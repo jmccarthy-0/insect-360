@@ -26,7 +26,7 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
     return (
         <div className={classes['app-intro']}>
             <div className={classes['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
-                <h1 className={classes['page-title']}><span className={classes['app-name']}>BioSphere:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
+                <h1 className={classes['page-title']}><span className={classes['app-name']}>Lantern:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
                 
                 <div className={classes['btn-wrapper']}>
                     <Btn handleClick={handleClick}>
