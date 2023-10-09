@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AppIntro from "../../components/AppIntro/AppIntro";
 
 interface IndexProps {

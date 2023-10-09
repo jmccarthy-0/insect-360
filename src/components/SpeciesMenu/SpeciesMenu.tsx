@@ -1,10 +1,7 @@
-import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
-
-import { setQueryParam } from '../../utils/ts/query-utils';
 
 import species from '../../assets/species-tree.json';
 
