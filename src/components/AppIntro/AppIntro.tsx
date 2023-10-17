@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { SpeciesMenuContext } from "../../contexts/SpeciesMenuContext";
 
 import Btn from "../Btn/Btn";
 
 import classes from './AppIntro.module.css';
 
-interface AppIntroProps {
-    setDisplaySpeciesMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
 
-const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
+
+const AppIntro = () => {
     const [borderHeight, setBorderHeight] = useState('0');
+    const {setDisplaySpeciesMenu} = useContext(SpeciesMenuContext);
     
     useEffect(() => {
         setTimeout(() => {
@@ -17,8 +18,6 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
         } , 800);
     }, []);
 
-    // Reuseable functionality: 
-    // Custom hook candidate?
     const handleClick = () => {
         setDisplaySpeciesMenu(true);
     };

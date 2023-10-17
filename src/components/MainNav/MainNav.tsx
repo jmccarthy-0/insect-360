@@ -1,13 +1,14 @@
+import { useContext } from 'react';
+import { SpeciesMenuContext } from '../../contexts/SpeciesMenuContext';
+
 import classes from './MainNav.module.css';
 
 import Btn from '../Btn/Btn';
 import btnStyles from '../Btn/Btn.module.css';
 
-interface MainNavProps {
-    setDisplaySpeciesMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
+const MainNav = () => {
+    const {setDisplaySpeciesMenu} = useContext(SpeciesMenuContext);
 
-const MainNav = ({ setDisplaySpeciesMenu }: MainNavProps) => {
     const handleClick = () => { setDisplaySpeciesMenu(true) }
     
     return (

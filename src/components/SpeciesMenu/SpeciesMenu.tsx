@@ -1,10 +1,8 @@
-import { useState, useEffect, ReactElement } from 'react';
+import { useState, useEffect, useContext, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-
+import { SpeciesMenuContext } from '../../contexts/SpeciesMenuContext';
 import Modal from '../Modal/Modal';
-
 import species from '../../assets/species-tree.json';
-
 import classes from './SpeciesMenu.module.css';
 import btnClasses from '../Btn/Btn.module.css';
 
@@ -15,13 +13,8 @@ interface Taxon {
     id: string;
 }
 
-interface SpeciesMenuProps {
-    displayMenu: boolean;
-    setDisplayMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
-
-
-const SpeciesMenu = ({ displayMenu, setDisplayMenu }: SpeciesMenuProps) => {
+const SpeciesMenu = () => {
+    const { displaySpeciesMenu, setDisplaySpeciesMenu} = useContext(SpeciesMenuContext)
     const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
 
     const buildTree = (data: Taxon[]) => {
@@ -34,7 +27,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu }: SpeciesMenuProps) => {
                         }
 
                         const handleClick = () => {
-                            setDisplayMenu(false);
+                            setDisplaySpeciesMenu(false);
                         }
                         
                         return (
@@ -55,16 +48,16 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu }: SpeciesMenuProps) => {
     }
 
     useEffect(() => {
-        if (!speciesTree && displayMenu) {
+        if (!speciesTree && displaySpeciesMenu) {
             const tree = buildTree(species);
             
             setSpeciesTree(tree);
         }
-    }, [ displayMenu ]);
+    }, [ displaySpeciesMenu ]);
 
-    if (displayMenu && speciesTree) {
+    if (displaySpeciesMenu && speciesTree) {
         return (
-            <Modal id="speciesMenuModal" setOpen={setDisplayMenu} animationDirection='fade'> 
+            <Modal id="speciesMenuModal" setOpen={setDisplaySpeciesMenu} animationDirection='fade'> 
                 <div className={classes['species-menu']}>
                     { speciesTree }
                 </div>
