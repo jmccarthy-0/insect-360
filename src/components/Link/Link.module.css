@@ -1,0 +1,33 @@
+.link {
+    --transform: 0;
+    --width: auto;
+    --height:  auto;
+    
+    position:relative;
+    padding: 0;
+    border-width: 0;
+    color: var(--accent-clr);
+    
+    &:hover {
+        --bg-color: transparent;
+        --transform: 100%;
+        
+    }
+
+    &--italic {
+        font-style: italic;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background-color: var(--accent-clr);       
+        transform: scaleX(var(--transform));
+        transform-origin: left;
+        transition: 80ms ease transform; 
+    }
+}
