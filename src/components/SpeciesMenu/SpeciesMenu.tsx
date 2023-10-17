@@ -1,13 +1,10 @@
-import { useState, useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useContext, ReactElement } from 'react';
+import { Link } from 'react-router-dom';
+import { SpeciesMenuContext } from '../../contexts/SpeciesMenuContext';
 import { fetchData } from '../../utils/ts/fetch-utils';
 
-import Btn from '../Btn/Btn';
 import Modal from '../Modal/Modal';
-
-import { setQueryParam } from '../../utils/ts/query-utils';
-
 import species from '../../assets/species-tree.json';
-
 import classes from './SpeciesMenu.module.css';
 import btnClasses from '../Btn/Btn.module.css';
 
@@ -17,14 +14,8 @@ type SpeciesItem = {
     species: string,
 }
 
-interface SpeciesMenuProps {
-    displayMenu: boolean;
-    setDisplayMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-    setActiveSpecies: Dispatch<SetStateAction<string | null>>;
-}
-
-
-const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesMenuProps) => {
+const SpeciesMenu = () => {
+    const { displaySpeciesMenu, setDisplaySpeciesMenu} = useContext(SpeciesMenuContext)
     const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
 
     const buildTree = async () => {
@@ -35,15 +26,13 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
                 {
                     data.map(({sid, genus, species}: SpeciesItem, index: number) => {
                         const handleClick = () => {
-                            setActiveSpecies(sid);
-                            setDisplayMenu(false);
-                            setQueryParam('sid', sid);
+                            setDisplaySpeciesMenu(false);
                         }
                         
                         return (
                             <li key={index}>
                                 { 
-                                    <Btn handleClick={handleClick} classes={`${btnClasses['btn--link']}`}>{genus} {species}</Btn>
+                                    <Link to={`${sid}/`} className={`${btnClasses['btn--link']}`} onClick={handleClick}>{genus} {species}</Link>
                                 }
                             </li>
                         );
@@ -55,7 +44,7 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
 
     useEffect(() => {
         const buildList = async () => {
-            if (!speciesTree && displayMenu) {
+            if (!speciesTree && displaySpeciesMenu) {
                 const tree = await buildTree();
                 
                 setSpeciesTree(tree);
@@ -63,11 +52,11 @@ const SpeciesMenu = ({ displayMenu, setDisplayMenu, setActiveSpecies }: SpeciesM
         }
 
         buildList();
-    }, [ displayMenu ]);
+    }, [ displaySpeciesMenu ]);
 
-    if (displayMenu && speciesTree) {
+    if (displaySpeciesMenu && speciesTree) {
         return (
-            <Modal id="speciesMenuModal" setOpen={setDisplayMenu} animationDirection='fade'> 
+            <Modal id="speciesMenuModal" setOpen={setDisplaySpeciesMenu} animationDirection='fade'> 
                 <div className={classes['species-menu']}>
                     { speciesTree }
                 </div>

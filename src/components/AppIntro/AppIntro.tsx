@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { SpeciesMenuContext } from "../../contexts/SpeciesMenuContext";
 
 import Btn from "../Btn/Btn";
 
 import classes from './AppIntro.module.css';
 
-interface AppIntroProps {
-    setDisplaySpeciesMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
 
-const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
+
+const AppIntro = () => {
     const [borderHeight, setBorderHeight] = useState('0');
+    const {setDisplaySpeciesMenu} = useContext(SpeciesMenuContext);
     
     useEffect(() => {
         setTimeout(() => {
@@ -17,8 +18,6 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
         } , 800);
     }, []);
 
-    // Reuseable functionality: 
-    // Custom hook candidate?
     const handleClick = () => {
         setDisplaySpeciesMenu(true);
     };
@@ -26,7 +25,7 @@ const AppIntro = ({setDisplaySpeciesMenu}: AppIntroProps) => {
     return (
         <div className={classes['app-intro']}>
             <div className={classes['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
-                <h1 className={classes['page-title']}><span className={classes['app-name']}>BioSphere:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
+                <h1 className={classes['page-title']}><span className={classes['app-name']}>Lantern:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
                 
                 <div className={classes['btn-wrapper']}>
                     <Btn handleClick={handleClick}>
