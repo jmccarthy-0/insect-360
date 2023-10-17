@@ -14,12 +14,10 @@ type SpeciesItem = {
 
 const SpeciesMenu = () => {
     const { displaySpeciesMenu, setDisplaySpeciesMenu} = useContext(SpeciesMenuContext)
-    const [speciesTree, setSpeciesTree] = useState< ReactElement | null>(null);
+    const [speciesList, setSpeciesList] = useState< ReactElement | null>(null);
 
     // Back end data for building list of species
-    const buildTree = async () => {
-        const data = await fetchData(`http://127.0.0.1:8000/species/`);
-
+    const generateListMarkup = (data: SpeciesItem[]) => {
         return (
             <ul className={`${classes['species-list']}`} >
                 {
@@ -41,22 +39,30 @@ const SpeciesMenu = () => {
 
     useEffect(() => {
         const buildList = async () => {
-            if (!speciesTree && displaySpeciesMenu) {
-                const tree = await buildTree();
+            if (!speciesList && displaySpeciesMenu) {
+                const data = await fetchData(`http://127.0.0.1:8000/species/`);
+
+                if (data) {
+                    const markup = generateListMarkup(data);
+                    setSpeciesList(markup);
+
+                    return;
+                }
+
+                setSpeciesList(<p>Error: Could not retrieve the species list</p>);
                 
-                setSpeciesTree(tree);
             }
         }
 
         buildList();
     }, [ displaySpeciesMenu ]);
 
-    if (displaySpeciesMenu && speciesTree) {
+    if (displaySpeciesMenu && speciesList) {
         return (
             <Modal id="speciesMenuModal" setOpen={setDisplaySpeciesMenu} animationDirection='fade'> 
                 <div className={classes['species-menu']}>
                     <h2 className={classes['species-title']}>Species</h2>
-                    { speciesTree }
+                    { speciesList }
                 </div>
             </Modal>
         );
