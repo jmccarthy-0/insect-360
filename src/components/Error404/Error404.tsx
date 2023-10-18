@@ -1,6 +1,6 @@
 import classes from './Error404.module.css';
 
-const Error404Content = () => {
+const Error404 = () => {
     return (
         <div className={`${classes['error-wrapper']}`}>
             <h1 className={`${classes['error-title']}`}>404</h1>
@@ -9,4 +9,4 @@ const Error404Content = () => {
     );
 }
 
-export default Error404Content;
+export default Error404;
