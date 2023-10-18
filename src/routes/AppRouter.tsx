@@ -1,21 +1,26 @@
 //import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Index from './pages/Index';
 import SpeciesDetailsPage from './pages/SpeciesDetailsPage';
+import Error404 from './pages/Error404';
 
-const AppRouter = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={import.meta.env.BASE_URL} element={<Layout />}> {/* Replace insect-360 pathing for index once we're off githubpage config*/}
-                    <Route index={true} element={<Index />} />
-                    <Route path=":speciesId" element={ <SpeciesDetailsPage /> } />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    )
-}
+const router = createBrowserRouter([
+    {
+      path: import.meta.env.BASE_UR,
+      element: <Layout />,
+      errorElement: <Error404 />,
+      children: [
+        {
+          index: true,
+          element: <Index />,
+        },
+        {
+            path: 'species/:speciesId',
+            element: <SpeciesDetailsPage />
+        }
+      ],
+    },
+]);
 
-export default AppRouter;
+export default router;
