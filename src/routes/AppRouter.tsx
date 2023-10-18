@@ -3,11 +3,11 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import Layout from './Layout';
 import Index from './pages/Index';
 import SpeciesDetailsPage from './pages/SpeciesDetailsPage';
-import Error404 from './pages/Error404';
+import Error404 from './pages/Error404';;
 
 const router = createBrowserRouter([
     {
-      path: import.meta.env.BASE_UR,
+      path: import.meta.env.BASE_URL,
       element: <Layout />,
       errorElement: <Error404 />,
       children: [
