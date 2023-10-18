@@ -1,9 +1,10 @@
 //import React from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
 import Index from './pages/Index';
 import SpeciesDetailsPage from './pages/SpeciesDetailsPage';
-import Error404 from './pages/Error404';;
+import Error404 from './pages/Error404';
+import { fetchData } from '../utils/ts/fetch-utils';
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
         },
         {
             path: 'species/:speciesId',
-            element: <SpeciesDetailsPage />
+            element: <SpeciesDetailsPage />,
+            loader: async ({ params }) => {
+                return await fetchData(`http://127.0.0.1:8000/species/${params.speciesId}`);
+            }
         }
       ],
     },
