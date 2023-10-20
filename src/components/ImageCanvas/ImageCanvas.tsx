@@ -26,9 +26,10 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
             const canvas = canvasRef.current;
             const currentCanvasWidth = canvas.clientWidth;
             const currentCanvasHeight = canvas.clientHeight;
+            
+            resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
+            
             if (zoomLevel !== prevZoom || currentCanvasWidth !== canvasWidth || currentCanvasHeight !== canvasHeight) {
-                resizeCanvas(canvas, canvas.clientWidth, canvas.clientHeight);
-                    
                 const scale = getDefaultImgScale(canvas, img) + zoomLevel;
                 const updateDw = Math.min(img.width, img.width * scale);
                 const updateDh = Math.min(img.height, img.height * scale);
@@ -46,13 +47,21 @@ const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasPr
     }
 
     // Set Image Render Values
+    const handleWindowResize = () => {
+        if (img && canvasRef.current) {
+            initCanvas();
+            refreshCanvas(canvasRef.current, img, dx, dy, dw, dh);
+        }
+
+    };
+
     useEffect(() => {    
         initCanvas();
 
-        window.addEventListener('resize', initCanvas);
+        window.addEventListener('resize', handleWindowResize);
 
         return () => {
-            window.removeEventListener('resize', initCanvas);
+            window.removeEventListener('resize', handleWindowResize);
         }
     }, [img, zoomLevel]);
 
