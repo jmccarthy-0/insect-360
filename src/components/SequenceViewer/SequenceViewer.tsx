@@ -17,12 +17,13 @@ interface SequenceViewerProps {
 }
 
 const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) => {
-    const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
     const [activeImgIndex, setActiveImgIndex] = useState(0);
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
     const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(getSpeciesHiResImgSequenceUrl(sid, activeImgIndex)); // Convert to reusable function
+    
+    const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
 
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {

@@ -51,7 +51,7 @@ const useMultiImageLoader = (imgCount: number, sid: string) => {
             const sprites = await getBitMaps(imgPromises) 
             setRenderImgs(sprites);
         })();
-    }, []);
+    }, [sid]);
 
     return renderImgs;
 };
