@@ -39,7 +39,7 @@ const useMultiImageLoader = (imgCount: number, sid: string) => {
         */
         const imgPromises: Promise<HTMLImageElement>[] = [];
         
-        for (let i=1; i<=imgCount; i++) {
+        for (let i=0; i<imgCount; i++) {
             imgPromises.push(loadImg(`${getSpeciesImgSequenceUrl(sid, i)}`));
         }
  

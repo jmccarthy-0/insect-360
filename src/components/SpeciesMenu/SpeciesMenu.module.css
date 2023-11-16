@@ -11,3 +11,9 @@
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
+
+
+.species-list {
+    display: grid;
+    row-gap: 1rem;
+}

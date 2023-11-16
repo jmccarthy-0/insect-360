@@ -28,7 +28,7 @@ const SpeciesMenu = () => {
                         
                         return (
                             <li key={index}>
-                                <Link to={`${sid}/`} className={`${linkClasses['link']} ${linkClasses['link--italic']}`} onClick={handleClick}>{genus} {species}</Link>
+                                <Link to={`species/${sid}/`} className={`${linkClasses['link']} ${linkClasses['link--italic']}`} onClick={handleClick}>{genus} {species}</Link>
                             </li>
                         );
                     })
