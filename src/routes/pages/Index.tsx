@@ -1,4 +1,4 @@
-import AppIntro from "../../components/AppIntro/AppIntro";
+import AppIntro from "@components/pages/home/AppIntro/AppIntro";
 
 const Index = () => {
     return <AppIntro />
