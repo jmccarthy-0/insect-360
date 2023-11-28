@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Taxon } from '../../../utils/ts/types';
+import { Taxon } from '@utils/ts/types';
 
-import useMultiImageLoader from '../../../hooks/multiImageLoader';
-import { getSpeciesHiResImgSequenceUrl } from '../../../utils/ts/img-utils';
-
-import ImageCanvas from '../../global/ImageCanvas/ImageCanvas'
-import Loader from '../../global/Loader/Loader';
+import useMultiImageLoader from '@hooks/multiImageLoader';
+import useHiResImgUrl from '@hooks/hiResImgSequenceUrl';
+import ImageCanvas from '@components/global/ImageCanvas/ImageCanvas'
+import Loader from '@components/global/Loader/Loader';
 import PhotoInfoModal from '../PhotoInfo/PhotoInfoModal';
 import PhotoViewerModal from '../PhotoViewer/PhotoViewerModal';
 import SequenceViewerControls from '../SequenceViewerControls/SequenceViewerControls';
@@ -21,19 +20,15 @@ const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) 
     const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
     const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
     const [displayLoader, setDisplayLoader] = useState(true);
-    const [activeHiResImgUrl, setActiveHighResImgUrl] = useState(getSpeciesHiResImgSequenceUrl(sid, activeImgIndex)); // Convert to reusable function
     
+    const hiResImgUrl = useHiResImgUrl(sid, activeImgIndex);
     const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
-
+    
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
             setDisplayLoader(false);
         }
     }, [imgs]);
-
-    useEffect(() => {
-        setActiveHighResImgUrl(getSpeciesHiResImgSequenceUrl(sid, activeImgIndex));
-    }, [ images, activeImgIndex]);
 
     return (
         <div className={classes['sequence-viewer']}>
@@ -54,7 +49,7 @@ const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) 
             }
 
             {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
-            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} imgPath={activeHiResImgUrl} /> }
+            { displayPhotoViewer && <PhotoViewerModal setOpen={setDisplayPhotoViewer} imgPath={hiResImgUrl} /> }
         </div>
     )
 }

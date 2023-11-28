@@ -17,7 +17,7 @@ const SpeciesWindow = () => {
     <main className={classes['species-window']}>
       <Suspense fallback={<Loader />}>
         {species && <PageIntro content={species.details} />}
-        {species && <SequenceViewer species={species} />}
+        {species && <SequenceViewer species={species} key={species.sid} />}
       </Suspense>
     </main>
   );
