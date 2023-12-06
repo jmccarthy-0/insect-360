@@ -4,9 +4,18 @@
     height: 100dvh;
     display: grid;
     place-content: center;
+    background-color: var(--primary-light);
+}
+
+.error-title, .error-descr {
+    color: var(--primary-dark);
 }
 
 .error-title {
     font-size: clamp(2.5rem, 5vw, 10rem);
     margin-bottom: 1rem;
+}
+
+.error-descr {
+    font-size: 1rem;
 }
