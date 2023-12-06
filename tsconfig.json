@@ -12,7 +12,8 @@
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
       "@contexts/*": ["contexts/*"],
-      "@pageComponents/*": ["components/pages/*"]
+      "@pageComponents/*": ["components/pages/*"],
+      "@/*": ["/*"]
     },
 
     /* Bundler mode */
