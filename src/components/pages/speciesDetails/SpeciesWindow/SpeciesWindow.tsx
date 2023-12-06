@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { Taxon } from '../../../../utils/ts/types';
+import { Taxon } from '@utils/ts/types';
 
 import Loader from '../../../global/Loader/Loader';
 const PageIntro = lazy(() => import('../PageIntro/PageIntro'));
