@@ -1,13 +1,6 @@
 .photo-viewer {
-    --cursor: grab;
-
     width: 100vw;
     height: 100dvh;
     background-color: #000;
-    overscroll-behavior: none;
-    cursor: var(--cursor);
-
-    &--is-grabbing {
-        --cursor: grabbing;
-    }
+    overscroll-behavior: none;   
 }

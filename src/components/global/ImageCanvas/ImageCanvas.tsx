@@ -1,15 +1,16 @@
-import {useState, useRef, useEffect, MouseEvent, TouchEvent} from 'react';
+import {useState, useRef, useEffect, MouseEvent, TouchEvent, RefObject} from 'react';
 import {resizeCanvas, refreshCanvas, getImgCenterOffset, getDefaultImgScale} from '../../../utils/ts/canvas-utils';
 import classes from './ImageCanvas.module.css';
 
-interface PhotoCanvasProps {
+interface ImageCanvasProps {
     img: HTMLImageElement | ImageBitmap | null;
     zoomLevel?: number;
     panningEnabled?: boolean;
+    canvasRef?: RefObject<HTMLCanvasElement>
 }
 
-const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false}: PhotoCanvasProps) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+const ImageCanvas = ({img, zoomLevel = 0, panningEnabled = false, canvasRef: parentCanvasRef}: ImageCanvasProps) => {
+    const canvasRef = parentCanvasRef || useRef<HTMLCanvasElement>(null);
     const [isDragging, setisDragging] = useState(false);
     const [prevDragPos, setPrevDragPos] = useState({ x:0 , y:0});
     const [prevZoom, setPrevZoom] = useState(zoomLevel);
