@@ -1,6 +1,6 @@
 import {useCallback} from 'react';
 import { initCanvas } from '@utils/ts/canvas-utils';
-import classes from './ImageCanvas.module.css';
+import CanvasStyles from './ImageCanvas.module.css';
 import { useInteractiveCanvas } from '@hooks/useCanvas';
 
 interface ImageCanvasProps {
@@ -14,7 +14,7 @@ const ImageCanvas = ({ img, zoomLevel=0, isInteractive=false }: ImageCanvasProps
     if (isInteractive) {
         const { canvasRef, handlePointerDown, handlePointerMove, handlePointerUp } = useInteractiveCanvas(img, zoomLevel)
 
-        return <canvas className={classes['img-canvas']} ref={canvasRef}
+        return <canvas className={`${CanvasStyles['img-canvas']} ${zoomLevel > 0 ? CanvasStyles['img-canvas--dragging'] : ''}`} ref={canvasRef}
                     onMouseDown={handlePointerDown} 
                     onMouseMove={handlePointerMove} 
                     onMouseUp={handlePointerUp}
@@ -52,7 +52,7 @@ const ImageCanvas = ({ img, zoomLevel=0, isInteractive=false }: ImageCanvasProps
         }
     }, [img, zoomLevel, isInteractive]);
 
-    return <canvas className={classes['img-canvas']} ref={canvasRef}></canvas>;
+    return <canvas className={CanvasStyles['img-canvas']} ref={canvasRef}></canvas>;
 }
 
 export default ImageCanvas;
