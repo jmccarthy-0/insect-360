@@ -21,7 +21,7 @@ const ZoomBtns = ({zoomLevel, setZoomLevel}: ZoomBtnsInterface) => {
             <Btn classes={ `${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0} ariaLabel="Zoom Out">
                 <Icon icon={'zoom out'} />
             </Btn>
-            <Btn classes={ `${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel >= 1} ariaLabel="Zoom In">
+            <Btn classes={ `${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={() => { handleZoomClick(true) }} disabled={zoomLevel === .5} ariaLabel="Zoom In">
                 <Icon icon={'zoom in'} />
             </Btn>
         </div>
