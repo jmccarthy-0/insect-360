@@ -1,7 +1,5 @@
-import {useCallback} from 'react';
-import { initCanvas } from '@utils/ts/canvas-utils';
-import CanvasStyles from './ImageCanvas.module.css';
-import { useInteractiveCanvas } from '@hooks/useCanvas';
+import InteractiveCanvas from './InteractiveCanvas/InteractiveCanvas';
+import StaticCanvas from './StaticCanvas/StaticCanvas';
 
 interface ImageCanvasProps {
     img: HTMLImageElement | ImageBitmap | null;
@@ -10,49 +8,7 @@ interface ImageCanvasProps {
 }
 
 const ImageCanvas = ({ img, zoomLevel=0, isInteractive=false }: ImageCanvasProps) => {
-    // Interactive: Uses hooks to handle zoom and positioning
-    if (isInteractive) {
-        const { canvasRef, handlePointerDown, handlePointerMove, handlePointerUp } = useInteractiveCanvas(img, zoomLevel)
-
-        return <canvas className={`${CanvasStyles['img-canvas']} ${zoomLevel > 0 ? CanvasStyles['img-canvas--dragging'] : ''}`} ref={canvasRef}
-                    onMouseDown={handlePointerDown} 
-                    onMouseMove={handlePointerMove} 
-                    onMouseUp={handlePointerUp}
-                    onTouchStart={handlePointerDown}
-                    onTouchMove={handlePointerMove}
-                    onTouchEnd={handlePointerUp}
-                    onPointerLeave={handlePointerUp}
-                ></canvas>;
-    }
-
-    // Non-interactive: only needs to be aware of its resize
-    let handleResize: () => void;
-
-    const canvasRef = useCallback((canvas: HTMLCanvasElement) => {
-        if (canvas && img) {
-            initCanvas(canvas, img, zoomLevel);
-
-            const prevDims = {
-                width: canvas.clientWidth,
-                height: canvas.clientHeight
-            }
-
-            handleResize = () => {
-                if (canvas.clientWidth !== prevDims.width || canvas.clientHeight !== prevDims.height) {
-                    initCanvas(canvas, img, zoomLevel);
-
-                    prevDims.width = canvas.clientWidth;
-                    prevDims.height = canvas.clientHeight;
-                }
-            }
-
-            window.addEventListener('resize', handleResize);
-        } else {
-            window.removeEventListener('resize', handleResize);
-        }
-    }, [img, zoomLevel, isInteractive]);
-
-    return <canvas className={CanvasStyles['img-canvas']} ref={canvasRef}></canvas>;
+    return isInteractive ? <InteractiveCanvas img={img} zoomLevel={zoomLevel} /> : <StaticCanvas img={img} />;
 }
 
 export default ImageCanvas;
