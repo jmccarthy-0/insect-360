@@ -97,8 +97,6 @@ export const useInteractiveCanvas = (img: HTMLImageElement | ImageBitmap | null,
         isDragging = false;
     };
 
-
-
     // General Initialization
     useEffect(() => {
         if (canvasRef.current && img) {

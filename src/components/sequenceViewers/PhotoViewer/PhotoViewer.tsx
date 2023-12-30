@@ -1,7 +1,6 @@
-import { useState, useEffect, MouseEvent, TouchEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { useSingleImageLoader } from '@hooks/singleImageLoader';
 
-import DraggableCanvas from '@components/sequenceViewers/DraggableCanvas/DraggableCanvas';
 import Loader from '@components/global/Loader/Loader';
 import ZoomBtns from "@components/sequenceViewers/ZoomBtns/ZoomBtns";
 
