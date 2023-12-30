@@ -6,6 +6,7 @@ import Loader from '@components/global/Loader/Loader';
 import ZoomBtns from "@components/sequenceViewers/ZoomBtns/ZoomBtns";
 
 import classes from './PhotoViewer.module.css';
+import ImageCanvas from '@components/global/ImageCanvas/ImageCanvas';
 
 interface PhotoViewerProps {
     imgPath: string;
@@ -25,7 +26,8 @@ const PhotoViewer = ({imgPath}: PhotoViewerProps) => {
         <div className={`${classes['photo-viewer']}`}>
             {displayLoader && <Loader />}
             <ZoomBtns setZoomLevel={setZoomLevel} zoomLevel={zoomLevel}/>
-            <DraggableCanvas img={img} zoomLevel={zoomLevel} />
+            {/* <DraggableCanvas img={img} zoomLevel={zoomLevel} /> */}
+            <ImageCanvas img={img} zoomLevel={zoomLevel} isInteractive={true}/>
         </div>
     )
 }

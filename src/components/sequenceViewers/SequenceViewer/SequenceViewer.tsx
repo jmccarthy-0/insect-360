@@ -23,6 +23,7 @@ const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) 
     
     const hiResImgUrl = useHiResImgUrl(sid, activeImgIndex);
     const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
+
     
     useEffect(() => {
         if (imgs.length === images.sequenceFramecount) {
