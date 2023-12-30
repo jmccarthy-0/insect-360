@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 
-import { SpeciesMenuContext } from "../../../../contexts/SpeciesMenuContext";
+import { SpeciesMenuContext } from "@contexts/SpeciesMenuContext";
 
-import Btn from "../../../global/Btn/Btn";
+import Btn from "@components/global/Btn/Btn";
 
 import classes from './AppIntro.module.css';
 

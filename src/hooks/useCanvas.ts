@@ -30,7 +30,7 @@ export const useInteractiveCanvas = (img: HTMLImageElement | ImageBitmap | null,
             }
         }
 
-        return () => {};
+        return () => { return null; };
     }, [img, zoomLevel]);
 
     useEffect(() => {

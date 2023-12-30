@@ -7,5 +7,5 @@ export interface SpeciesMenuContextType {
   
 export const SpeciesMenuContext = createContext<SpeciesMenuContextType>({
     displaySpeciesMenu: false,
-    setDisplaySpeciesMenu: () => {},
+    setDisplaySpeciesMenu: () => {return null},
 });
