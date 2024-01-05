@@ -6,7 +6,8 @@ import { SpeciesMenuContext } from '@contexts/SpeciesMenuContext';
 import Header from '@components/pageHeader/Header/Header';
 import SpeciesMenu from '@components/pageHeader/SpeciesMenu/SpeciesMenu';
 
-import classes from './Layout.module.css';
+import PageStyles from './Layout.module.css';
+import LinkStyles from '@components/global/Link/Link.module.css';
 
 const Layout = () => {
   const [displaySpeciesMenu, setDisplaySpeciesMenu] = useState(false);
@@ -16,13 +17,15 @@ const Layout = () => {
       displaySpeciesMenu, 
       setDisplaySpeciesMenu
     }}>
-      <div className={classes['app']}>
-        <div className={classes['page-grid']}>
+      <div className={PageStyles['app']}>
+        <div className={PageStyles['page-grid']}>
             <Header />
             <SpeciesMenu />
-
             <Outlet />
         </div>
+        <footer className={PageStyles['footer']}>
+          <small><span>&copy; 2024</span><a href="https://joemccarthy.dev/" target="_blank" className={LinkStyles['link']}>Joe McCarthy</a></small>
+        </footer>
       </div>
     </SpeciesMenuContext.Provider>
   )

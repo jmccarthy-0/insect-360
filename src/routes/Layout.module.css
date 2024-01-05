@@ -16,3 +16,19 @@
     display: grid;
     place-content: center;
 }
+
+.footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 12px;
+    color: var(--txt-clr);
+
+    small {
+        display: flex;
+        justify-content: center;
+        gap: 1ch;
+    }
+}
