@@ -19,7 +19,7 @@ const router = createBrowserRouter([
             path: 'species/:speciesId',
             element: <SpeciesDetailsPage />,
             loader: async ({ params }) => {
-                return await fetchData(`http://${import.meta.env.VITE_API}/species/${params.speciesId}`);
+                return await fetchData(`${import.meta.env.VITE_API}/species/${params.speciesId}`);
             }
         }
       ],

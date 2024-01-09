@@ -40,7 +40,7 @@ const SpeciesMenu = () => {
     useEffect(() => {
         const buildList = async () => {
             if (!speciesList && displaySpeciesMenu) {
-                const data = await fetchData(`http://${import.meta.env.VITE_API}/species/`);
+                const data = await fetchData(`${import.meta.env.VITE_API}/species/`);
 
                 if (data) {
                     const markup = generateListMarkup(data);
