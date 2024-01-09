@@ -11,8 +11,8 @@ const SpeciesDetailsPage = () => {
     return (
         <>
             <Helmet>
-                <title>Lantern Field Guide: {binomialName} ({commonName})</title>
-                <meta name="description" content={`360 degree macro photography viewer for ${binomialName}`}/>
+                <title>{import.meta.env.VITE_TITLE}: {binomialName} ({commonName})</title>
+                <meta name="description" content={`360° macro photography viewer for ${binomialName}`}/>
             </Helmet>
             <SpeciesWindow />
         </>

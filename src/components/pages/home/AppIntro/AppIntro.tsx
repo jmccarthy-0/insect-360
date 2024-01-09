@@ -4,7 +4,7 @@ import { SpeciesMenuContext } from "@contexts/SpeciesMenuContext";
 
 import Btn from "@components/global/Btn/Btn";
 
-import classes from './AppIntro.module.css';
+import IntroStyles from './AppIntro.module.css';
 
 
 
@@ -23,11 +23,12 @@ const AppIntro = () => {
     };
 
     return (
-        <div className={classes['app-intro']}>
-            <div className={classes['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
-                <h1 className={classes['page-title']}><span className={classes['app-name']}>Lantern:</span> <span className={classes['tag-line']}>A Digital Field Guide</span></h1>
+        <div className={IntroStyles['app-intro']}>
+            <div className={IntroStyles['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
+                <h1 className={IntroStyles['page-title']}>{import.meta.env.VITE_TITLE}</h1> 
+                <p className={IntroStyles['tag-line']}>Explore high resolution insect anatomy from every angle with LAB. Select a species to get started.</p>
                 
-                <div className={classes['btn-wrapper']}>
+                <div className={IntroStyles['btn-wrapper']}>
                     <Btn handleClick={handleClick}>
                         Species
                     </Btn>

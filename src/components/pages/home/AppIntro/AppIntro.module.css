@@ -39,28 +39,16 @@
 
 .page-title {
     font-size: clamp(3rem, 4vw, 6rem);
-    line-height: 1;
+    line-height: 1.15;
+    margin-bottom: .5rem;
+}
+
+.tag-line {
+    font-size: 1rem;
     margin-bottom: 3rem;
 
     @media (min-width: 740px) {
         margin-bottom: 4rem;
-    }
-}
-
-.app-name {
-    display: block;
-    line-height: 1.5;
-
-    @media (min-width: 740px) {
-        display: inline;
-        line-height: inherit;
-    }
-}
-
-.tag-line {
-    font-size: 2rem;
-    @media (min-width: 740px) {
-        font-size: inherit;
     }
 }
 
