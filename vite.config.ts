@@ -4,6 +4,7 @@ import autoprefixer from 'autoprefixer';
 import postCSSNested from 'postcss-nested';
 import svgr from "vite-plugin-svgr";
 import path from "path";
+import tailwind from 'tailwindcss';
 
 
 // https://vitejs.dev/config/
@@ -27,8 +28,9 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
+        postCSSNested(),
+        tailwind(),
         autoprefixer(),
-        postCSSNested()
       ],
     }
   },
