@@ -4,17 +4,16 @@ import { SpeciesMenuContext } from "@contexts/SpeciesMenuContext";
 
 import Btn from "@components/global/Btn/Btn";
 
-import IntroStyles from './AppIntro.module.css';
-
 
 
 const AppIntro = () => {
-    const [borderHeight, setBorderHeight] = useState('0');
+    const [showBorder, setShowBorder] = useState(false);
     const {setDisplaySpeciesMenu} = useContext(SpeciesMenuContext);
     
     useEffect(() => {
         setTimeout(() => {
-            setBorderHeight('1');
+            //setBorderHeight('1');
+            setShowBorder(true);
         } , 800);
     }, []);
 
@@ -23,12 +22,12 @@ const AppIntro = () => {
     };
 
     return (
-        <div className={IntroStyles['app-intro']}>
-            <div className={IntroStyles['page-header']} style={{ '--border-height': borderHeight } as React.CSSProperties}>
-                <h1 className={IntroStyles['page-title']}>{import.meta.env.VITE_TITLE}</h1> 
-                <p className={IntroStyles['tag-line']}>Explore high resolution insect anatomy from every angle with LAB. Select a species to get started.</p>
+        <div className='grid gap-y-8 place-content-center text-center'>
+            <div className={`relative lg:px-8 2xl:px-16 lg:py-4 2xl:py-6 after:content-none after:lg:content-[''] after:h-full after:absolute after:top-0 after:left-px after:border-l after:border-muted-dark dark:after:border-muted-light after:origin-top ${showBorder ? 'after:scale-y-1' : 'after:scale-y-0'} after:transition-transform after:duration-300 after:ease-in`}>
+                <h1 className='text-5xl md:text-6xl lg:text-8xl text-primary-dark dark:text-primary-light mb-6 md:mb-8 lg:mb-10'>{import.meta.env.VITE_TITLE}</h1> 
+                <p className='text-base mb-12 md:mb-16 text-primary-dark dark:text-primary-light'>Explore high resolution insect anatomy from every angle with LAB. Select a species to get started.</p>
                 
-                <div className={IntroStyles['btn-wrapper']}>
+                <div className='flex justify-center'>
                     <Btn handleClick={handleClick}>
                         Species
                     </Btn>
