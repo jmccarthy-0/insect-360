@@ -46,6 +46,11 @@ html {
   }
 }
 
+.page-grid {
+  @apply grid w-[95%] min-h-dvh mx-auto;
+  grid-template-rows: max-content 1fr;
+}
+
 /*
 	Improved screen reader only CSS class
 	@author Gaël Poupard

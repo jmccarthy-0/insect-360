@@ -17,14 +17,14 @@ const Layout = () => {
       displaySpeciesMenu, 
       setDisplaySpeciesMenu
     }}>
-      <div className={PageStyles['app']}>
-        <div className={PageStyles['page-grid']}>
+      <div className='max-w-[2400px] m-auto'>
+        <div className='page-grid'>
             <Header />
             <SpeciesMenu />
             <Outlet />
         </div>
-        <footer className={PageStyles['footer']}>
-          <small><span>&copy; 2024</span><a href="https://joemccarthy.dev/" target="_blank" className={LinkStyles['link']}>Joe McCarthy</a></small>
+        <footer className='text-center fixed inset-x-0 bottom-0 pb-3 text-primary-dark dark:text-primary-light'>
+          <small className='flex justify-center gap-[1ch]'><span>&copy; 2024</span><a href="https://joemccarthy.dev/" target="_blank" className={LinkStyles['link']}>Joe McCarthy</a></small>
         </footer>
       </div>
     </SpeciesMenuContext.Provider>
