@@ -4,7 +4,6 @@ import { SpeciesMenuContext } from '@contexts/SpeciesMenuContext';
 import { fetchData } from '@utils/ts/fetch-utils';
 import Modal from '@components/global/Modal/Modal';
 import classes from './SpeciesMenu.module.css';
-import linkClasses from '@components/global/Link/Link.module.css';
 
 type SpeciesItem = {
     sid: string,
@@ -28,7 +27,7 @@ const SpeciesMenu = () => {
                         
                         return (
                             <li key={index}>
-                                <Link to={`species/${sid}/`} className={`${linkClasses['link']} ${linkClasses['link--italic']}`} onClick={handleClick}>{genus} {species}</Link>
+                                <Link to={`species/${sid}/`} className='link italic' onClick={handleClick}>{genus} {species}</Link>
                             </li>
                         );
                     })

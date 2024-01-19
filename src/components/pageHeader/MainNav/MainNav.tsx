@@ -4,7 +4,6 @@ import { SpeciesMenuContext } from '@contexts/SpeciesMenuContext';
 import classes from './MainNav.module.css';
 
 import Btn from '@components/global/Btn/Btn';
-import btnStyles from '@components/global/Btn/Btn.module.css';
 
 const MainNav = () => {
     const {setDisplaySpeciesMenu} = useContext(SpeciesMenuContext);
@@ -15,7 +14,7 @@ const MainNav = () => {
         <nav>
             <ul className={classes['nav-list']}>
                 <li>
-                    <Btn handleClick={handleClick} classes={btnStyles['btn--link']} ariaControls="speciesMenuModal">Species</Btn>
+                    <Btn handleClick={handleClick} classes={'link p-0 h-auto'} ariaControls="speciesMenuModal">Species</Btn>
                 </li>
             </ul>
         </nav>
