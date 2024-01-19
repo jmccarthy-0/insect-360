@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-
-import './DarkModeToggle.css';
 import DarkModeToggleSR from "./DarkModeToggle_SR";
 import DarkModeToggleUI from "./DarkModeToggle_UI";
 

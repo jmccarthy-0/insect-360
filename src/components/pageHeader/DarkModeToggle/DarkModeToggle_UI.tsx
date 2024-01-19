@@ -13,9 +13,9 @@ const DarkModeToggleUI = ({darkMode, setDarkMode}: DarkModeToggleProps) => {
     }, []);
 
     return (
-        <div className="dark-mode-toggle">
+        <div className="flex items-center gap-x-2 [&_path]:fill-primary-dark dark:[&_path]:fill-primary-light">
             <Icon icon="light" />
-            <div className={`dark-mode-toggle__input ${darkMode ? 'dark-mode-toggle__input--dark' : ''}`} onClick={toggleDarkMode} aria-hidden="true"></div>
+            <div className={'relative w-12 h-6 bg-muted-dark dark:bg-muted-light rounded-xl border border-primary-light dark:border-primary-dark cursor-pointer after:content-[""] after:absolute after:top-[-1px] after-left-[-1px] after:w-6 after:h-6 after:bg-primary-light dark:after:bg-primary-dark after:border after:border-primary-dark dark:after:border-primary-light after:rounded-full after:transition-[transform,background-color] after:duration-150 dark:after:translate-x-full'} onClick={toggleDarkMode} aria-hidden="true"></div>
             <Icon icon="dark" />
         </div>
     );
