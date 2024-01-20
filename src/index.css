@@ -101,18 +101,8 @@ html {
 
 
 
-html, body {
-  overscroll-behavior-x: none;
-}
-
-
 html {
-  box-sizing: border-box;
   font-size: 14px;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
 }
 
 body {
@@ -125,33 +115,4 @@ body {
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul, dl, dd, dt, button {
   @apply font-serif font-normal;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-p {
-  line-height: 2;
-
-  &:has(+ p) {
-    margin-bottom: 1rem;
-  }
-}
-
-p, button {
-  font-size: 1rem;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  text-decoration: none;
-
-  &:visited {
-    color: var(--accent-clr);
-  }
 }
