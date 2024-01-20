@@ -1,8 +1,5 @@
 import { useContext } from 'react';
 import { SpeciesMenuContext } from '@contexts/SpeciesMenuContext';
-
-import classes from './MainNav.module.css';
-
 import Btn from '@components/global/Btn/Btn';
 
 const MainNav = () => {
@@ -12,7 +9,7 @@ const MainNav = () => {
     
     return (
         <nav>
-            <ul className={classes['nav-list']}>
+            <ul className={'flex items-center gap-x-4 h-full'}>
                 <li>
                     <Btn handleClick={handleClick} classes={'link p-0 h-auto'} ariaControls="speciesMenuModal">Species</Btn>
                 </li>
