@@ -1,6 +1,4 @@
-import { TaxonDetails } from '../../../../utils/ts/types';
-
-import classes from './PageIntro.module.css';
+import { TaxonDetails } from '@utils/ts/types';
 
 interface PageIntroProps {
   content: TaxonDetails
@@ -8,13 +6,13 @@ interface PageIntroProps {
 
 const PageIntro = ({content: {binomialName, commonName, classifiedBy}}: PageIntroProps) => {
     return (
-        <div className={classes['page-intro']}>
-          <div className={classes['title-wrapper']}>
-            <h1 className={`${classes['heading']}`}>
-              <span className={`${classes['scientific-name']}`}>{binomialName}</span>
-              {commonName && <span className={`${classes['common-name']}`}>{commonName}</span>}
+        <div className='px-page-x'>
+          <div className='text-center'>
+            <h1 className={'mb-2'}>
+              <span className='block xl:inline text-4xl italic text-primary-dark dark:text-primary-light'>{binomialName}</span>
+              {commonName && <span className="block xl:inline text-2xl xl:text-4xl text-primary-dark dark:text-primary-light before:content-[''] xl:before:content-['_-_']">{commonName}</span>}
             </h1>
-            {classifiedBy && <p>({classifiedBy})</p>}
+            {classifiedBy && <p className='text-primary-dark dark:text-primary-light'>({classifiedBy})</p>}
           </div>
         </div>
     );

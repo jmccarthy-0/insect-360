@@ -68,7 +68,7 @@ const Modal = ({ children, id, setOpen, modalAdjustmentClasses, animationDirecti
                     ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
                 }
             >
-                <CloseBtn classes={`absolute z-20 ${size === 'small' ? 'top-2.5 left-2.5' : 'top-12 right-4'} ${theme !== 'default' ? btnClasses[`btn--${theme}`] : ''}`} handleClick={handleClose} /> 
+                <CloseBtn classes={`absolute z-20 ${size === 'small' ? 'top-2.5 right-2.5' : 'top-page-y right-page-x'} ${theme !== 'default' ? btnClasses[`btn--${theme}`] : ''}`} handleClick={handleClose} /> 
                 {children}
             </div>
         </div>
