@@ -3,47 +3,19 @@
 @tailwind utilities;
 
 html {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;  
+  font-size: 14px;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+body {
+  @apply bg-primary-light dark:bg-primary-dark;
 
-  --primary-light: hsl(0, 0%, 5%);
-  --primary-dark: hsl(0, 0%, 90%);
-  --secondary-light: hsl(41, 100%, 49%);
-  --secondary-dark: hsl(170, 24%, 31%);
-  --true-black: #000;
- 
-  --bg-clr: var(--primary-dark);
-  --txt-clr: var(--primary-light);
-  --border-color: var(--primary-light);
-  --txt-muted: hsl(0, 0%, 46%);
-  --accent-clr: var(--secondary-dark);
-
-  --bg-color-invert: var(--primary-light);
-  --txt-color-invert: var(--primary-dark);
-  --border-color-invert: var(--primary-dark);
-
-  --page-padding-x: 1rem;
-  --page-padding-y: 3rem;
-
-  &[data-theme="dark"] {
-    --bg-clr: var(--primary-light);
-    --border-color: var(--primary-dark);
-    --txt-clr: var(--primary-dark);
-    --txt-muted: hsl(0, 0%, 51%);
-    --accent-clr: var(--secondary-light);
-
-
-    --bg-color-invert: var(--primary-dark);
-    --txt-color-invert: var(--primary-light);
-    --border-color-invert: var(--primary-light);
+  &.modal-open {
+    @apply h-dvh overflow-hidden;
   }
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, dl, dd, dt, button {
+  @apply font-serif font-normal;
 }
 
 .link {
@@ -59,8 +31,6 @@ html {
     transform: scaleX(var(--transform));
   }
 }
-
-
 
 /*
 	Improved screen reader only CSS class
@@ -95,24 +65,5 @@ html {
 
 	clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
 	-webkit-clip-path: inset(50%) !important;
-		clip-path: inset(50%) !important;  /* 2 */
-}
-
-
-
-
-html {
-  font-size: 14px;
-}
-
-body {
-  @apply bg-primary-light dark:bg-primary-dark;
-
-  &.modal-open {
-    @apply h-dvh overflow-hidden;
-  }
-}
-
-body, h1, h2, h3, h4, h5, h6, p, ol, ul, dl, dd, dt, button {
-  @apply font-serif font-normal;
+	clip-path: inset(50%) !important;  /* 2 */
 }

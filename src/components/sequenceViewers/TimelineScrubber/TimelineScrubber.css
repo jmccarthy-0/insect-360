@@ -2,12 +2,12 @@
     --track-w: 100%;
     --track-h: 0px;
     --track-bg: transparent;
-    --track-border: 1px solid hsl(0,0%,100%);
+    --track-border: 1px solid theme(colors.white);
 
     --thumb-dim: 2rem;
-    --thumb-border: 3px solid var(--secondary-light);
+    --thumb-border: 3px solid theme(colors.accent.dark);
     --thumb-radius: 50%;
-    --thumb-bg: hsl(0,0%,0%);
+    --thumb-bg: theme(colors.black);
 
     @media (min-width:992px) {
         --thumb-dim: 1.5rem;
@@ -24,7 +24,7 @@
 
 
     &:active {
-        --thumb-bg: var(--secondary-light);
+        --thumb-bg: theme(colors.accent.dark);
     }
 
     /* Track */
