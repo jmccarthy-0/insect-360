@@ -32,6 +32,9 @@ export default {
       gridTemplateRows: {
         'max-1fr': 'max-content 1fr'
       },
+      gridTemplateColumns: {
+        'max-1fr': 'max-content 1fr'
+      },
       spacing: {
         'page-x': '1rem',
         'page-y': '3rem',
