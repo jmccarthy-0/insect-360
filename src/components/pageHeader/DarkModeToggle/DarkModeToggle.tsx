@@ -15,7 +15,7 @@ const DarkModeToggle = () => {
     return (
         <>  
             <DarkModeToggleSR darkMode={darkMode} setDarkMode={setDarkMode} />
-            <DarkModeToggleUI darkMode={darkMode} setDarkMode={setDarkMode} />
+            <DarkModeToggleUI setDarkMode={setDarkMode} />
         </>
     );
 }

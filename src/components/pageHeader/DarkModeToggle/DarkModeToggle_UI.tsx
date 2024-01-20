@@ -2,11 +2,10 @@ import { useCallback } from "react";
 import Icon from "../../global/Icon/Icon";
 
 interface DarkModeToggleProps {
-    darkMode: boolean;
     setDarkMode: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 
-const DarkModeToggleUI = ({darkMode, setDarkMode}: DarkModeToggleProps) => {
+const DarkModeToggleUI = ({setDarkMode}: DarkModeToggleProps) => {
 
     const toggleDarkMode = useCallback(() => {
         setDarkMode(prevDarkMode => !prevDarkMode);
