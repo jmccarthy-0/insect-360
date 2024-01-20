@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 import DarkModeToggleSR from "./DarkModeToggle_SR";
 import DarkModeToggleUI from "./DarkModeToggle_UI";
 
-
 const DarkModeToggle = () => {
-    const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(true);
 
-    useEffect(() => {
-        document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? "dark" : "light";
 
-        darkMode ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark');
-    }, [darkMode])
+    darkMode
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.remove("dark");
+  }, [darkMode]);
 
-    return (
-        <>  
-            <DarkModeToggleSR darkMode={darkMode} setDarkMode={setDarkMode} />
-            <DarkModeToggleUI setDarkMode={setDarkMode} />
-        </>
-    );
-}
+  return (
+    <>
+      <DarkModeToggleSR darkMode={darkMode} setDarkMode={setDarkMode} />
+      <DarkModeToggleUI setDarkMode={setDarkMode} />
+    </>
+  );
+};
 
 export default DarkModeToggle;

@@ -13,7 +13,7 @@
       "@hooks/*": ["hooks/*"],
       "@contexts/*": ["contexts/*"],
       "@pageComponents/*": ["components/pages/*"],
-      "@/*": ["/*"]
+      "@/*": ["/*"],
     },
 
     /* Bundler mode */
@@ -28,7 +28,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],

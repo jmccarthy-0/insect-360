@@ -1,38 +1,44 @@
-import { useCallback } from 'react';
-import { initCanvas } from '@utils/ts/canvas-utils';
+import { useCallback } from "react";
+import { initCanvas } from "@utils/ts/canvas-utils";
 
 interface StaticCanvasProps {
-    img: HTMLImageElement | ImageBitmap | null;
+  img: HTMLImageElement | ImageBitmap | null;
 }
 
-const StaticCanvas = ({img}: StaticCanvasProps) => {
-    let handleResize: () => void;
+const StaticCanvas = ({ img }: StaticCanvasProps) => {
+  let handleResize: () => void;
 
-    const canvasRef = useCallback((canvas: HTMLCanvasElement) => {
-        if (canvas && img) {
+  const canvasRef = useCallback(
+    (canvas: HTMLCanvasElement) => {
+      if (canvas && img) {
+        initCanvas(canvas, img, 0);
+
+        const prevDims = {
+          width: canvas.clientWidth,
+          height: canvas.clientHeight,
+        };
+
+        handleResize = () => {
+          if (
+            canvas.clientWidth !== prevDims.width ||
+            canvas.clientHeight !== prevDims.height
+          ) {
             initCanvas(canvas, img, 0);
 
-            const prevDims = {
-                width: canvas.clientWidth,
-                height: canvas.clientHeight
-            }
+            prevDims.width = canvas.clientWidth;
+            prevDims.height = canvas.clientHeight;
+          }
+        };
 
-            handleResize = () => {
-                if (canvas.clientWidth !== prevDims.width || canvas.clientHeight !== prevDims.height) {
-                    initCanvas(canvas, img, 0);
+        window.addEventListener("resize", handleResize);
+      } else {
+        window.removeEventListener("resize", handleResize);
+      }
+    },
+    [img],
+  );
 
-                    prevDims.width = canvas.clientWidth;
-                    prevDims.height = canvas.clientHeight;
-                }
-            }
-
-            window.addEventListener('resize', handleResize);
-        } else {
-            window.removeEventListener('resize', handleResize);
-        }
-    }, [img]);
-
-    return <canvas className='w-full h-full bg-black' ref={canvasRef}></canvas>;
-}
+  return <canvas className="h-full w-full bg-black" ref={canvasRef}></canvas>;
+};
 
 export default StaticCanvas;
