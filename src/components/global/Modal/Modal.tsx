@@ -63,7 +63,7 @@ const Modal = ({ children, id, setOpen, modalAdjustmentClasses, animationDirecti
             }
         >
             <div className={
-                    `flex justify-center items-center relative transition-[transform,opacity] duration-300 motion-reduce:duration-0 ${/* Main modal classes*/}
+                    `flex justify-center items-center relative transition-[transform,opacity] duration-300 motion-reduce:duration-0
                     ${ isActive ? 'translate-x-0 opacity-100' : animationStyles /* Added on mount to trigger animation */ } 
                     ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
                 }

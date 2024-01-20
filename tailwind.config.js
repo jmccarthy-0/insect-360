@@ -32,16 +32,7 @@ export default {
       serif: ['Libre Baskerville', 'serif']
     },
     extend: {
-      
     },
   },
   plugins: [],
 }
-
-
-/*
-hsl(0, 0%, 5%); // Primary (Dark)
-hsl(0, 0%, 46%) // Muted (Dark Mode)
-hsl(0, 0%, 51%) // Muted (Light Mode)
-hsl(0, 0%, 90%) // Primary (Light)
-*/
