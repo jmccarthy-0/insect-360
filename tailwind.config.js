@@ -25,12 +25,15 @@ export default {
         200: 'hsl(0, 0%, 46%)',
         300: 'hsl(0, 0%, 5%)',
       },
-      transparent: 'transparent'
+      transparent: 'transparent',
+      black: 'hsl(0,0%,0%)'
     },
     fontFamily: {
       serif: ['Libre Baskerville', 'serif']
     },
-    extend: {},
+    extend: {
+      
+    },
   },
   plugins: [],
 }

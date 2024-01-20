@@ -65,6 +65,8 @@ html {
   }
 }
 
+
+
 /*
 	Improved screen reader only CSS class
 	@author Gaël Poupard
@@ -94,7 +96,7 @@ html {
 		@see https://csswizardry.com/2016/05/the-importance-of-important/
 */
 .sr-only {
-  @apply absolute border-0 h-px m-[-1px] overflow-hidden p-0 w-px whitespace-nowrap;
+  @apply absolute border-0 h-px -m-px overflow-hidden p-0 w-px whitespace-nowrap;
 
 	clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
 	-webkit-clip-path: inset(50%) !important;
