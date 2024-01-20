@@ -2,7 +2,6 @@ import Btn from "@components/global/Btn/Btn";
 
 import btnClasses from '@components/global/Btn/Btn.module.css';
 import Icon from "@components/global/Icon/Icon";
-import classes from './ZoomBtns.module.css';
 
 interface ZoomBtnsInterface {
     zoomLevel: number;
@@ -17,7 +16,7 @@ const ZoomBtns = ({zoomLevel, setZoomLevel}: ZoomBtnsInterface) => {
     }
 
     return (
-        <div className={classes['zoom-btns']}>
+        <div className='absolute bottom-[2dvh] right-page-x inline-flex justify-end gap-4 min-w-40'>
             <Btn classes={ `${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={() => { handleZoomClick(false) }} disabled={zoomLevel === 0} ariaLabel="Zoom Out">
                 <Icon icon={'zoom out'} />
             </Btn>
