@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { SpeciesMenuContext } from '@contexts/SpeciesMenuContext';
 import { fetchData } from '@utils/ts/fetch-utils';
 import Modal from '@components/global/Modal/Modal';
-import classes from './SpeciesMenu.module.css';
 
 type SpeciesItem = {
     sid: string,
@@ -18,7 +17,7 @@ const SpeciesMenu = () => {
     // Back end data for building list of species
     const generateListMarkup = (data: SpeciesItem[]) => {
         return (
-            <ul className={`${classes['species-list']}`} >
+            <ul className='grid gap-y-4' >
                 {
                     data.map(({sid, genus, species}: SpeciesItem, index: number) => {
                         const handleClick = () => {
@@ -59,8 +58,8 @@ const SpeciesMenu = () => {
     if (displaySpeciesMenu && speciesList) {
         return (
             <Modal id="speciesMenuModal" setOpen={setDisplaySpeciesMenu} animationDirection='fade'> 
-                <div className={classes['species-menu']}>
-                    <h2 className={classes['species-title']}>Species</h2>
+                <div className='grid place-content-center w-dvw h-dvh bg-primary-light dark:bg-primary-dark text-primary-dark dark:text-primary-light'>
+                    <h2 className='text-4xl mb-4'>Species</h2>
                     { speciesList }
                 </div>
             </Modal>
