@@ -1,4 +1,4 @@
-import Modal from "../../global/Modal/Modal";
+import Modal from "@components/global/Modal/Modal";
 import PhotoViewer from "./PhotoViewer";
 
 interface PhotoViewerModalProps {
