@@ -14,14 +14,9 @@
     }
 
     /* Reset */
-    position: absolute;
-    left: var(--page-padding-x);
-    right: var(--page-padding-x);
-    bottom: 2rem;
-    width: calc(100% - calc(var(--page-padding-x) * 2));
-    background: transparent; 
+    @apply absolute inset-x-page-x bottom-8 bg-transparent;
+    width: calc(100% - calc(theme(spacing.page-x) * 2));
     -webkit-appearance: none;
-
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
