@@ -32,6 +32,9 @@ export default {
       serif: ['Libre Baskerville', 'serif']
     },
     extend: {
+      gridTemplateRows: {
+        'max-1fr': 'max-content 1fr'
+      }
     },
   },
   plugins: [],

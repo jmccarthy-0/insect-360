@@ -15,7 +15,7 @@ const Layout = () => {
       setDisplaySpeciesMenu
     }}>
       <div className='max-w-[2400px] m-auto'>
-        <div className='page-grid'>
+        <div className='grid w-[95%] min-h-dvh mx-auto grid-rows-max-1fr'>
             <Header />
             <SpeciesMenu />
             <Outlet />
