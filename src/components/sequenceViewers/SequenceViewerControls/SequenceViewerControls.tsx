@@ -2,8 +2,6 @@ import ExpandBtn from "@components/global/Btn/ExpandBtn";
 import InfoBtn from "@components/global/Btn/InfoBtn";
 import TimelineScrubber from "@components/sequenceViewers/TimelineScrubber/TimelineScrubber";
 
-import classes from './SequenceViewerControls.module.css';
-
 interface SequenceViewerControlsProps {
     activeImgIndex: number;
     setActiveImgIndex: (value: number | ((prevVar: number) => number)) => void;
@@ -23,8 +21,8 @@ const SequenceViewerControls = ({setDisplayPhotoInfo, setDisplayPhotoViewer, act
     
     return(
         <>
-            <InfoBtn classes={classes['info-btn']} handleClick={handleInfoClick}/>
-            <ExpandBtn classes={classes['expand-btn']} handleClick={handleViewerClick} />
+            <InfoBtn classes='absolute top-2.5 left-page-x' handleClick={handleInfoClick}/>
+            <ExpandBtn classes='absolute top-2.5 right-page-x' handleClick={handleViewerClick} />
             <TimelineScrubber min={0} max={imgCount - 1} value={activeImgIndex} setTimelineIndex={setActiveImgIndex} />
         </>
     );
