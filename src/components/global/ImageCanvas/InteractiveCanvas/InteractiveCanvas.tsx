@@ -1,8 +1,5 @@
 import { useInteractiveCanvas } from '@hooks/useCanvas';
 
-import CanvasStyles from '../ImageCanvas.module.css';
-
-
 interface InteractiveCanvasProps {
     img: HTMLImageElement | ImageBitmap | null;
     zoomLevel: number;
@@ -11,7 +8,7 @@ interface InteractiveCanvasProps {
 const InteractiveCanvas = ({img, zoomLevel}: InteractiveCanvasProps) => {
     const { canvasRef, handlePointerDown, handlePointerMove, handlePointerUp } = useInteractiveCanvas(img, zoomLevel)
 
-    return <canvas className={`${CanvasStyles['img-canvas']} ${zoomLevel > 0 ? CanvasStyles['img-canvas--dragging'] : ''}`} ref={canvasRef}
+    return <canvas className={`w-full h-full bg-black ${zoomLevel > 0 ? 'cursor-move' : ''}`} ref={canvasRef}
                 onMouseDown={handlePointerDown} 
                 onMouseMove={handlePointerMove} 
                 onMouseUp={handlePointerUp}

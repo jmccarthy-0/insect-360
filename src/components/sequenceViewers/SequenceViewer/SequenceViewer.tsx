@@ -9,8 +9,6 @@ import PhotoInfoModal from '../PhotoInfo/PhotoInfoModal';
 import PhotoViewerModal from '../PhotoViewer/PhotoViewerModal';
 import SequenceViewerControls from '../SequenceViewerControls/SequenceViewerControls';
 
-import classes from './SequenceViewer.module.css';
-
 interface SequenceViewerProps {
     species: Taxon;
 }
@@ -32,7 +30,7 @@ const SequenceViewer = ({ species: { images, meta, sid }}: SequenceViewerProps) 
     }, [imgs]);
 
     return (
-        <div className={classes['sequence-viewer']}>
+        <div className='relative flex flex-col justify-center items-center w-full max-w-4xl aspect-4/3 mx-auto'>
             {displayLoader && <Loader />}
 
             <SequenceViewerControls 

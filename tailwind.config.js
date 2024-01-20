@@ -26,6 +26,9 @@ export default {
       serif: ['Libre Baskerville', 'serif']
     },
     extend: {
+      aspectRatio: {
+        '4/3': '4/3'
+      },
       gridTemplateRows: {
         'max-1fr': 'max-content 1fr'
       },

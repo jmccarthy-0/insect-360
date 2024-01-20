@@ -1,8 +1,6 @@
 import { useCallback } from 'react';
 import { initCanvas } from '@utils/ts/canvas-utils';
 
-import CanvasStyles from '../ImageCanvas.module.css';
-
 interface StaticCanvasProps {
     img: HTMLImageElement | ImageBitmap | null;
 }
@@ -34,7 +32,7 @@ const StaticCanvas = ({img}: StaticCanvasProps) => {
         }
     }, [img]);
 
-    return <canvas className={CanvasStyles['img-canvas']} ref={canvasRef}></canvas>;
+    return <canvas className='w-full h-full bg-black' ref={canvasRef}></canvas>;
 }
 
 export default StaticCanvas;
