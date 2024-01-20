@@ -1,5 +1,3 @@
-import PhotoInfoStyles from './PhotoInfo.module.css';
-
 interface PhotoInfoProps {
     content: string
 }
