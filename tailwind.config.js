@@ -19,12 +19,6 @@ export default {
         dark: 'hsl(0, 0%, 46%)',
         light: 'hsl(0, 0%, 51%)' 
       },
-      gray: {
-        50: 'hsl(0, 0%, 90%)',
-        100: 'hsl(0, 0%, 51%)',
-        200: 'hsl(0, 0%, 46%)',
-        300: 'hsl(0, 0%, 5%)',
-      },
       transparent: 'transparent',
       black: 'hsl(0,0%,0%)'
     },
