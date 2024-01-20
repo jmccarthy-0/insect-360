@@ -20,7 +20,8 @@ export default {
         light: 'hsl(0, 0%, 51%)' 
       },
       transparent: 'transparent',
-      black: 'hsl(0,0%,0%)'
+      black: 'hsl(0,0%,0%)',
+      current: 'currentColor'
     },
     fontFamily: {
       serif: ['Libre Baskerville', 'serif']

@@ -1,8 +1,6 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
-import btnClasses from './Btn.module.css';
-
 interface InfoBtnProps {
     handleClick: () => void;
     classes?: string;
@@ -10,7 +8,7 @@ interface InfoBtnProps {
 
 const InfoBtn = ({ classes, handleClick }: InfoBtnProps) => {
     return (
-        <Btn classes={`${classes ? classes : ''} ${btnClasses['btn--dark']} ${btnClasses['btn--square']}`} handleClick={handleClick} ariaLabel="Photo Info" ariaControls="photoInfoModal">
+        <Btn theme="dark" shape="square" classes={`${classes ? classes : ''}`} handleClick={handleClick} ariaLabel="Photo Info" ariaControls="photoInfoModal">
             <Icon icon={'info'} />
         </Btn>
     )

@@ -1,6 +1,5 @@
 import { ReactNode, useState, useEffect } from "react";
 import CloseBtn from "@components/global/Btn/CloseBtn";
-import btnClasses from '@components/global/Btn/Btn.module.css';
 
 interface ModalProps {
     children: ReactNode;
@@ -68,7 +67,7 @@ const Modal = ({ children, id, setOpen, modalAdjustmentClasses, animationDirecti
                     ${ modalAdjustmentClasses ? modalAdjustmentClasses : '' /* Any extra classes unique to the modal's usage context */ }`
                 }
             >
-                <CloseBtn classes={`absolute z-20 ${size === 'small' ? 'top-2.5 right-2.5' : 'top-page-y right-page-x'} ${theme !== 'default' ? btnClasses[`btn--${theme}`] : ''}`} handleClick={handleClose} /> 
+                <CloseBtn theme={theme} classes={`absolute z-20 ${size === 'small' ? 'top-2.5 right-2.5' : 'top-page-y right-page-x'}`} handleClick={handleClose} /> 
                 {children}
             </div>
         </div>

@@ -1,16 +1,15 @@
 import Btn from "./Btn";
 import Icon from "../Icon/Icon";
 
-import btnClasses from './Btn.module.css';
-
 interface CloseBtnProps {
     handleClick: () => void;
     classes?: string;
+    theme?: 'default' | 'dark' | 'light'
 }
 
-const CloseBtn = ({ classes, handleClick }: CloseBtnProps) => {
+const CloseBtn = ({ classes, handleClick, theme='default' }: CloseBtnProps) => {
     return (
-        <Btn classes={`close-btn ${classes ? classes : ''}  ${btnClasses['btn--square']}`} handleClick={handleClick} ariaLabel="Close Modal">
+        <Btn theme={theme} shape="square" classes={`${classes ? classes : ''}`} handleClick={handleClick} ariaLabel="Close Modal">
             <Icon icon={'close'} />
         </Btn>
     )

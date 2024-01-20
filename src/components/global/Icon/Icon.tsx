@@ -1,6 +1,6 @@
 import {ReactComponent as CloseIcon} from '@assets/icons/close_FILL0_wght400_GRAD0_opsz48.svg';
 import {ReactComponent as ExpandIcon} from '@assets/icons/expand_content_FILL0_wght400_GRAD0_opsz48.svg';
-import {ReactComponent as InfoIcon} from '@assets/icons/info_modified.svg';
+import {ReactComponent as InfoIcon} from '@assets/icons/info_i_FILL0_wght400_GRAD0_opsz24.svg';
 import {ReactComponent as LightIcon} from '@assets/icons/light_mode_FILL0_wght400_GRAD0_opsz24.svg';
 import {ReactComponent as DarkIcon} from '@assets/icons/dark_mode_FILL0_wght400_GRAD0_opsz24.svg';
 import {ReactComponent as ZoomInIcon} from '@assets/icons/zoom_in_FILL0_wght400_GRAD0_opsz24.svg';
