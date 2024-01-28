@@ -1,12 +1,14 @@
 import Modal from "../../global/Modal/Modal";
 import PhotoInfo from "./PhotoInfo";
+import { TaxonPhotoMeta } from "@utils/ts/types";
 
 interface PhotoInfoModalProps {
   setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-  content: string;
+  photoMeta: TaxonPhotoMeta;
 }
 
-const PhotoInfoModal = ({ setOpen, content }: PhotoInfoModalProps) => {
+const PhotoInfoModal = ({ setOpen, photoMeta }: PhotoInfoModalProps) => {
+  console.log({photoMeta});
   return (
     <Modal
       id="photoInfoModal"
@@ -15,7 +17,7 @@ const PhotoInfoModal = ({ setOpen, content }: PhotoInfoModalProps) => {
       animationDirection="fade"
       size="small"
     >
-      <PhotoInfo content={content} />
+      <PhotoInfo photoMeta={photoMeta} />
     </Modal>
   );
 };

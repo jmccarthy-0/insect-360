@@ -4,13 +4,17 @@ export type TaxonDetails = {
   classifiedBy: string | null;
 };
 
-export type TaxonMeta = {
-  photoInfo: string;
+export type TaxonPhotoMeta = {
+  description?: string,
+  cameraModel?: string,
+  lens?: string,
+  flash?: string,
+  stacker?: string
 };
 
 export interface Taxon {
   sid: string;
-  meta: TaxonMeta;
+  photoMeta: TaxonPhotoMeta;
   details: TaxonDetails;
   images: {
     sequenceFramecount: number;

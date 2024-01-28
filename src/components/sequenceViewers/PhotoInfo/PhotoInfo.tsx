@@ -1,17 +1,28 @@
+import { TaxonPhotoMeta } from "@utils/ts/types";
+
 interface PhotoInfoProps {
-  content: string;
+  photoMeta: TaxonPhotoMeta;
 }
 
-const PhotoInfo = ({ content }: PhotoInfoProps) => {
-  const parseHtml = (str: string) => {
-    return { __html: str };
-  };
+const PhotoInfo = ({ photoMeta: { description, cameraModel, lens, flash, stacker }}: PhotoInfoProps) => {
+  const getListItem = (key:string,val:string) => {
+    return (<>
+      <dt>{key}:</dt>
+      <dd>{val}</dd>
+    </>);
+  }
 
   return (
     <div
-      className="w-full bg-primary-light px-page-x pb-4 pt-16 text-primary-dark dark:bg-primary-dark dark:text-primary-light [&_dl]:grid [&_dl]:grid-cols-max-1fr [&_dl]:gap-x-4 [&_dl]:gap-y-2 [&_p]:text-base not-last:[&_p]:mb-4"
-      dangerouslySetInnerHTML={parseHtml(content)}
-    ></div>
+      className="w-full bg-primary-light px-page-x pb-4 pt-16 text-primary-dark dark:bg-primary-dark dark:text-primary-light ">
+      {description && <p className="text-base not-last:mb-4">{description}</p>}
+      <dl className="grid grid-cols-max-1fr gap-x-4 gap-y-2">
+        {cameraModel && getListItem('Camera', cameraModel)}
+        {lens && getListItem('Lens', lens)}
+        {flash && getListItem('Flash', flash)}
+        {stacker && getListItem('Stack', stacker)}
+      </dl>
+    </div>
   );
 };
 

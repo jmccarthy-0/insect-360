@@ -14,7 +14,7 @@ interface SequenceViewerProps {
 }
 
 const SequenceViewer = ({
-  species: { images, meta, sid },
+  species: { images, photoMeta, sid },
 }: SequenceViewerProps) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
@@ -47,7 +47,7 @@ const SequenceViewer = ({
       {displayPhotoInfo && (
         <PhotoInfoModal
           setOpen={setDisplayPhotoInfo}
-          content={meta.photoInfo}
+          photoMeta={photoMeta}
         />
       )}
 
