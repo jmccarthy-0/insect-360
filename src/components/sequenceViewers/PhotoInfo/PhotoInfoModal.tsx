@@ -8,7 +8,7 @@ interface PhotoInfoModalProps {
 }
 
 const PhotoInfoModal = ({ setOpen, photoMeta }: PhotoInfoModalProps) => {
-  console.log({photoMeta});
+  console.log({ photoMeta });
   return (
     <Modal
       id="photoInfoModal"

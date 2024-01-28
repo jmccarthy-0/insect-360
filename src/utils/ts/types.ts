@@ -5,11 +5,11 @@ export type TaxonDetails = {
 };
 
 export type TaxonPhotoMeta = {
-  description?: string,
-  cameraModel?: string,
-  lens?: string,
-  flash?: string,
-  stacker?: string
+  description?: string;
+  cameraModel?: string;
+  lens?: string;
+  flash?: string;
+  stacker?: string;
 };
 
 export interface Taxon {

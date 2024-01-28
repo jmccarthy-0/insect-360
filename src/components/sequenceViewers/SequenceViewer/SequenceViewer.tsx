@@ -45,10 +45,7 @@ const SequenceViewer = ({
 
       {/* Modal details about a given photo */}
       {displayPhotoInfo && (
-        <PhotoInfoModal
-          setOpen={setDisplayPhotoInfo}
-          photoMeta={photoMeta}
-        />
+        <PhotoInfoModal setOpen={setDisplayPhotoInfo} photoMeta={photoMeta} />
       )}
 
       {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
