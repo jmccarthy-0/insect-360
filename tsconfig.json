@@ -9,10 +9,12 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@hooks/*": ["hooks/*"],
       "@contexts/*": ["contexts/*"],
+      "@data/*": ["data/*"],
+      "@hooks/*": ["hooks/*"],
+      "@models/*": ["models/*"],
       "@pageComponents/*": ["components/pages/*"],
+      "@utils/*": ["utils/*"],
       "@/*": ["/*"],
     },
 
