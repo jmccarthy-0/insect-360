@@ -5,6 +5,7 @@ import SpeciesDetailsPage from "./pages/SpeciesDetailsPage";
 import Error404Page from "./pages/Error404Page";
 import { fetchData } from "../utils/ts/fetch-utils";
 
+
 const router = createBrowserRouter([
   {
     path: import.meta.env.BASE_URL,
@@ -18,10 +19,20 @@ const router = createBrowserRouter([
       {
         path: "species/:speciesId",
         element: <SpeciesDetailsPage />,
-        loader: async ({ params }) => {
-          return await fetchData(
-            `${import.meta.env.VITE_API}/species/${params.speciesId}`,
-          );
+        loader: async ({ params: {speciesId} }) => {
+            // Mock 
+            if (import.meta.env.VITE_MOCKAPI) {
+                const speciesData = await import(
+                    `../data/species.json`
+                );
+                
+                return speciesData.default[speciesId];
+            }
+
+            // API
+            return await fetchData(
+                `${import.meta.env.VITE_API}/species/${speciesId}`,
+            );
         },
       },
     ],
