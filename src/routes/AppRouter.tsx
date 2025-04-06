@@ -26,7 +26,7 @@ const router = createBrowserRouter([
                     `../data/species.json`
                 );
                 
-                return speciesData.default[speciesId];
+                return speciesData.default[speciesId as keyof typeof speciesData.default];
             }
 
             // API
