@@ -1,3 +1,9 @@
+/**
+ * useSpeciesList
+ * 
+ * Hook for fetching the main menu of species
+ */
+
 import { useEffect, useState } from "react"
 import { fetchData } from "@utils/ts/fetch-utils";
 

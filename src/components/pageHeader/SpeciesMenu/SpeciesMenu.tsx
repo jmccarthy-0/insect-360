@@ -1,25 +1,25 @@
-import { useState, useEffect, useContext, ReactElement } from "react";
+import { useContext } from "react";
+
+// Components
 import { Link } from "react-router-dom";
 import { SpeciesMenuContext } from "@contexts/SpeciesMenuContext";
-import { fetchData } from "@utils/ts/fetch-utils";
 import Modal from "@components/global/Modal/Modal";
 
-type SpeciesItem = {
-  sid: string;
-  genus: string;
-  species: string;
-};
+// Hooks
+import { useSpeciesList } from "@hooks/useSpeciesList";
+
+// Types
+import { SpeciesListItem } from "@models/species.models";
 
 const SpeciesMenu = () => {
-  const { displaySpeciesMenu, setDisplaySpeciesMenu } =
-    useContext(SpeciesMenuContext);
-  const [speciesList, setSpeciesList] = useState<ReactElement | null>(null);
+  const { displaySpeciesMenu, setDisplaySpeciesMenu } = useContext(SpeciesMenuContext);
+  const {speciesList} = useSpeciesList();
 
   // Back end data for building list of species
-  const generateListMarkup = (data: SpeciesItem[]) => {
+  const generateListMarkup = (data: SpeciesListItem[]) => {
     return (
       <ul className="grid gap-y-4">
-        {data.map(({ sid, genus, species }: SpeciesItem, index: number) => {
+        {data.map(({ sid, genus, species }: SpeciesListItem, index: number) => {
           const handleClick = () => {
             setDisplaySpeciesMenu(false);
           };
@@ -40,25 +40,6 @@ const SpeciesMenu = () => {
     );
   };
 
-  useEffect(() => {
-    const buildList = async () => {
-      if (!speciesList && displaySpeciesMenu) {
-        const data = await fetchData(`${import.meta.env.VITE_API}/species/`);
-
-        if (data) {
-          const markup = generateListMarkup(data);
-          setSpeciesList(markup);
-
-          return;
-        }
-
-        setSpeciesList(<p>Error: Could not retrieve the species list</p>);
-      }
-    };
-
-    buildList();
-  }, [displaySpeciesMenu]);
-
   if (displaySpeciesMenu && speciesList) {
     return (
       <Modal
@@ -68,7 +49,7 @@ const SpeciesMenu = () => {
       >
         <div className="grid h-dvh w-dvw place-content-center bg-primary-light text-primary-dark dark:bg-primary-dark dark:text-primary-light">
           <h2 className="mb-4 text-4xl">Species</h2>
-          {speciesList}
+          {generateListMarkup(speciesList)}
         </div>
       </Modal>
     );
