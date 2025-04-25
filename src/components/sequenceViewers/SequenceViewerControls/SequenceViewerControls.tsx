@@ -5,10 +5,10 @@ import TimelineScrubber from "@components/sequenceViewers/TimelineScrubber/Timel
 interface SequenceViewerControlsProps {
   activeImgIndex: number;
   setActiveImgIndex: (value: number | ((prevVar: number) => number)) => void;
-  setDisplayPhotoInfo: (
+  setDisplayPhotoInfo?: (
     value: boolean | ((prevVar: boolean) => boolean),
   ) => void;
-  setDisplayPhotoViewer: (
+  setDisplayPhotoViewer?: (
     value: boolean | ((prevVar: boolean) => boolean),
   ) => void;
   imgCount: number;
@@ -22,23 +22,31 @@ const SequenceViewerControls = ({
   imgCount,
 }: SequenceViewerControlsProps) => {
   const handleInfoClick = () => {
-    setDisplayPhotoInfo(true);
+    setDisplayPhotoInfo && setDisplayPhotoInfo(true);
   };
 
   const handleViewerClick = () => {
-    setDisplayPhotoViewer(true);
+    setDisplayPhotoViewer && setDisplayPhotoViewer(true);
   };
 
   return (
     <>
-      <InfoBtn
-        classes="absolute top-2.5 left-page-x"
-        handleClick={handleInfoClick}
-      />
-      <ExpandBtn
-        classes="absolute top-2.5 right-page-x"
-        handleClick={handleViewerClick}
-      />
+      {
+        setDisplayPhotoInfo ?
+        <InfoBtn
+          classes="absolute top-2.5 left-page-x"
+          handleClick={handleInfoClick}
+        />
+        : null
+      }
+      {
+        setDisplayPhotoViewer ? 
+        <ExpandBtn
+          classes="absolute top-2.5 right-page-x"
+          handleClick={handleViewerClick}
+        />
+        : null
+      }
       <TimelineScrubber
         min={0}
         max={imgCount - 1}

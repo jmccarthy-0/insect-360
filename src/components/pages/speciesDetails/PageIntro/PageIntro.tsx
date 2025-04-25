@@ -1,11 +1,12 @@
-import { TaxonDetails } from "@utils/ts/types";
-
 interface PageIntroProps {
-  content: TaxonDetails;
+  binomialName: string
+  commonName?: string
+  classifiedBy?: string
+  classifiedYear?: string
 }
 
 const PageIntro = ({
-  content: { binomialName, commonName, classifiedBy },
+  binomialName, commonName, classifiedBy, classifiedYear
 }: PageIntroProps) => {
   return (
     <div className="px-page-x">
@@ -22,7 +23,7 @@ const PageIntro = ({
         </h1>
         {classifiedBy && (
           <p className="text-primary-dark dark:text-primary-light">
-            ({classifiedBy})
+            ({classifiedBy}{classifiedYear ? `, ${classifiedYear}` : ''})
           </p>
         )}
       </div>

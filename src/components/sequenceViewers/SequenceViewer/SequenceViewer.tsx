@@ -1,52 +1,57 @@
 import { useEffect, useState } from "react";
-import { Taxon } from "@utils/ts/types";
 
-import useMultiImageLoader from "@hooks/multiImageLoader";
-import useHiResImgUrl from "@hooks/hiResImgSequenceUrl";
+// Components
 import ImageCanvas from "@components/global/ImageCanvas/ImageCanvas";
 import Loader from "@components/global/Loader/Loader";
 import PhotoInfoModal from "../PhotoInfo/PhotoInfoModal";
 import PhotoViewerModal from "../PhotoViewer/PhotoViewerModal";
 import SequenceViewerControls from "../SequenceViewerControls/SequenceViewerControls";
 
+// Hooks
+import useMultiImageLoader from "@hooks/multiImageLoader";
+import useHiResImgUrl from "@hooks/hiResImgSequenceUrl";
+
 interface SequenceViewerProps {
-  species: Taxon;
+  speciesId: string
+  frameCount: number
 }
 
 const SequenceViewer = ({
-  species: { images, photoMeta, sid },
+  speciesId,
+  frameCount
 }: SequenceViewerProps) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
   const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
   const [displayLoader, setDisplayLoader] = useState(true);
 
-  const hiResImgUrl = useHiResImgUrl(sid, activeImgIndex);
-  const imgs = useMultiImageLoader(images.sequenceFramecount, sid);
+  const hiResImgUrl = useHiResImgUrl(speciesId, activeImgIndex);
+  const imgs = useMultiImageLoader(frameCount, speciesId);
 
   useEffect(() => {
-    if (imgs.length === images.sequenceFramecount) {
+    if (imgs.length === frameCount) {
       setDisplayLoader(false);
     }
   }, [imgs]);
+  
 
   return (
     <div className="relative mx-auto flex aspect-4/3 w-full max-w-4xl flex-col items-center justify-center">
       {displayLoader && <Loader />}
 
       <SequenceViewerControls
-        setDisplayPhotoInfo={setDisplayPhotoInfo}
+        //setDisplayPhotoInfo={setDisplayPhotoInfo}
         setDisplayPhotoViewer={setDisplayPhotoViewer}
         activeImgIndex={activeImgIndex}
         setActiveImgIndex={setActiveImgIndex}
-        imgCount={images.sequenceFramecount}
+        imgCount={frameCount}
       />
       <ImageCanvas img={imgs[activeImgIndex]} />
 
       {/* Modal details about a given photo */}
-      {displayPhotoInfo && (
+      {/* {displayPhotoInfo && (
         <PhotoInfoModal setOpen={setDisplayPhotoInfo} photoMeta={photoMeta} />
-      )}
+      )} */}
 
       {/* Modal Canvas for viewing Hi-res images. Refactor to separate component */}
       {displayPhotoViewer && (
