@@ -1,22 +1,17 @@
 {
 	"dolichovespula-maculata": {
+        "taxonId": "1311815",
 		"sid": "dolichovespula-maculata",
+        "imageCount": 36,
 		"photoMeta": {
 			"description": "Photo set © Joe McCarthy",
 			"lens": "M. Zuiko 60mm Macro",
 			"flash": "Godox TT350o",
 			"stacker": "Zerene Stacker"
-		},
-		"details": {
-			"binomialName": "Dolichovespula maculata",
-			"commonName": "Bald-faced Hornet",
-			"classifiedBy": "Linnaeus, 1753"
-		},
-		"images": {
-			"sequenceFramecount": 36
 		}
 	},
     "lycorma-delicatula": {
+        "taxonId": "5157899",
         "sid": "lycorma-delicatula",
         "photoMeta": {
             "description": "Photo set © Joe McCarthy",
@@ -24,17 +19,11 @@
             "flash": "Godox TT350o",
             "stacker": "Zerene Stacker"
         },
-        "details": {
-            "binomialName": "Lycorma delicatula",
-            "commonName": "Spotted Lanternfly",
-            "classifiedBy": "White, 1845"
-        },
-        "images": {
-            "sequenceFramecount": 19
-        }
+        "imageCount": 19
         
     },
     "oncopeltus-fasciatus": {
+        "taxonId": "2007764",
         "sid": "oncopeltus-fasciatus",
         "photoMeta": {
             "description": "Photo set © Joe McCarthy",
@@ -42,13 +31,6 @@
             "flash": "Godox TT350o",
             "stacker": "Zerene Stacker"
         },
-        "details": {
-            "binomialName": "Oncopeltus fasciatus",
-            "commonName": "Large Milkweed Bug",
-            "classifiedBy": "Dallas, 1852"
-        },
-        "images": {
-            "sequenceFramecount": 36
-        }
+        "imageCount": 36
     }
 }
