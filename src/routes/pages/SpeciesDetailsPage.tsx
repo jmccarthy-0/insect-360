@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 // Components
 import { Helmet } from "react-helmet";
 import Loader from "@components/global/Loader/Loader";
+import Citation from "@components/pages/speciesDetails/Citation/Citation";
 const PageIntro = lazy(() => import("@components/pages/speciesDetails/PageIntro/PageIntro"));
 const SequenceViewer = lazy(
     () => import("@components/sequenceViewers/SequenceViewer/SequenceViewer"),
@@ -59,6 +60,7 @@ const SpeciesDetailsPage = () => {
                 <PageIntro binomialName={canonicalNameWithMarker} classifiedBy={bracketAuthorship} classifiedYear={bracketYear} />
                 <SequenceViewer speciesId={speciesId} frameCount={imageCount}  key={speciesId} />
             </Suspense>
+            <Citation />
         </main>
     </>
   );
