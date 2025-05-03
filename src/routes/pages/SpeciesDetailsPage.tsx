@@ -12,8 +12,7 @@ const SequenceViewer = lazy(
 
 // Types
 import { SpeciesNameResponse } from "@models/gbif/Species.model";
-
-
+import { LoaderFunctionArgs } from "react-router-dom";
 interface SpeciesDetailData {
     speciesId: string,
     speciesDetails: SpeciesNameResponse,
@@ -26,6 +25,42 @@ interface SpeciesDetailData {
     },
 }
 
+// Utils
+import { fetchData } from "@utils/ts/fetch-utils";
+
+
+
+// Loader
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+    const { speciesId } = params;
+    let speciesData;
+
+    // Mock
+    if (import.meta.env.VITE_MOCKAPI) {
+        speciesData = await import(`../../data/species.json`);
+    } else {
+        speciesData = await fetchData(
+            `${import.meta.env.VITE_API}/species/${speciesId}`,
+        );
+    }
+
+    const speciesMeta =
+        speciesData.default[speciesId as keyof typeof speciesData.default];
+
+    const gbifData: SpeciesNameResponse = await fetchData(
+        `${import.meta.env.VITE_GBIF_API}species/${speciesMeta.taxonId}/name`,
+    );
+
+    return {
+        speciesId: speciesMeta.sid,
+        speciesDetails: gbifData,
+        imageCount: speciesMeta.imageCount,
+        photoMeta: speciesMeta.photoMeta,
+    };
+}
+
+
+// Page Markup
 const SpeciesDetailsPage = () => {
     const {
         speciesId, 
