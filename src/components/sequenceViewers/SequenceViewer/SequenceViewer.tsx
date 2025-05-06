@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 // Components
 import ImageCanvas from "@components/global/ImageCanvas/ImageCanvas";
 import Loader from "@components/global/Loader/Loader";
-import PhotoInfoModal from "../PhotoInfo/PhotoInfoModal";
 import PhotoViewerModal from "../PhotoViewer/PhotoViewerModal";
 import SequenceViewerControls from "../SequenceViewerControls/SequenceViewerControls";
 
@@ -21,7 +20,6 @@ const SequenceViewer = ({
   frameCount
 }: SequenceViewerProps) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
-  const [displayPhotoInfo, setDisplayPhotoInfo] = useState(false);
   const [displayPhotoViewer, setDisplayPhotoViewer] = useState(false);
   const [displayLoader, setDisplayLoader] = useState(true);
 
