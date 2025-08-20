@@ -1,44 +1,32 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { initCanvas } from "@utils/ts/canvas-utils";
+import { ImageCanvas } from "@utils/ts/ImageCanvas";
 
 interface StaticCanvasProps {
   img: HTMLImageElement | ImageBitmap | null;
 }
 
 const StaticCanvas = ({ img }: StaticCanvasProps) => {
-  let handleResize: () => void;
+  const canvasElemRef = useRef<null | HTMLCanvasElement>(null);
+  const canvasRef = useRef<null | ImageCanvas>(null)
 
-  const canvasRef = useCallback(
-    (canvas: HTMLCanvasElement) => {
-      if (canvas && img) {
-        initCanvas(canvas, img, 0);
+  useEffect(() => {
+    if (canvasElemRef.current && !canvasRef.current) {
+      canvasRef.current = new ImageCanvas(canvasElemRef.current);
+    }
 
-        const prevDims = {
-          width: canvas.clientWidth,
-          height: canvas.clientHeight,
-        };
+    if (canvasRef.current && img) {
+      canvasRef.current.img = img;
+    }
 
-        handleResize = () => {
-          if (
-            canvas.clientWidth !== prevDims.width ||
-            canvas.clientHeight !== prevDims.height
-          ) {
-            initCanvas(canvas, img, 0);
-
-            prevDims.width = canvas.clientWidth;
-            prevDims.height = canvas.clientHeight;
-          }
-        };
-
-        window.addEventListener("resize", handleResize);
-      } else {
-        window.removeEventListener("resize", handleResize);
+    return () => {
+      if (canvasRef.current) {
+        canvasRef.current.destroy();
       }
-    },
-    [img],
-  );
+    }
+  }, [img])
 
-  return <canvas className="h-full w-full bg-black" ref={canvasRef}></canvas>;
+  return <canvas className="h-full w-full bg-black" ref={canvasElemRef}></canvas>;
 };
 
 export default StaticCanvas;
