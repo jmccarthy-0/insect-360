@@ -1,14 +1,10 @@
-import { Suspense, lazy } from "react";
 import { useLoaderData } from "react-router-dom";
 
 // Components
 import { Helmet } from "react-helmet";
-import Loader from "@components/global/Loader/Loader";
 import Citation from "@components/pages/speciesDetails/Citation/Citation";
-const PageIntro = lazy(() => import("@components/pages/speciesDetails/PageIntro/PageIntro"));
-const SequenceViewer = lazy(
-    () => import("@components/sequenceViewers/SequenceViewer/SequenceViewer"),
-);
+import PageIntro from "@components/pages/speciesDetails/PageIntro/PageIntro";
+import SequenceViewer from "@components/sequenceViewers/SequenceViewer/SequenceViewer";
 
 // Types
 import { SpeciesNameResponse } from "@models/gbif/Species.model";
@@ -90,11 +86,9 @@ const SpeciesDetailsPage = () => {
             <meta property="og:image:width" content="2400" />
             <meta property="og:image:height" content="1800" />
         </Helmet>
-        <main className="grid grid-cols-1 grid-rows-max-1fr gap-y-12 py-14">
-            <Suspense fallback={<Loader />}>
-                <PageIntro binomialName={canonicalNameWithMarker} classifiedBy={bracketAuthorship} classifiedYear={bracketYear} />
-                <SequenceViewer speciesId={speciesId} frameCount={imageCount}  key={speciesId} />
-            </Suspense>
+        <main className="grid grid-cols-1 grid-rows-max-1fr gap-y-12 py-14"> 
+            <PageIntro binomialName={canonicalNameWithMarker} classifiedBy={bracketAuthorship} classifiedYear={bracketYear} />
+            <SequenceViewer speciesId={speciesId} frameCount={imageCount}  key={speciesId} />
             <Citation />
         </main>
     </>

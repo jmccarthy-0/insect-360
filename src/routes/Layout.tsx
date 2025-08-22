@@ -22,7 +22,7 @@ const Layout = () => {
           <SpeciesMenu />
           <Outlet />
         </div>
-        <footer className="fixed inset-x-0 bottom-0 pb-3 text-center text-primary-dark dark:text-primary-light">
+        <footer className="fixed inset-x-0 bottom-0 py-2 text-center text-primary-dark dark:text-primary-light bg-primary-light dark:bg-primary-dark">
           <small className="flex justify-center gap-[1ch]">
             <span>&copy; 2024</span>
             <a href="https://joemccarthy.dev/" target="_blank" className="link">
