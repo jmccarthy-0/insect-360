@@ -1,18 +1,27 @@
+import { MutableRefObject } from "react";
 import Btn from "@components/global/Btn/Btn";
 import Icon from "@components/global/Icon/Icon";
 
+import { InteractiveImageCanvas } from "@utils/ts/ImageCanvas";
+
+
 interface ZoomBtnsInterface {
-  zoomLevel: number;
-  setZoomLevel: (value: number | ((prevVar: number) => number)) => void;
+  canvasRef: MutableRefObject<InteractiveImageCanvas | null>;
 }
 
-const ZoomBtns = ({ zoomLevel, setZoomLevel }: ZoomBtnsInterface) => {
-  const increment = (val: number) => val + 0.5;
-  const decrement = (val: number) => val - 0.5;
+const ZoomBtns = ({ canvasRef }: ZoomBtnsInterface) => {
   const handleZoomClick = (isPositive: boolean) => {
-    setZoomLevel((prevZoom) =>
-      isPositive ? increment(prevZoom) : decrement(prevZoom),
-    );
+    if (canvasRef.current) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce').matches) {
+        isPositive ? 
+          canvasRef.current.staticZoomIn() : 
+          canvasRef.current.staticZoomOut();
+      } else {
+        isPositive ? 
+          canvasRef.current.animateZoomIn() : 
+          canvasRef.current.animateZoomOut();
+      }
+    }
   };
 
   return (
@@ -23,7 +32,7 @@ const ZoomBtns = ({ zoomLevel, setZoomLevel }: ZoomBtnsInterface) => {
         handleClick={() => {
           handleZoomClick(false);
         }}
-        disabled={zoomLevel === 0}
+        disabled={false}
         ariaLabel="Zoom Out"
       >
         <Icon icon={"zoom out"} />
@@ -34,7 +43,7 @@ const ZoomBtns = ({ zoomLevel, setZoomLevel }: ZoomBtnsInterface) => {
         handleClick={() => {
           handleZoomClick(true);
         }}
-        disabled={zoomLevel === 0.5}
+        disabled={false}
         ariaLabel="Zoom In"
       >
         <Icon icon={"zoom in"} />

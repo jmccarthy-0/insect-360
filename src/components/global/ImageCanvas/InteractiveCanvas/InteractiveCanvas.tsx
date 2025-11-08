@@ -1,13 +1,13 @@
+import ZoomBtns from "@components/sequenceViewers/ZoomBtns/ZoomBtns";
 import { useInteractiveCanvas } from "@hooks/useCanvas";
 import { InteractiveImageCanvas } from "@utils/ts/ImageCanvas";
 import { useEffect, useRef } from "react";
 
 interface InteractiveCanvasProps {
   img: HTMLImageElement | ImageBitmap | null;
-  zoomLevel: number;
 }
 
-const InteractiveCanvas = ({ img, zoomLevel }: InteractiveCanvasProps) => {
+const InteractiveCanvas = ({ img }: InteractiveCanvasProps) => {
   // const { canvasRef, handlePointerDown, handlePointerMove, handlePointerUp } =
   //   useInteractiveCanvas(img, zoomLevel);
   const canvasElemRef = useRef<null | HTMLCanvasElement>(null);
@@ -31,10 +31,13 @@ const InteractiveCanvas = ({ img, zoomLevel }: InteractiveCanvasProps) => {
   }, [img])
 
   return (
-    <canvas
-      className={`h-full w-full bg-black ${zoomLevel > 0 ? "cursor-move" : ""}`}
-      ref={canvasElemRef}
-    ></canvas>
+    <div className="h-dvh w-dvw overscroll-none">
+      <ZoomBtns canvasRef={canvasRef} />
+      <canvas
+        className={`h-full w-full bg-accent-light`}
+        ref={canvasElemRef}
+      ></canvas>
+    </div>
   );
 };
 

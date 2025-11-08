@@ -1,3 +1,7 @@
+// Animation constants
+const ACCELERATION = 1.1;
+const MAXVELOCITY = 0.03
+
 
 export class ImageCanvas {
     // Types
@@ -28,7 +32,7 @@ export class ImageCanvas {
             dh: 0,
             dx: 0,
             dy: 0,
-            zoom: this.calculateDefaultZoom(),
+            zoom: -1,
             prevZoom: -1
         }
 
@@ -46,8 +50,7 @@ export class ImageCanvas {
         this._img = img;
 
         // Constrain to canvas
-        this._zoomBaseline = this._state.zoom = this.calculateDefaultZoom();
-        this.updateDrawDimensions();
+        this._zoomBaseline = this._state.zoom = this._state.prevZoom = this.calculateDefaultZoom();
 
         // Display
         this.refresh();
@@ -66,8 +69,37 @@ export class ImageCanvas {
     };
 
     updateDrawDimensions() {
-        this._state.dw *= this._state.zoom;
-        this._state.dh *= this._state.zoom;
+        if (this._img) {
+            this._state.dw = this._img.width * this._state.zoom
+            this._state.dh = this._img.height * this._state.zoom
+        }
+    }
+
+    updateDrawPosition(mid?: {x: number, y:number}) {
+        if (mid) {
+            /*
+                dx2 = px - ((px-dx1) * (scale2/scale1))
+
+                dx2 = new offset
+                dx1 = initial (current offset)
+                scale2 = new (current) zoom
+                scale1 = initial (previous) zoom
+                px = canvas point to stay centered in (px,py)
+
+            */
+            const zoomFactor = this._state.zoom / this._state.prevZoom
+
+            let px, py;
+
+            px = mid.x;
+            py = mid.y;
+
+            this._state.dx = px - (px - this._state.dx) * zoomFactor
+            this._state.dy = py - (py - this._state.dy) * zoomFactor
+        } else {
+            this._state.dx = (this._canvas.width - this._state.dw) / 2;
+            this._state.dy = (this._canvas.height - this._state.dh) / 2;
+        }
     }
 
 
@@ -83,6 +115,19 @@ export class ImageCanvas {
     }
 
     refresh() {
+        this.updateDrawDimensions();
+        this.updateDrawPosition();
+
+        console.log('Drawing at:', {
+            dw: this._state.dw,
+            dh: this._state.dh,
+            dx: this._state.dx,
+            dy: this._state.dy,
+            zoom: this._state.zoom,
+            cw: this._canvas.width,
+            ch: this._canvas.height
+        })
+
         this.draw();
     }
 
@@ -114,20 +159,76 @@ export class InteractiveImageCanvas extends ImageCanvas {
         super(canvas);
     }
 
-    updateDrawPosition(mid?: {x: number, y:number}) {
-        let px, py;
+    staticZoomIn() {
+        this._state.zoom = 1;
+            
 
-        if (mid) {
-            px = mid.x;
-            py = mid.y;
-        } else {
-            px = this._canvas.width / 2;
-            py = this._canvas.height / 2;
+        // Update canvas
+        this.refresh();
+
+    }
+
+    staticZoomOut() {
+        this._state.zoom = this._zoomBaseline;
+        
+        // Update canvas
+        this.refresh();
+    }
+
+    animateZoomIn() {
+        this.animateZoom(this._state.zoom, 1, 0.005);
+    }
+
+    animateZoomOut() {
+        this.animateZoom(this._state.zoom, this._zoomBaseline, 0.005);
+    }
+
+    animateZoom(from: number, to: number, velocity: number) {        
+        if (from < to) {
+             this.zoomIn(velocity, to);
+        } else if (from > to) {
+            this.zoomOut(velocity, to);
         }
 
-        const zoomFactor = this._state.zoom / this._state.prevZoom
+        this.refresh();
 
-        this._state.dx = px - (px - this._state.dx) * zoomFactor
-        this._state.dy = py - (py - this._state.dy) * zoomFactor
+        if (this._state.zoom !== to) {
+            let newVelocity = velocity;
+
+            if (newVelocity < MAXVELOCITY) {
+                newVelocity *= ACCELERATION;
+            }
+
+            if (newVelocity > MAXVELOCITY) {
+                newVelocity = MAXVELOCITY;
+            }
+        
+            window.requestAnimationFrame(() => {
+                this.animateZoom(from, to, newVelocity)
+            })
+        }
+    }
+
+    zoomIn(delta: number, target: number) {
+        if (this._state.zoom < target) {
+            this._state.prevZoom = this._state.zoom;
+            this._state.zoom += delta;
+            
+            if (this._state.zoom > target) {
+                this._state.zoom = target
+            }
+        }
+        // Update canvas
+    }
+
+    zoomOut(delta: number, target: number) {
+        if (this._state.zoom > target) {
+            this._state.prevZoom = this._state.zoom;
+            this._state.zoom -= delta;
+            
+            if (this._state.zoom < target) {
+                this._state.zoom = target
+            }
+        }
     }
 }
