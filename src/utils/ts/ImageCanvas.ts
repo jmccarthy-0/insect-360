@@ -1,3 +1,6 @@
+import { gsap } from "gsap";
+import { Vector2 } from "@use-gesture/react";
+
 // Animation constants
 const ACCELERATION = 1.1;
 const MAXVELOCITY = 0.03
@@ -5,6 +8,7 @@ const MAXVELOCITY = 0.03
 
 export class ImageCanvas {
     // Types
+    //Private
     _canvas: HTMLCanvasElement
     _ctx:  CanvasRenderingContext2D | null
     _img: HTMLImageElement | ImageBitmap | null
@@ -18,12 +22,19 @@ export class ImageCanvas {
     }
     _resizeObserver: ResizeObserver;
     _zoomBaseline: number
+    _device: number
+
+    // Public
+    isAnimating: boolean
 
     constructor(canvas: HTMLCanvasElement) {
         this._canvas = canvas;
         this._ctx = canvas.getContext("2d");
         this._img = null;
         this._zoomBaseline = -1;
+        this._device = Math.min(2, window.devicePixelRatio)
+
+        this.isAnimating = false
         
         this.resize(this._canvas.clientWidth, this._canvas.clientHeight);
         
@@ -78,6 +89,10 @@ export class ImageCanvas {
     updateDrawPosition(mid?: {x: number, y:number}) {
         if (mid) {
             /*
+                User pinch:
+                Image needs to scale and transform from the relative pinch 
+                center
+
                 dx2 = px - ((px-dx1) * (scale2/scale1))
 
                 dx2 = new offset
@@ -97,6 +112,7 @@ export class ImageCanvas {
             this._state.dx = px - (px - this._state.dx) * zoomFactor
             this._state.dy = py - (py - this._state.dy) * zoomFactor
         } else {
+            // Image scales and transforms from middle of canvas
             this._state.dx = (this._canvas.width - this._state.dw) / 2;
             this._state.dy = (this._canvas.height - this._state.dh) / 2;
         }
@@ -108,30 +124,13 @@ export class ImageCanvas {
      * greater than 1.
      */
     resize(w: number, h: number) {
-        const device = Math.min(2, window.devicePixelRatio);
-
-        this._canvas.width = w * device;
-        this._canvas.height = h * device;
+        this._canvas.width = w * this._device;
+        this._canvas.height = h * this._device;
     }
 
-    refresh() {
-        this.updateDrawDimensions();
-        this.updateDrawPosition();
-
-        console.log('Drawing at:', {
-            dw: this._state.dw,
-            dh: this._state.dh,
-            dx: this._state.dx,
-            dy: this._state.dy,
-            zoom: this._state.zoom,
-            cw: this._canvas.width,
-            ch: this._canvas.height
-        })
-
-        this.draw();
-    }
-
-
+    /**
+     * Draw the current image on the canvas
+     */
     draw() {
         try {
             if (this._img) {
@@ -149,6 +148,22 @@ export class ImageCanvas {
         }
     }
 
+    /**
+     * Bundled action for updating image position/scale and drawing the image
+     * 
+     * @param origin: The midpoint of a user pinch gesture, used for ensuring
+     * image scales from the relative pinch center rather than the canvas center
+     */
+    refresh(origin?: Vector2) {
+        this.updateDrawDimensions();
+        this.updateDrawPosition(
+            origin ? 
+            {x: origin[0], y: origin[1]} : 
+            undefined
+        );
+        this.draw();
+    }
+
     destroy() {
         this._resizeObserver.disconnect();
     }
@@ -159,15 +174,21 @@ export class InteractiveImageCanvas extends ImageCanvas {
         super(canvas);
     }
 
+
+    /**
+     * Jump canvas to max zoom, no animation
+     */
     staticZoomIn() {
         this._state.zoom = 1;
             
-
         // Update canvas
         this.refresh();
 
     }
 
+    /**
+     * Jump canvas to min zoom, no animation
+     */
     staticZoomOut() {
         this._state.zoom = this._zoomBaseline;
         
@@ -175,14 +196,23 @@ export class InteractiveImageCanvas extends ImageCanvas {
         this.refresh();
     }
 
+    /**
+     * Animated zoom to max zoom
+     */
     animateZoomIn() {
         this.animateZoom(this._state.zoom, 1, 0.005);
     }
 
+    /**
+     * Animated zoom to min zoom
+     */
     animateZoomOut() {
         this.animateZoom(this._state.zoom, this._zoomBaseline, 0.005);
     }
 
+    /**
+     * Animation loop for zooming
+     */
     animateZoom(from: number, to: number, velocity: number) {        
         if (from < to) {
              this.zoomIn(velocity, to);
@@ -209,7 +239,65 @@ export class InteractiveImageCanvas extends ImageCanvas {
         }
     }
 
-    zoomIn(delta: number, target: number) {
+    /**
+     * Repositions image within the canvas if a user gesture places the image
+     * out of viewing bounds (typically caused by a pinch zoom)
+     */
+    animateRecenter() {
+        let needsAnimate = false;
+
+        let targetX = this._state.dx;
+        let targetY = this._state.dy;
+        const centerX  = (this._canvas.width - this._state.dw) / 2;
+        const centerY = (this._canvas.height - this._state.dh) / 2;
+
+        // Horizontal
+        if (this._state.dw >= this._canvas.width) {
+            if (this._state.dx > 0) {
+                targetX = 0;
+                needsAnimate = true;
+            } else if (this._state.dx < this._canvas.width - this._state.dw) {
+                targetX = this._canvas.width - this._state.dw;
+                needsAnimate = true;
+            }
+        } else {
+            targetX = centerX;
+            needsAnimate = true;
+        }
+
+        // Vertical
+        if (this._state.dh >= this._canvas.height) {
+            if (this._state.dy > 0) {
+                targetY = 0;
+                needsAnimate = true;
+            } else if (this._state.dy < this._canvas.height - this._state.dh) {
+                targetY = this._canvas.height - this._state.dh;
+                needsAnimate = true;
+            }
+        } else {
+            targetY = centerY;
+            needsAnimate = true;
+        }
+
+        if (needsAnimate) {
+            this.isAnimating = true;
+
+            gsap.killTweensOf(this._state);
+            gsap.to(this._state, {
+                duration: 1,
+                dx: targetX,
+                dy: targetY,
+                ease: "power2.out",
+                onUpdate: () => this.draw(),
+                onComplete: () => { this.isAnimating = false; }
+            });
+        }
+    }
+
+    /**
+     * Increase the current zoom level by the given delta
+     */
+    zoomIn(delta: number, target=1) {
         if (this._state.zoom < target) {
             this._state.prevZoom = this._state.zoom;
             this._state.zoom += delta;
@@ -218,10 +306,12 @@ export class InteractiveImageCanvas extends ImageCanvas {
                 this._state.zoom = target
             }
         }
-        // Update canvas
     }
 
-    zoomOut(delta: number, target: number) {
+    /**
+     * Decrease the current zoom level by the given delta
+     */
+    zoomOut(delta: number, target=this._zoomBaseline) {
         if (this._state.zoom > target) {
             this._state.prevZoom = this._state.zoom;
             this._state.zoom -= delta;
@@ -230,5 +320,53 @@ export class InteractiveImageCanvas extends ImageCanvas {
                 this._state.zoom = target
             }
         }
+    }
+
+    /**
+     * Action for panning an image within the canvas on user drag
+     */
+    handleDrag([offsetX, offsetY]: Vector2) {
+        if (this._state.dw > this._canvas.width) {
+            this._state.dx += offsetX * this._device;
+            
+            if (this._state.dx < this._canvas.width - this._state.dw) {
+                this._state.dx = this._canvas.width - this._state.dw;
+            } else if (this._state.dx > 0) {
+                this._state.dx = 0;
+            }
+        }
+
+        if (this._state.dh > this._canvas.height) {
+            this._state.dy += offsetY * this._device;
+            
+            if (this._state.dy < this._canvas.height - this._state.dh) {
+                this._state.dy = this._canvas.height - this._state.dh;
+            } else if (this._state.dy > 0) {
+                this._state.dy = 0;
+            }
+        }
+
+        
+        window.requestAnimationFrame(() => {
+            this.draw();
+        })
+    }
+
+    /**
+     * Action for zooming the image in/out on user pinch
+     */
+    handlePinch(pinchDelta: number, origin: Vector2) {
+        const cappedDelta = Math.min(Math.abs(pinchDelta), .02);
+
+        window.requestAnimationFrame(() => {
+            if (pinchDelta < 0 && this._state.zoom > this._zoomBaseline) {
+                this.zoomOut(cappedDelta)
+                this.refresh(origin);
+            } else if (pinchDelta > 0 && this._state.zoom < 1) {
+                this.zoomIn(cappedDelta)
+                this.refresh(origin);
+            }
+
+        })
     }
 }

@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useSingleImageLoader } from "@hooks/singleImageLoader";
 
 import Loader from "@components/global/Loader/Loader";
-import ZoomBtns from "@components/sequenceViewers/ZoomBtns/ZoomBtns";
-import ImageCanvas from "@components/global/ImageCanvas/ImageCanvas";
 import InteractiveCanvas from "@components/global/ImageCanvas/InteractiveCanvas/InteractiveCanvas";
 
 interface PhotoViewerProps {
@@ -12,7 +10,6 @@ interface PhotoViewerProps {
 
 const PhotoViewer = ({ imgPath }: PhotoViewerProps) => {
   const img = useSingleImageLoader(imgPath);
-  const [zoomLevel, setZoomLevel] = useState(0);
   const [displayLoader, setDisplayLoader] = useState(true);
 
   useEffect(() => {

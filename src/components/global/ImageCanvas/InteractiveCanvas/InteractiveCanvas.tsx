@@ -1,17 +1,44 @@
 import ZoomBtns from "@components/sequenceViewers/ZoomBtns/ZoomBtns";
-import { useInteractiveCanvas } from "@hooks/useCanvas";
-import { InteractiveImageCanvas } from "@utils/ts/ImageCanvas";
+
 import { useEffect, useRef } from "react";
+import { useGesture } from "@use-gesture/react";
+
+import { InteractiveImageCanvas } from "@utils/ts/ImageCanvas";
+
 
 interface InteractiveCanvasProps {
   img: HTMLImageElement | ImageBitmap | null;
 }
 
 const InteractiveCanvas = ({ img }: InteractiveCanvasProps) => {
-  // const { canvasRef, handlePointerDown, handlePointerMove, handlePointerUp } =
-  //   useInteractiveCanvas(img, zoomLevel);
   const canvasElemRef = useRef<null | HTMLCanvasElement>(null);
   const canvasRef = useRef<null | InteractiveImageCanvas>(null)
+
+  const bindGesture = useGesture({
+    onDrag: ({delta, pinching, touches}) => {
+      // Pinch takes precedent over drag
+      if (pinching || touches > 1) {
+        return
+      }
+
+      if (canvasRef.current && !canvasRef.current.isAnimating) {
+        canvasRef.current.handleDrag(delta);
+      }
+    },
+    
+    onPinch: ({event, origin, delta}) => {
+      event.preventDefault();
+      
+      if (canvasRef.current && !canvasRef.current.isAnimating) {
+        canvasRef.current.handlePinch(delta[0], origin)
+      }
+    },
+    onPinchEnd: () => {
+      if (canvasRef.current && !canvasRef.current.isAnimating) {
+        canvasRef.current.animateRecenter();
+      }
+    }
+  })
 
 
   useEffect(() => {
@@ -34,8 +61,9 @@ const InteractiveCanvas = ({ img }: InteractiveCanvasProps) => {
     <div className="h-dvh w-dvw overscroll-none">
       <ZoomBtns canvasRef={canvasRef} />
       <canvas
-        className={`h-full w-full bg-accent-light`}
+        className={`h-full w-full bg-primary-dark touch-none`}
         ref={canvasElemRef}
+        {...bindGesture()}
       ></canvas>
     </div>
   );
