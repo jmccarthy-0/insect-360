@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 
 // Components
-import ImageCanvas from "@components/global/ImageCanvas/ImageCanvas";
 import Loader from "@components/global/Loader/Loader";
 import PhotoViewerModal from "../PhotoViewer/PhotoViewerModal";
 import SequenceViewerControls from "../SequenceViewerControls/SequenceViewerControls";
+import StaticCanvas from "@components/global/ImageCanvas/StaticCanvas/StaticCanvas";
 
 // Hooks
 import useMultiImageLoader from "@hooks/multiImageLoader";
 import useHiResImgUrl from "@hooks/hiResImgSequenceUrl";
-import StaticCanvas from "@components/global/ImageCanvas/StaticCanvas/StaticCanvas";
 
 interface SequenceViewerProps {
   speciesId: string
