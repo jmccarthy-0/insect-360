@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from "react";
-import { initCanvas } from "@utils/ts/canvas-utils";
+import { useEffect, useRef } from "react";
+
 import { ImageCanvas } from "@utils/ts/ImageCanvas";
 
 interface StaticCanvasProps {
