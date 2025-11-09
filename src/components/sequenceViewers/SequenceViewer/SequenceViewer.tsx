@@ -9,6 +9,7 @@ import SequenceViewerControls from "../SequenceViewerControls/SequenceViewerCont
 // Hooks
 import useMultiImageLoader from "@hooks/multiImageLoader";
 import useHiResImgUrl from "@hooks/hiResImgSequenceUrl";
+import StaticCanvas from "@components/global/ImageCanvas/StaticCanvas/StaticCanvas";
 
 interface SequenceViewerProps {
   speciesId: string
@@ -44,7 +45,7 @@ const SequenceViewer = ({
         setActiveImgIndex={setActiveImgIndex}
         imgCount={frameCount}
       />
-      <ImageCanvas img={imgs[activeImgIndex]} />
+      <StaticCanvas img={imgs[activeImgIndex]} />
 
       {/* Modal details about a given photo */}
       {/* {displayPhotoInfo && (
