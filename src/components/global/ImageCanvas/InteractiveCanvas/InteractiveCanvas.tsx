@@ -12,7 +12,7 @@ interface InteractiveCanvasProps {
 const InteractiveCanvas = ({ img }: InteractiveCanvasProps) => {
     const canvasElemRef = useRef<null | HTMLCanvasElement>(null);
     const canvasRef = useRef<null | InteractiveImageCanvas>(null);
-    const test = 4;
+    console.log(notDefinedVar);
 
     const bindGesture = useGesture({
         onDrag: ({ delta, pinching, touches }) => {
