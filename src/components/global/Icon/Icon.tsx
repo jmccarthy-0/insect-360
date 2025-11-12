@@ -1,10 +1,10 @@
-import { ReactComponent as CloseIcon } from "@assets/icons/close_FILL0_wght400_GRAD0_opsz48.svg";
-import { ReactComponent as ExpandIcon } from "@assets/icons/expand_content_FILL0_wght400_GRAD0_opsz48.svg";
-import { ReactComponent as InfoIcon } from "@assets/icons/info_i_FILL0_wght400_GRAD0_opsz24.svg";
-import { ReactComponent as LightIcon } from "@assets/icons/light_mode_FILL0_wght400_GRAD0_opsz24.svg";
-import { ReactComponent as DarkIcon } from "@assets/icons/dark_mode_FILL0_wght400_GRAD0_opsz24.svg";
-import { ReactComponent as ZoomInIcon } from "@assets/icons/zoom_in_FILL0_wght400_GRAD0_opsz24.svg";
-import { ReactComponent as ZoomOutIcon } from "@assets/icons/zoom_out_FILL0_wght400_GRAD0_opsz24.svg";
+import CloseIcon from "@assets/icons/close_FILL0_wght400_GRAD0_opsz48.svg?react";
+import ExpandIcon from "@assets/icons/expand_content_FILL0_wght400_GRAD0_opsz48.svg?react";
+import InfoIcon from "@assets/icons/info_i_FILL0_wght400_GRAD0_opsz24.svg?react";
+import LightIcon from "@assets/icons/light_mode_FILL0_wght400_GRAD0_opsz24.svg?react";
+import DarkIcon from "@assets/icons/dark_mode_FILL0_wght400_GRAD0_opsz24.svg?react";
+import ZoomInIcon from "@assets/icons/zoom_in_FILL0_wght400_GRAD0_opsz24.svg?react";
+import ZoomOutIcon from "@assets/icons/zoom_out_FILL0_wght400_GRAD0_opsz24.svg?react";
 
 type iconType =
   | "close"
