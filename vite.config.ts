@@ -21,7 +21,14 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "./src/utils"),
     },
   },
-  plugins: [react(), svgr()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler']
+      },
+    }), 
+    svgr()
+  ],
   css: {
     postcss: {
       plugins: [tailwindNesting(), tailwind(), autoprefixer()],
